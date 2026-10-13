@@ -1,0 +1,108 @@
+---
+- name: Triển khai Wazuh Agent tự động trên Linux và Windows
+  hosts: all
+  gather_facts: yes
+  vars:
+    manager_ip: "{{ lookup('env', 'WAZUH_MANAGER_IP') | default('10.241.6.14', true) }}"
+    agent_version: "{{ lookup('env', 'WAZUH_AGENT_VERSION') | default('4.9.0', true) }}"
+
+  tasks:
+    # --------------------------------------------------------------------------
+    # TASK CHO LINUX
+    # --------------------------------------------------------------------------
+    - name: "[Linux] Kiểm tra kiến trúc và hệ điều hành"
+      when: ansible_system == 'Linux'
+      ansible.builtin.debug:
+        msg: "Bắt đầu triển khai Wazuh Agent trên {{ ansible_distribution }} (IP: {{ ansible_default_ipv4.address }}) kết nối về Manager {{ manager_ip }}"
+
+    - name: "[Linux Debian/Ubuntu] Cài đặt khóa GPG Wazuh"
+      when: ansible_os_family == 'Debian'
+      become: yes
+      ansible.builtin.shell: |
+        curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+      args:
+        creates: /usr/share/keyrings/wazuh.gpg
+
+    - name: "[Linux Debian/Ubuntu] Thêm kho lưu trữ Wazuh APT"
+      when: ansible_os_family == 'Debian'
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main"
+        state: present
+        filename: wazuh
+
+    - name: "[Linux Debian/Ubuntu] Cài đặt gói wazuh-agent"
+      when: ansible_os_family == 'Debian'
+      become: yes
+      ansible.builtin.apt:
+        name: "wazuh-agent"
+        state: present
+        update_cache: yes
+      environment:
+        WAZUH_MANAGER: "{{ manager_ip }}"
+
+    - name: "[Linux RedHat/CentOS/Rocky] Cài đặt khóa GPG Wazuh"
+      when: ansible_os_family == 'RedHat'
+      become: yes
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+    - name: "[Linux RedHat/CentOS/Rocky] Thêm kho lưu trữ YUM"
+      when: ansible_os_family == 'RedHat'
+      become: yes
+      ansible.builtin.yum_repository:
+        name: wazuh
+        description: Wazuh repository
+        baseurl: https://packages.wazuh.com/4.x/yum/
+        gpgcheck: yes
+        enabled: yes
+
+    - name: "[Linux RedHat/CentOS/Rocky] Cài đặt gói wazuh-agent"
+      when: ansible_os_family == 'RedHat'
+      become: yes
+      ansible.builtin.yum:
+        name: "wazuh-agent"
+        state: present
+      environment:
+        WAZUH_MANAGER: "{{ manager_ip }}"
+
+    - name: "[Linux] Cập nhật cấu hình IP Wazuh Manager trong ossec.conf"
+      when: ansible_system == 'Linux'
+      become: yes
+      ansible.builtin.replace:
+        path: /var/ossec/etc/ossec.conf
+        regexp: '<address>.*?</address>'
+        replace: "<address>{{ manager_ip }}</address>"
+
+    - name: "[Linux] Kích hoạt và khởi động dịch vụ wazuh-agent"
+      when: ansible_system == 'Linux'
+      become: yes
+      ansible.builtin.systemd:
+        name: wazuh-agent
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
+
+    # --------------------------------------------------------------------------
+    # TASK CHO WINDOWS
+    # --------------------------------------------------------------------------
+    - name: "[Windows] Tải bộ cài đặt Wazuh Agent MSI"
+      when: ansible_os_family == 'Windows'
+      ansible.windows.win_get_url:
+        url: "https://packages.wazuh.com/4.x/windows/wazuh-agent-{{ agent_version }}-1.msi"
+        dest: "C:\\Windows\\Temp\\wazuh-agent.msi"
+
+    - name: "[Windows] Cài đặt silent Wazuh Agent với Manager IP"
+      when: ansible_os_family == 'Windows'
+      ansible.windows.win_package:
+        path: "C:\\Windows\\Temp\\wazuh-agent.msi"
+        arguments: "/q WAZUH_MANAGER='{{ manager_ip }}'"
+        state: present
+
+    - name: "[Windows] Khởi động dịch vụ Wazuh trên Windows"
+      when: ansible_os_family == 'Windows'
+      ansible.windows.win_service:
+        name: Wazuh
+        start_mode: auto
+        state: started

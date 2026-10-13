@@ -1,0 +1,56 @@
+---
+- name: Kiểm tra cấu hình Rsyslog và trạng thái Wazuh Agent
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: "[Linux] Kiểm tra dịch vụ Rsyslog"
+      when: ansible_system == 'Linux'
+      ansible.builtin.shell: "systemctl is-active rsyslog 2>/dev/null || echo 'inactive'"
+      register: rsyslog_service_linux
+      ignore_errors: yes
+
+    - name: "[Linux] Kiểm tra cấu hình đẩy Remote Rsyslog/Syslog"
+      when: ansible_system == 'Linux'
+      ansible.builtin.shell: "grep -rhE '^[^#]*(@|target=)' /etc/rsyslog.conf /etc/rsyslog.d/ 2>/dev/null || echo 'Chưa cấu hình đẩy remote syslog'"
+      register: rsyslog_forward_rules
+      ignore_errors: yes
+
+    - name: "[Linux] Kiểm tra trạng thái dịch vụ Wazuh Agent"
+      when: ansible_system == 'Linux'
+      ansible.builtin.shell: "systemctl is-active wazuh-agent 2>/dev/null || echo 'inactive'"
+      register: wazuh_service_linux
+      ignore_errors: yes
+
+    - name: "[Linux] Kiểm tra Wazuh Manager IP đã cấu hình trong ossec.conf"
+      when: ansible_system == 'Linux'
+      ansible.builtin.shell: "grep -oPm1 '(?<=<address>)[^<]+' /var/ossec/etc/ossec.conf 2>/dev/null || echo 'Chưa cài đặt ossec.conf'"
+      register: wazuh_mgr_ip_linux
+      ignore_errors: yes
+
+    - name: "[Linux] Báo cáo tình trạng Rsyslog và Wazuh Agent"
+      when: ansible_system == 'Linux'
+      ansible.builtin.debug:
+        msg:
+          - "=========================================================="
+          - "BÁO CÁO MÁY CHỦ: {{ inventory_hostname }} (IP: {{ ansible_default_ipv4.address | default(ansible_host) }})"
+          - "Trạng thái Rsyslog: {{ rsyslog_service_linux.stdout }}"
+          - "Quy tắc đẩy Rsyslog: {{ rsyslog_forward_rules.stdout_lines }}"
+          - "Trạng thái Wazuh Agent: {{ wazuh_service_linux.stdout }}"
+          - "Wazuh Manager IP: {{ wazuh_mgr_ip_linux.stdout }}"
+          - "=========================================================="
+
+    - name: "[Windows] Kiểm tra dịch vụ Wazuh và Syslog"
+      when: ansible_os_family == 'Windows'
+      ansible.windows.win_service:
+        name: Wazuh
+      register: wazuh_service_win
+      ignore_errors: yes
+
+    - name: "[Windows] Báo cáo tình trạng Windows"
+      when: ansible_os_family == 'Windows'
+      ansible.builtin.debug:
+        msg:
+          - "=========================================================="
+          - "BÁO CÁO WINDOWS: {{ inventory_hostname }}"
+          - "Wazuh Agent Status: {{ wazuh_service_win.state | default('Not installed') }}"
+          - "=========================================================="

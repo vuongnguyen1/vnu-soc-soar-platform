@@ -1,0 +1,49 @@
+/* ==========================================================================
+   SILENT BACKGROUND UPDATE (STALE-WHILE-REVALIDATE ANTI-FLICKER ENGINE)
+   Triệt tiêu 100% hiện tượng chớp nháy, giật cục khi Dashboard tự động cập nhật
+   ========================================================================== */
+
+/* 1. Ẩn triệt để thanh loading-bar và spinner quay tròn gây chớp màn hình */
+.react-loading-skeleton,
+.ol-progress-bar,
+.ol-progress-message,
+[data-testid*="loading"],
+[data-testid*="spinner"],
+div[class*="loading-bar"],
+div[class*="loadingIndicator"],
+div[class*="panel-loading"],
+.panel-header-spinner,
+.fa-spinner {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* 2. Khóa cứng bố cục Panel, chống giật Layout Shift & triệt tiêu chớp tắt mờ */
+.react-grid-item,
+.react-grid-layout,
+section[class*="panel-container"],
+div[class*="panel-container"],
+div[class*="panel-content"],
+[data-panelid] {
+  opacity: 1 !important;
+  filter: none !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease !important;
+}
+
+/* 3. Chuyển đổi số liệu mượt mà (Smooth cross-fade transition cho Stat & Bar Gauge) */
+[data-testid*="stat-value"],
+[data-testid*="bar-gauge"],
+.panel-content svg,
+.panel-content canvas,
+.u-over {
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+/* 4. Giữ nguyên hình ảnh biểu đồ cũ trong suốt quá trình fetch ngầm (Stale-While-Revalidate) */
+div[class*="panel-content"]:has([class*="loading"]),
+div[class*="panel-content"]:has([data-testid*="loading"]) {
+  opacity: 1 !important;
+  filter: none !important;
+}

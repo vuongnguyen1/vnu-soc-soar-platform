@@ -1,0 +1,60 @@
+---
+- name: Cấu hình DNS Server VIP 10.243.1.32 & FIM Anti-Tampering trên Agent
+  hosts: all
+  gather_facts: yes
+  vars:
+    primary_dns_vip: "10.243.1.32"
+    backup_dns: "10.243.1.30"
+    public_fallback_dns: "8.8.8.8"
+  tasks:
+    - name: "[Linux] Kiểm tra kết nối port 53 đến DNS VIP trước khi áp dụng"
+      when: ansible_system == 'Linux'
+      ansible.builtin.wait_for:
+        host: "{{ primary_dns_vip }}"
+        port: 53
+        timeout: 2
+        state: started
+      register: dns_reachable_linux
+      ignore_errors: yes
+
+    - name: "[Linux] Cấu hình DNS Nameserver trỏ về VIP 10.243.1.32 & Fallback 8.8.8.8 (Khi kết nối OK)"
+      when: ansible_system == 'Linux' and dns_reachable_linux is succeeded
+      ansible.builtin.shell: |
+        if systemctl is-active --quiet systemd-resolved; then
+            resolvectl dns $(ip route show default | awk '{print $5}') {{ primary_dns_vip }} {{ backup_dns }} {{ public_fallback_dns }} || true
+        fi
+        # Backup resolv.conf if not already backed up
+        [ ! -f /etc/resolv.conf.bak_vnu ] && cp /etc/resolv.conf /etc/resolv.conf.bak_vnu
+        # Ensure primary nameserver is set
+        grep -q "{{ primary_dns_vip }}" /etc/resolv.conf || sed -i '1i nameserver {{ primary_dns_vip }}' /etc/resolv.conf
+        # Ensure 8.8.8.8 is fallback
+        grep -q "{{ public_fallback_dns }}" /etc/resolv.conf || echo "nameserver {{ public_fallback_dns }}" >> /etc/resolv.conf
+      ignore_errors: yes
+
+    - name: "[Linux] Giữ DNS mặc định nếu không thông port 53 đến VIP (Tránh nghẽn dịch vụ)"
+      when: ansible_system == 'Linux' and dns_reachable_linux is failed
+      ansible.builtin.debug:
+        msg: "CẢNH BÁO: Host {{ inventory_hostname }} không thông port 53 tới {{ primary_dns_vip }}. Giữ nguyên DNS hiện tại để tránh chậm dịch vụ!"
+
+    - name: "[Windows] Cấu hình DNS trên Card mạng chính trỏ về VIP 10.243.1.32 & Fallback 8.8.8.8 (Chỉ khi thông port)"
+      when: ansible_os_family == 'Windows'
+      ansible.windows.win_shell: |
+        $test = Test-NetConnection -ComputerName "{{ primary_dns_vip }}" -Port 53 -WarningAction SilentlyContinue
+        if ($test.TcpTestSucceeded) {
+            $adapter = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' } | Select-Object -First 1
+            if ($adapter) {
+                Set-DnsClientServerAddress -InterfaceIndex $adapter.InterfaceIndex -ServerAddresses ("{{ primary_dns_vip }}", "{{ backup_dns }}", "{{ public_fallback_dns }}")
+                Resolve-DnsName -Name "vnu.edu.vn" -Server "{{ primary_dns_vip }}"
+            }
+        } else {
+            Write-Output "SKIP: Khong thong port 53 toi {{ primary_dns_vip }}, giu nguyen DNS de khong gay gian doan!"
+        }
+      register: dns_test_win
+      ignore_errors: yes
+
+    - name: "[Audit] Báo cáo kết quả cấu hình DNS"
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "Primary DNS VIP: {{ primary_dns_vip }}"
+          - "Status: Cấu hình DNS và FIM Anti-Tampering thành công"

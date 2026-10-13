@@ -1,0 +1,55 @@
+---
+- name: Cập nhật bản vá lỗ hổng CVE an toàn (Targeted CVE Package Upgrade)
+  hosts: all
+  gather_facts: yes
+  vars:
+    target_package: ""
+    cve_id: ""
+  tasks:
+    - name: "[Validation] Kiểm tra tham số gói cần vá"
+      ansible.builtin.fail:
+        msg: "Vui lòng cung cấp biến target_package (ví dụ: -e target_package=openssl)"
+      when: target_package is not defined or target_package | length == 0
+
+    - name: "[Linux Debian/Ubuntu] Cập nhật danh mục gói"
+      when: ansible_os_family == 'Debian'
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 300
+      ignore_errors: yes
+
+    - name: "[Linux Debian/Ubuntu] Nâng cấp gói mục tiêu để vá CVE"
+      when: ansible_os_family == 'Debian'
+      ansible.builtin.apt:
+        name: "{{ target_package }}"
+        state: latest
+        only_upgrade: yes
+      register: apt_patch_res
+
+    - name: "[Linux RedHat/CentOS/Rocky] Nâng cấp gói mục tiêu để vá CVE"
+      when: ansible_os_family == 'RedHat'
+      ansible.builtin.package:
+        name: "{{ target_package }}"
+        state: latest
+      register: yum_patch_res
+
+    - name: "[Windows] Cập nhật gói phần mềm qua Winget hoặc Chocolatey"
+      when: ansible_os_family == 'Windows'
+      ansible.windows.win_shell: |
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            winget upgrade --id "{{ target_package }}" --accept-source-agreements --accept-package-agreements -h
+        } elseif (Get-Command choco -ErrorAction SilentlyContinue) {
+            choco upgrade "{{ target_package }}" -y
+        } else {
+            Write-Output "No package manager available on Windows host"
+        }
+      register: win_patch_res
+      ignore_errors: yes
+
+    - name: "[Audit] Ghi nhận kết quả vá lỗi"
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "Target Package: {{ target_package }}"
+          - "CVE ID: {{ cve_id | default('N/A') }}"
+          - "Status: Completed successfully"

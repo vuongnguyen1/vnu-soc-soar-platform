@@ -1,0 +1,1714 @@
+<group name="keycloak_custom,">
+  <rule id="100050" level="3">
+    <decoded_as>keycloak-universal</decoded_as>
+    <description>Keycloak: Event Detected</description>
+  </rule>
+
+  <!-- Routine User Authentication: Level 3 (Audit) -->
+  <rule id="100060" level="3">
+    <decoded_as>keycloak-login-success</decoded_as>
+    <description>Keycloak: Login Success | User: $(dstuser) | IP: $(srcip) | App: $(id)</description>
+    <group>authentication_success,pci_dss_8.1,pci_dss_10.2.5,nist_800_53_AC.2,nist_800_53_AU.2,gdpr_IV_32.2,</group>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+  </rule>
+
+  <!-- Google Workspace SAML Login Success: Level 3 -->
+  <rule id="100065" level="3">
+    <if_sid>100060</if_sid>
+    <id type="pcre2">accounts\.google\.com</id>
+    <description>Keycloak: Google Workspace SAML SSO Login Success | User: $(dstuser) | IP: $(srcip)</description>
+    <group>google_workspace,authentication_success,saml,</group>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+  </rule>
+
+  <!-- User Logout Event: Level 3 (Routine) -->
+  <rule id="100061" level="3">
+    <decoded_as>keycloak-user-action</decoded_as>
+    <match>LOGOUT</match>
+    <description>Keycloak: User Logout | User: $(dstuser) | App: $(id) | IP: $(srcip)</description>
+    <group>authentication_success,pci_dss_8.1,nist_800_53_AC.2,</group>
+  </rule>
+
+  <!-- Password Updated: Level 4 (User Profile Change) -->
+  <rule id="100062" level="4">
+    <decoded_as>keycloak-user-action</decoded_as>
+    <match>UPDATE_PASSWORD|RESET_PASSWORD</match>
+    <description>Keycloak: Password Updated | User: $(dstuser) | App: $(id) | IP: $(srcip)</description>
+    <group>credential_change,pci_dss_8.2,nist_800_53_IA.5,iso27001_A.8.5,</group>
+  </rule>
+
+  <!-- Email Updated: Level 5 (Security Critical Profile Change) -->
+  <rule id="100063" level="5">
+    <decoded_as>keycloak-user-action</decoded_as>
+    <match>UPDATE_EMAIL</match>
+    <description>Keycloak: Account Email Updated | User: $(dstuser) | App: $(id) | IP: $(srcip)</description>
+    <group>account_change,pci_dss_8.2,nist_800_53_IA.5,</group>
+  </rule>
+
+  <!-- MFA / TOTP Configuration Change: Level 6 -->
+  <rule id="100064" level="6">
+    <decoded_as>keycloak-user-action</decoded_as>
+    <match>UPDATE_TOTP|REMOVE_TOTP</match>
+    <description>Keycloak: MFA / TOTP Configuration Changed | User: $(dstuser) | Event: $(extra_data) | App: $(id) | IP: $(srcip)</description>
+    <group>mfa_change,pci_dss_8.3,nist_800_53_IA.2,iso27001_A.8.5,</group>
+  </rule>
+
+  <!-- Single Login Failure: Invalid Password (User exists, password wrong) -> MITRE T1110.001 -->
+  <rule id="100051" level="4">
+    <decoded_as>keycloak-login-fail</decoded_as>
+    <match>invalid_user_credentials</match>
+    <description>Keycloak: Login Failed (Invalid Password) | User: $(dstuser) | App: $(id) | IP: $(srcip)</description>
+    <group>authentication_failed,invalid_credentials,pci_dss_8.1.6,pci_dss_10.2.4,nist_800_53_AC.7,nist_800_53_AU.14,gdpr_IV_32.2,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- Google Workspace SAML Login Failed (Invalid Password): Level 4 -->
+  <rule id="100055" level="4">
+    <if_sid>100051</if_sid>
+    <id type="pcre2">accounts\.google\.com</id>
+    <description>Keycloak: Google Workspace SAML Login Failed (Invalid Password) | User: $(dstuser) | IP: $(srcip)</description>
+    <group>google_workspace,authentication_failed,saml,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- Single Login Failure: User Not Found (Account does not exist, reconnaissance probe) -> MITRE T1087.002 -->
+  <rule id="100053" level="5">
+    <decoded_as>keycloak-login-fail</decoded_as>
+    <match>user_not_found</match>
+    <description>Keycloak: Login Failed (User Not Found / Account Probe) | Target: $(dstuser) | App: $(id) | IP: $(srcip)</description>
+    <group>authentication_failed,account_enumeration,user_not_found,pci_dss_10.2.4,nist_800_53_AC.7,iso27001_A.8.16,</group>
+    <mitre>
+      <id>T1087.002</id>
+      <id>T1589.002</id>
+    </mitre>
+  </rule>
+
+  <!-- Single Login Failure: Fallback for Other Errors -->
+  <rule id="100054" level="4">
+    <decoded_as>keycloak-login-fail</decoded_as>
+    <description>Keycloak: Login Failed | User: $(dstuser) | App: $(id) | IP: $(srcip) | Reason: $(data)</description>
+    <group>authentication_failed,pci_dss_8.1.6,pci_dss_10.2.4,nist_800_53_AC.7,</group>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+  <!-- Token / API Errors: Level 4 -->
+  <rule id="100052" level="4">
+    <decoded_as>keycloak-token-error</decoded_as>
+    <description>Keycloak: Token / API Error | App: $(id) | IP: $(srcip) | Event: $(extra_data) | Reason: $(data)</description>
+    <group>authentication_failed,pci_dss_10.2.4,nist_800_53_AC.7,gdpr_IV_32.2,</group>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+  </rule>
+
+  <!-- Keycloak Custom SPI: Protected Campus / CGNAT Network Burst (Observe Only, NO BAN) -->
+  <rule id="100075" level="4">
+    <decoded_as>keycloak-spi-security</decoded_as>
+    <match>LOGIN_ERROR_BURST_OBSERVE</match>
+    <description>Keycloak SPI: Protected / CGNAT Shared IP Login Error Burst (Observe Only, NO BAN) | IP: $(srcip) | Target: $(dstuser) | Burst: $(data)</description>
+    <group>cgnat_noise,domestic_shared_ip,campus_network,authentication_failed,no_ban,</group>
+  </rule>
+
+  <!-- Keycloak Custom SPI: External IP Burst Auto-Banned by IDP L7 Protection -->
+  <rule id="100076" level="11">
+    <decoded_as>keycloak-spi-security</decoded_as>
+    <match>BLOCKED_IP</match>
+    <description>Keycloak SPI: Untrusted External IP Auto-Banned by L7 Protection | IP: $(srcip) | Target: $(dstuser) | Burst: $(data) | Synced to LB</description>
+    <group>idp_auto_ban,brute_force,pci_dss_8.1.6,nist_800_53_AC.7,iso27001_A.8.5,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- Escalated Threat: Targeted Password Brute Force on SAME Account (>= 8 errors in 60s) -->
+  <rule id="100070" level="11" frequency="8" timeframe="60">
+    <if_matched_sid>100051</if_matched_sid>
+    <same_source_ip />
+    <same_user />
+    <description>Keycloak: Targeted Password Brute Force on account $(dstuser) from IP $(srcip)</description>
+    <group>brute_force,targeted_attack,authentication_failed,pci_dss_8.1.6,nist_800_53_AC.7,gdpr_IV_32.2,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- CGNAT / Domestic Mobile Network Shared IP Noise (Multiple users failing sporadically - Observe Only, NO BAN) -->
+  <rule id="100072" level="4" frequency="6" timeframe="120">
+    <if_matched_sid>100051</if_matched_sid>
+    <same_source_ip />
+    <different_user />
+    <description>Keycloak: Multi-User Login Failures on Shared IP (Likely Vietnam CGNAT 4G / Campus NAT) | IP: $(srcip) - Observe Only (NO BAN)</description>
+    <group>cgnat_noise,domestic_shared_ip,authentication_failed,no_ban,</group>
+  </rule>
+
+  <!-- Severe Password Spraying Attack (>= 25 different accounts probed from 1 IP in 120s - exceeds normal CGNAT variance) -->
+  <rule id="100071" level="12" frequency="25" timeframe="120">
+    <if_matched_sid>100051</if_matched_sid>
+    <same_source_ip />
+    <different_user />
+    <description>Keycloak: Severe Password Spraying Attack from IP $(srcip) across >= 25 accounts</description>
+    <group>password_spraying,authentication_failed,attack_burst,pci_dss_8.1.6,nist_800_53_AC.7,iso27001_A.8.5,</group>
+    <mitre>
+      <id>T1110.003</id>
+    </mitre>
+  </rule>
+
+  <!-- Escalated Threat: Account Enumeration Attack (>= 6 non-existent accounts probed in 60s) -->
+  <rule id="100073" level="12" frequency="6" timeframe="60">
+    <if_matched_sid>100053</if_matched_sid>
+    <same_source_ip />
+    <description>Keycloak: Account Enumeration Attack from IP $(srcip) (Multiple non-existent users probed)</description>
+    <group>account_enumeration,reconnaissance,attack_burst,pci_dss_10.6.1,nist_800_53_SI.4,iso27001_A.8.16,</group>
+    <mitre>
+      <id>T1087.002</id>
+      <id>T1589.002</id>
+    </mitre>
+  </rule>
+
+  <!-- High Risk: Credential Stuffing Success (1 IP logs into multiple accounts successfully) -->
+  <rule id="100080" level="13" frequency="6" timeframe="180">
+    <if_matched_sid>100060</if_matched_sid>
+    <same_source_ip />
+    <different_user />
+    <description>Keycloak: High Risk - One IP $(srcip) successfully logged into multiple accounts (possible credential stuffing)</description>
+    <group>authentication_success,account_takeover,credential_stuffing,pci_dss_8.1,pci_dss_10.2.5,nist_800_53_AC.7,nist_800_53_IR.4,gdpr_IV_32.2,</group>
+    <mitre>
+      <id>T1110.004</id>
+      <id>T1078</id>
+    </mitre>
+  </rule>
+
+  <!-- Critical: Persistent Account Takeover Attack -->
+  <rule id="100081" level="15" frequency="3" timeframe="120">
+    <if_matched_sid>100080</if_matched_sid>
+    <same_source_ip />
+    <description>Keycloak: CRITICAL - One source IP $(srcip) repeatedly logs in successfully to many accounts (potential unauthorized access)</description>
+    <group>authentication_success,incident_response,critical,pci_dss_10.6.1,nist_800_53_IR.5,nist_800_53_SI.4,gdpr_IV_33,</group>
+    <mitre>
+      <id>T1078</id>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+  <!-- Google Workspace Security Alert Automated Remediation: Level 13 -->
+  <rule id="100078" level="13">
+    <decoded_as>keycloak-google-alert</decoded_as>
+    <description>Keycloak SOC: Google Workspace Security Alert - Automated Remediation Enforced | User: $(dstuser) | Type: $(data)</description>
+    <group>google_workspace,incident_response,account_compromised,pci_dss_10.6.1,nist_800_53_IR.4,iso27001_A.8.16,</group>
+    <mitre>
+      <id>T1566</id>
+      <id>T1078</id>
+    </mitre>
+  </rule>
+</group>
+
+<group name="lb_security,haproxy,crowdsec,">
+  <!-- HAProxy Base HTTP Access: Level 3 -->
+  <rule id="100200" level="3">
+    <decoded_as>haproxy</decoded_as>
+    <description>HAProxy: HTTP Request from $(srcip) to $(url)</description>
+  </rule>
+
+  <!-- HAProxy 403 Forbidden / Denied by ACL or CrowdSec SPOE Bouncer -->
+  <rule id="100201" level="8">
+    <if_sid>100200</if_sid>
+    <status>403</status>
+    <description>HAProxy: Access Denied (HTTP 403) for IP $(srcip) on $(url) | Flags: $(data)</description>
+    <group>access_denied,pci_dss_10.2.4,nist_800_53_AC.7,iso27001_A.8.16,</group>
+    <mitre>
+      <id>T1071</id>
+    </mitre>
+  </rule>
+
+  <!-- HAProxy Repeated 403 from same IP: Level 10 -->
+  <rule id="100202" level="10" frequency="10" timeframe="60">
+    <if_matched_sid>100201</if_matched_sid>
+    <same_source_ip />
+    <description>HAProxy: Multiple Access Denials (403) from IP $(srcip) - Possible attack or scan</description>
+    <group>access_denied,attack_burst,pci_dss_10.6.1,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec Ban Event Generic: Level 10 -->
+  <rule id="100210" level="10">
+    <decoded_as>crowdsec</decoded_as>
+    <match>ban</match>
+    <description>CrowdSec: IP Banned on Load Balancer | IP: $(srcip) | Reason: $(data) | Action: $(extra_data)</description>
+    <group>crowdsec_ban,firewall_drop,pci_dss_10.6.1,nist_800_53_SI.4,iso27001_A.8.16,</group>
+    <mitre>
+      <id>T1190</id>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec SSH Brute Force Ban: Level 11 -->
+  <rule id="100211" level="11">
+    <if_sid>100210</if_sid>
+    <match>ssh-bf|ssh:bruteforce|ssh-slow-bf</match>
+    <description>CrowdSec: SSH Brute-Force Ban on Load Balancer | IP: $(srcip) | $(extra_data)</description>
+    <group>crowdsec_ban,brute_force,pci_dss_8.1.6,nist_800_53_AC.7,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec WAF: SQL Injection Detected & Banned (Level 13) -->
+  <rule id="100213" level="13">
+    <if_sid>100210</if_sid>
+    <match>sqli|waf-sqli</match>
+    <description>CrowdSec WAF: SQL Injection Attack Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,sqli,web_attack,owasp_A03_2021,pci_dss_6.5.1,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec WAF: Cross-Site Scripting (XSS) Detected & Banned (Level 12) -->
+  <rule id="100214" level="12">
+    <if_sid>100210</if_sid>
+    <match>xss</match>
+    <description>CrowdSec WAF: Cross-Site Scripting (XSS) Attack Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,xss,web_attack,owasp_A03_2021,pci_dss_6.5.7,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1059.007</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec WAF: Path Traversal / LFI Detected & Banned (Level 13) -->
+  <rule id="100215" level="13">
+    <if_sid>100210</if_sid>
+    <match>path-traversal</match>
+    <description>CrowdSec WAF: Path Traversal / LFI Attack Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,path_traversal,web_attack,owasp_A01_2021,pci_dss_6.5.8,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1083</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec WAF: Web Backdoor / Webshell Probing Banned (Level 14) -->
+  <rule id="100216" level="14">
+    <if_sid>100210</if_sid>
+    <match>backdoors</match>
+    <description>CrowdSec WAF: Web Backdoor / Webshell Probing Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,backdoor,web_attack,owasp_A03_2021,pci_dss_6.5,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1505.003</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec WAF: Sensitive Files Reconnaissance Banned (Level 10) -->
+  <rule id="100217" level="10">
+    <if_sid>100210</if_sid>
+    <match>sensitive-files|http-probing</match>
+    <description>CrowdSec WAF: Sensitive File / Configuration Probing Banned | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,recon,web_attack,owasp_A01_2021,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1595</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec WAF: Critical RCE / Log4j / Spring4Shell / CVE Exploit Banned (Level 15) -->
+  <rule id="100218" level="15">
+    <if_sid>100210</if_sid>
+    <match>cve|log4j|spring4shell</match>
+    <description>CrowdSec WAF: CRITICAL RCE / CVE Exploit Attempt Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,critical,rce,owasp_A06_2021,pci_dss_6.5,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec WAF: Bad Bot / Scanner Banned (Level 9) -->
+  <rule id="100219" level="9">
+    <if_sid>100210</if_sid>
+    <match>bad-user-agent|crawl|w00tw00t|open-proxy</match>
+    <description>CrowdSec WAF: Malicious Bot / Scanner Probing Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,scanner,web_attack,nist_800_53_SI.4,</group>
+    <mitre>
+      <id>T1595</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec: Domestic Vietnam SSO Rate-Limited / Soft Remediation (High CGNAT Tolerance) -->
+  <rule id="100221" level="9">
+    <if_sid>100210</if_sid>
+    <match>domestic-keycloak-bruteforce</match>
+    <description>CrowdSec WAF: Domestic Vietnam IP Exceeded SSO Rate-Limit (CGNAT Tolerant 15-error policy) | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,domestic_limit,cgnat_aware,pci_dss_8.1.6,nist_800_53_AC.7,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec: Foreign / Non-Vietnam IP Keycloak Brute-Force Strict Ban (Level 13) -->
+  <rule id="100222" level="13">
+    <if_sid>100210</if_sid>
+    <match>foreign-keycloak-bruteforce</match>
+    <description>CrowdSec WAF: Foreign / Non-Vietnam IP Targeted SSO Brute-Force BLOCKED | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,foreign_attack,brute_force,pci_dss_8.1.6,nist_800_53_AC.7,iso27001_A.8.5,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec: Keycloak Credential Stuffing Ban (Level 12) -->
+  <rule id="100223" level="12">
+    <if_sid>100210</if_sid>
+    <match>keycloak-credential-stuffing</match>
+    <description>CrowdSec WAF: Keycloak Multi-Account Credential Stuffing Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,credential_stuffing,pci_dss_8.1.6,nist_800_53_AC.7,iso27001_A.8.5,</group>
+    <mitre>
+      <id>T1110.004</id>
+    </mitre>
+  </rule>
+
+  <!-- CrowdSec: Keycloak Generic Brute-Force Fallback (Level 11) -->
+  <rule id="100220" level="11">
+    <if_sid>100210</if_sid>
+    <match>keycloak-bf</match>
+    <description>CrowdSec WAF: Keycloak SSO Targeted Brute-Force Banned on Load Balancer | IP: $(srcip) | Reason: $(data)</description>
+    <group>crowdsec_waf,brute_force,idp_attack,pci_dss_8.1.6,nist_800_53_AC.7,</group>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+</group>
+
+<group name="openldap_forensics">
+  <rule id="110002" level="3">
+    <if_sid>2507</if_sid>
+    <match>BIND dn=</match>
+    <description>LDAP Session $(id): User $(dstuser) logged in</description>
+    <group>authentication</group>
+  </rule>
+
+  <rule id="110003" level="10">
+    <if_sid>2507</if_sid>
+    <field name="ldap_command">MOD|DEL|ADD</field>
+    <description>LDAP Session $(ldap_conn): Action $(ldap_command) on $(ldap_target_dn)</description>
+    <group>audit,modification</group>
+  </rule>
+
+  <rule id="110004" level="12">
+    <if_sid>2507</if_sid>
+    <match>attr=userPassword</match>
+    <description>LDAP Session $(ldap_conn): SECURITY ALERT - Password Change Detected!</description>
+    <group>audit,modification,pci_dss_8.1.2</group>
+  </rule>
+</group>
+
+<group name="wazuh_service_health">
+  <rule id="200010" level="12">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>logcollector_stopped</match>
+    <description>CRITICAL: Wazuh Log Collector service is DOWN - No logs being collected!</description>
+    <group>service_availability,critical,incident_response</group>
+  </rule>
+
+  <rule id="200011" level="12">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>analysisd_stopped</match>
+    <description>CRITICAL: Wazuh Analysisd service is DOWN - No event analysis!</description>
+    <group>service_availability,critical,incident_response</group>
+  </rule>
+
+  <rule id="200012" level="12">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>remoted_stopped</match>
+    <description>CRITICAL: Wazuh Remoted service is DOWN - No agent communication!</description>
+    <group>service_availability,critical,incident_response</group>
+  </rule>
+
+  <rule id="200013" level="11">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>syscheckd_stopped</match>
+    <description>WARNING: Wazuh Syscheckd service is DOWN - Integrity monitoring disabled!</description>
+    <group>service_availability,warning,incident_response</group>
+  </rule>
+
+  <rule id="200014" level="12">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>indexer_unavailable</match>
+    <description>CRITICAL: OpenSearch Indexer is NOT responding - Alerts not being indexed!</description>
+    <group>service_availability,critical,incident_response,database</group>
+  </rule>
+
+  <rule id="200015" level="11">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>disk_usage_critical</match>
+    <description>WARNING: Disk usage CRITICAL (&gt;95%) - Service performance degraded!</description>
+    <group>system_health,warning,incident_response</group>
+  </rule>
+
+  <rule id="200016" level="14">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>multiple_services_down</match>
+    <description>CRITICAL ALERT: Multiple Wazuh services DOWN - System integrity compromised!</description>
+    <group>service_availability,critical,incident_response</group>
+  </rule>
+
+  <rule id="200017" level="10">
+    <program_name>wazuh-service-monitor</program_name>
+    <match>alert_delivery_lag</match>
+    <description>WARNING: Alert delivery lag detected - Indexer may be overwhelmed ($(data))</description>
+    <group>service_availability,warning,database</group>
+  </rule>
+</group>
+
+<group name="noise_suppression,">
+  <rule id="100100" level="3">
+    <if_sid>60122,60204</if_sid>
+    <srcip>172.16.3.50</srcip>
+    <options>no_log</options>
+    <description>Windows Logon Failure from 172.16.3.50 (Silent tracking)</description>
+  </rule>
+
+  <rule id="100101" level="8" frequency="100" timeframe="120">
+    <if_matched_sid>100100</if_matched_sid>
+    <same_source_ip />
+    <description>BURST DETECTED: Hơn 100 lần đăng nhập sai từ IP 172.16.3.50 (Đã nén log)</description>
+    <group>authentication_failures,brute_force</group>
+  </rule>
+
+  <rule id="100102" level="3">
+    <if_sid>31101</if_sid>
+    <options>no_log</options>
+    <description>Web rule 31101 noise (Silent tracking)</description>
+  </rule>
+
+  <rule id="100103" level="8" frequency="100" timeframe="120">
+    <if_matched_sid>100102</if_matched_sid>
+    <same_source_ip />
+    <description>BURST DETECTED: Hơn 100 lỗi Web 400 từ IP (Đã nén log)</description>
+  </rule>
+
+  <rule id="100104" level="8" frequency="150" timeframe="60">
+    <if_matched_sid>31101</if_matched_sid>
+    <same_source_ip />
+    <description>BURST DETECTED: Directory Brute-Force / Quét Web 404 từ IP</description>
+  </rule>
+</group>
+
+<group name="yara,">
+  <rule id="108000" level="12">
+    <decoded_as>yara_decoder</decoded_as>
+    <match>wazuh-yara:</match>
+    <description>Yara detected malware: $(yara_rule) in file $(yara_scanned_file)</description>
+    <group>malware,yara,incident_response,pci_dss_5.1,pci_dss_5.2,pci_dss_11.4,</group>
+  </rule>
+</group>
+
+<group name="fortigate_custom,">
+  <rule id="100610" level="10" frequency="6" timeframe="900">
+    <if_matched_sid>81606</if_matched_sid>
+    <same_location />
+    <description>Fortigate: Distributed brute-force - multiple source IPs targeting same firewall admin login within 15 minutes.</description>
+    <mitre>
+      <id>T1110</id>
+      <id>T1110.003</id>
+    </mitre>
+    <group>authentication_failures,fortigate,syslog,mitre,brute_force,</group>
+  </rule>
+</group>
+
+<group name="vnu_soar_test,">
+
+  <rule id="100900" level="12">
+    <match>VNU_SHUFFLE_E2E_TEST</match>
+    <description>VNU SOAR end-to-end test alert</description>
+    <group>vnu_soar_test,</group>
+  </rule>
+
+  <rule id="999914" level="12">
+    <match>VNU_AR_DRYRUN_TEST</match>
+    <description>VNU AR positive dry-run test</description>
+    <group>vnu_soar_test,</group>
+  </rule>
+
+  <!-- Rule 100995: VNU SOAR Feedback Loop - Realtime Incident & FortiGate Enforcement Stream -->
+  <rule id="100995" level="14">
+    <decoded_as>json</decoded_as>
+    <field name="soar_event">LIVE_INCIDENT_ENFORCEMENT</field>
+    <description>VNU SOAR: [$(threat_category)] $(attack_action) from $(srcip) -> $(soar_decision)</description>
+    <group>soar,enforcement,incident_response,active_response,attack,</group>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100996: VNU SOAR Feedback Loop - Infrastructure & vCenter Operational Alert Stream (ALERT ONLY) -->
+  <rule id="100996" level="10">
+    <decoded_as>json</decoded_as>
+    <field name="soar_event">INFRA_OPERATIONAL_ALERT</field>
+    <description>VNU SOAR INFRA: [$(asset_type)] $(attack_action) on $(asset_name) from $(srcip) -> $(soar_decision)</description>
+    <group>infra,alert_only,</group>
+  </rule>
+
+</group>
+
+<group name="iis_attack_detection,seo_cloaking,incident_response,">
+
+  <!-- Rule 100910: IIS Worker Process spawning Command Shell (WebShell / RCE Execution) -->
+  <rule id="100910" level="12">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)w3wp\.exe</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)(cmd|powershell|pwsh|certutil)\.exe</field>
+    <description>IIS Backdoor / WebShell Execution: w3wp.exe spawned command interpreter $(win.eventdata.image) [Command: $(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1059.003</id>
+      <id>T1505.003</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100911: Suspicious certutil downloading file from remote IP -->
+  <rule id="100911" level="11">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)certutil\.exe</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)-urlcache|-split</field>
+    <description>Defense Evasion / Ingress Tool Transfer: certutil used to download file via command line [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1105</id>
+      <id>T1564.004</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100912: IIS Native Module Registration / Backdoor Tampering -->
+  <rule id="100912" level="13">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(appcmd.*(install|add).*module|mscofxp|dllHide)</field>
+    <description>CRITICAL: IIS Native Module Backdoor Installation Attempt [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1505.004</id>
+      <id>T1546</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100913: Security Service Disablement (sc stop aella_conf / defense tampering) -->
+  <rule id="100913" level="12">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)sc(\.exe)?\s+stop\s+(aella_conf|ossec|wazuh|sysmon|windefend)</field>
+    <description>Impair Defenses: Security Sensor or Agent Service stopped [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1562.001</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100914: IIS Worker Process Repeated Crash (w3wp.exe APPCRASH) -->
+  <rule id="100914" level="10">
+    <if_sid>60602</if_sid>
+    <field name="win.system.message" type="pcre2">(?i)w3wp\.exe</field>
+    <description>High Risk: IIS Worker Process w3wp.exe crashed (Potential unstable native module / exploit crash)</description>
+    <mitre>
+      <id>T1499</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100915: Web Access Log: Suspicious Search Bot Crawling Dynamic Endpoints / Cloaking Detection -->
+  <rule id="100915" level="8">
+    <if_sid>31100,31108</if_sid>
+    <url type="pcre2">(?i)\.(asp|aspx|php)(\?.*)?$</url>
+    <description>SEO Crawl Audit: Search Engine Bot crawling dynamic endpoint $(url)</description>
+    <group>seo_audit,reconnaissance,</group>
+  </rule>
+
+  <!-- Rule 100916: Suspicious External Redirect / SEO Hijacking in Web Logs -->
+  <rule id="100916" level="11">
+    <if_sid>31100,31108</if_sid>
+    <id>^30[127]</id>
+    <url type="pcre2">(?i)(bet|casino|nohu|game|play|win|slot)</url>
+    <description>CRITICAL: Potential SEO Cloaking / Web Redirection to Gambling Target [Status $(id) URL: $(url)]</description>
+    <mitre>
+      <id>T1505.004</id>
+      <id>T1584.004</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100920: Dangerous File Extension Access or Upload Attempt on IIS -->
+  <rule id="100920" level="12">
+    <if_sid>31100,31108</if_sid>
+    <url type="pcre2">(?i)\.(cer|asa|cdx|ashx|asmx|ps1|bat|cmd|vbs|vbe|hta|wsf|dll|exe|msi)(\?.*)?$</url>
+    <description>Web Attack: Direct access or request for high-risk script/executable file [URL: $(url)]</description>
+    <mitre>
+      <id>T1505.003</id>
+      <id>T1105</id>
+    </mitre>
+    <group>web_attack,attack,critical,</group>
+  </rule>
+
+  <!-- Rule 100921: IIS Directory Brute-Force / Scanning Burst -->
+  <rule id="100921" level="10" frequency="25" timeframe="60">
+    <if_matched_sid>31101</if_matched_sid>
+    <same_source_ip />
+    <description>Web Reconnaissance: Directory Brute-Force or Web Scanning detected from $(srcip) (25+ 404 errors in 60s)</description>
+    <mitre>
+      <id>T1595.002</id>
+    </mitre>
+    <group>reconnaissance,scanner,attack,</group>
+  </rule>
+
+  <!-- Rule 100922: SQL Injection Attempt in Web Query or Stem -->
+  <rule id="100922" level="12">
+    <if_sid>31100,31101,31103,31104,31105,31106,31108</if_sid>
+    <url type="pcre2">(?i)(union(\s+|%20|\+)+(all(\s+|%20|\+)+)?select|select.*from.*sys|waitfor(\s+|%20|\+)delay|xp_cmdshell|exec(\s+|%20|\+)sp_|\bor\b(\s+|%20|\+)1(\s+|%20|\+)*=(\s+|%20|\+)*1|information_schema|benchmark\s*\(|sleep\s*\()</url>
+    <description>Web Attack: SQL Injection attempt detected in request [URL: $(url)]</description>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+    <group>sqli,web_attack,attack,critical,</group>
+  </rule>
+
+  <!-- Rule 100923: Cross-Site Scripting (XSS) Attempt in Web Request -->
+  <rule id="100923" level="8">
+    <if_sid>31100,31101,31105,31106,31108</if_sid>
+    <url type="pcre2">(?i)(&lt;script|%3cscript|javascript:|onerror\s*=|onload\s*=|alert\(|document\.cookie)</url>
+    <description>Web Attack: Potential Cross-Site Scripting (XSS) attempt [URL: $(url)]</description>
+    <mitre>
+      <id>T1189</id>
+    </mitre>
+    <group>xss,web_attack,attack,</group>
+  </rule>
+
+  <!-- Rule 100924: Path Traversal / Directory Traversal Attempt -->
+  <rule id="100924" level="12">
+    <if_sid>31100,31101,31104,31106,31108</if_sid>
+    <url type="pcre2">(?i)(\.\./|\.\.\\|%2e%2e%2f|%2e%2e/|\.\.%2f|%252e%252e%252f|/etc/passwd|c:[\\/]windows)</url>
+    <description>Web Attack: Path Traversal / Directory Traversal attempt [URL: $(url)]</description>
+    <mitre>
+      <id>T1083</id>
+      <id>T1006</id>
+    </mitre>
+    <group>path_traversal,web_attack,attack,critical,</group>
+  </rule>
+
+  <!-- Rule 100933: Multiple Web Attacks / Injection Attempts Burst from Same Source IP -->
+  <rule id="100933" level="13" frequency="2" timeframe="60">
+    <if_matched_group>web_attack</if_matched_group>
+    <same_source_ip />
+    <description>CRITICAL: Repeated Web Exploit / Injection attempts from $(srcip) (2+ violations in 60s)</description>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+    <group>attack,sqli,web_attack,incident_response,critical,</group>
+  </rule>
+
+  <!-- Rule 100934: Command Injection / Remote Code Execution in Web Request -->
+  <rule id="100934" level="12">
+    <if_sid>31100,31101,31104,31106,31108</if_sid>
+    <url type="pcre2">(?i)(/bin/sh|/bin/bash|cmd\.exe|powershell(\.exe)?|wget\s+|curl\s+|nc(\.exe)?\s+|whoami|;\s*cat\s+/etc|\$\(whoami\)|\`whoami\`)</url>
+    <description>Web Attack: Command Injection / Remote Code Execution attempt in web request [URL: $(url)]</description>
+    <mitre>
+      <id>T1059</id>
+      <id>T1190</id>
+    </mitre>
+    <group>command_injection,rce,web_attack,attack,critical,</group>
+  </rule>
+
+  <!-- Rule 100925: PowerShell Download Cradle Execution -->
+  <rule id="100925" level="12">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(Invoke-WebRequest|DownloadFile|DownloadString|Net\.WebClient|curl\.exe.*-O|wget.*-O|IWR\s+-Uri)</field>
+    <description>Defense Evasion / Download Cradle: Script or process attempting remote file download via CLI [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1059.001</id>
+      <id>T1105</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100926: Suspicious Windows Service Creation via CLI -->
+  <rule id="100926" level="10">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)sc(\.exe)?\s+(create|config\s+.*binpath)</field>
+    <description>Persistence: Windows Service created or modified via command line [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1543.003</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100927: Scheduled Task Creation via CLI -->
+  <rule id="100927" level="10">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)schtasks(\.exe)?\s+/create</field>
+    <description>Persistence: Scheduled Task created via CLI [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1053.005</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100928: Persistence via Registry Run / RunOnce modification -->
+  <rule id="100928" level="11">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)reg(\.exe)?\s+add\s+.*\\(Run|RunOnce|Winlogon|Explorer\\ShellFolders)</field>
+    <description>Persistence: Registry Startup / Run key modified via CLI [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1547.001</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100929: Suspicious LSASS Memory Access / Dumping (Sysmon Event ID 10) -->
+  <rule id="100929" level="13">
+    <if_sid>61612</if_sid>
+    <field name="win.eventdata.targetImage" type="pcre2">(?i)lsass\.exe</field>
+    <field name="win.eventdata.grantedAccess" type="pcre2">(?i)0x1010|0x1fffff|0x1f0fff|0x1410</field>
+    <description>CRITICAL: Potential Credential Dumping against LSASS process [Source: $(win.eventdata.sourceImage)]</description>
+    <mitre>
+      <id>T1003.001</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100930: Sysmon Event ID 7 - Unsigned or Suspicious DLL Loaded into w3wp.exe -->
+  <rule id="100930" level="12">
+    <if_sid>61609</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)w3wp\.exe</field>
+    <field name="win.eventdata.imageLoaded" type="pcre2">(?i)\\(Temp|Users|Quarantine|Public|inetpub|Downloads)\\[^\\]+\.dll$</field>
+    <description>CRITICAL: IIS Worker Process w3wp.exe loaded DLL from suspicious path [DLL: $(win.eventdata.imageLoaded)]</description>
+    <mitre>
+      <id>T1574.002</id>
+      <id>T1505.004</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 100931: FIM - WebShell File Created or Modified in Web Root Directory -->
+  <rule id="100931" level="12">
+    <if_sid>550,554</if_sid>
+    <field name="file" type="pcre2">(?i)(website|wwwroot|inetpub|var/www|vhost|uploads?|media|html|tssdh|portal|survey|vnu_it|vnu_cyber|[\\/]www[\\/]).*\.(asp|aspx|ashx|asmx|cer|asa|jsp|php|phtml|php[3-8])$</field>
+    <description>CRITICAL: WebShell or executable script created or modified in web directory [File: $(file)]</description>
+    <mitre>
+      <id>T1505.003</id>
+    </mitre>
+    <group>fim,file_created,webshell,incident_response,soar,</group>
+  </rule>
+
+  <!-- Rule 100932: Known Privilege Escalation and IIS Hacking Tools Execution -->
+  <rule id="100932" level="14">
+    <if_group>sysmon_eid1_detections</if_group>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(JuicyPotato|PrintSpoofer|SweetPotato|BadPotato|RoguePotato|dllHide|mscofxp|mimikatz|godpotato|SharpEfsPotato)</field>
+    <description>CRITICAL: Known Privilege Escalation or Exploitation Tool execution detected [$(win.eventdata.commandLine)]</description>
+    <mitre>
+      <id>T1068</id>
+      <id>T1505.004</id>
+    </mitre>
+    <group>privilege_escalation,critical,incident_response,</group>
+  </rule>
+
+</group>
+
+<group name="clamav_custom,antivirus,">
+
+  <!-- Rule 100940: ClamAV Antivirus Detected Malware / Virus -->
+  <rule id="100940" level="13">
+    <match>clamscan: [VIRUS FOUND]</match>
+    <description>CRITICAL: ClamAV Antivirus detected malware on system!</description>
+    <mitre>
+      <id>T1204.002</id>
+      <id>T1505.003</id>
+    </mitre>
+    <group>antivirus,malware,virus,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100941: ClamAV Scan Completed Clean -->
+  <rule id="100941" level="3">
+    <match>clamscan: [CLEAN]</match>
+    <description>ClamAV Antivirus scan completed: All scanned files clean (0 infections)</description>
+    <group>antivirus,system_audit,</group>
+  </rule>
+
+  <!-- Rule 100942: ClamAV Scan Started or Signatures Updated -->
+  <rule id="100942" level="2">
+    <match>clamscan: [INFO]</match>
+    <description>ClamAV Antivirus scan event / database update</description>
+    <group>antivirus,</group>
+  </rule>
+
+</group>
+
+<group name="backdoor_detection,c2_detection,reverse_shell,">
+
+  <!-- Rule 100950: IIS Worker Process (w3wp.exe) initiating outbound network connection (Potential Reverse Shell / SSRF / C2) -->
+  <rule id="100950" level="13">
+    <if_group>sysmon_eid3_detections</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)w3wp\.exe</field>
+    <field name="win.eventdata.destinationIp" type="pcre2">^(?!127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.).*</field>
+    <description>CRITICAL: IIS Worker Process w3wp.exe initiated OUTBOUND connection to external Internet IP $(win.eventdata.destinationIp):$(win.eventdata.destinationPort) [Potential Reverse Shell / C2 Beacon]</description>
+    <mitre>
+      <id>T1059.003</id>
+      <id>T1071</id>
+      <id>T1095</id>
+    </mitre>
+    <group>backdoor,reverse_shell,c2,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100951: Command Line Interpreter initiating outbound TCP connection (Reverse Shell) -->
+  <rule id="100951" level="13">
+    <if_group>sysmon_eid3_detections</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)(cmd|powershell|pwsh|bash)\.exe</field>
+    <field name="win.eventdata.destinationIp" type="pcre2">^(?!127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.).*</field>
+    <description>CRITICAL: Command Shell $(win.eventdata.image) opened network connection to external IP $(win.eventdata.destinationIp):$(win.eventdata.destinationPort) [Potential Reverse Shell]</description>
+    <mitre>
+      <id>T1059.001</id>
+      <id>T1095</id>
+    </mitre>
+    <group>reverse_shell,backdoor,c2,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100952: LOLBin communicating outbound to external IP (certutil, rundll32, mshta, cscript) -->
+  <rule id="100952" level="12">
+    <if_group>sysmon_eid3_detections</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)(certutil|rundll32|regsvr32|mshta|cscript|wscript|bitsadmin)\.exe</field>
+    <field name="win.eventdata.destinationIp" type="pcre2">^(?!127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.).*</field>
+    <description>HIGH RISK: LOLBin $(win.eventdata.image) connected to external IP $(win.eventdata.destinationIp):$(win.eventdata.destinationPort) [Payload Download / C2 / Exfiltration]</description>
+    <mitre>
+      <id>T1105</id>
+      <id>T1218</id>
+    </mitre>
+    <group>c2,lolbin,ingress_tool_transfer,</group>
+  </rule>
+
+  <!-- Rule 100953: Tunneling and Reverse Proxy Tool Execution / Network Activity (ngrok, chisel, frp, ligolo...) -->
+  <rule id="100953" level="14">
+    <if_sid>60004, 184665</if_sid>
+    <field name="win.system.eventID">^1$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)(ngrok|chisel|frpc?|ligolo|plink|gost|nps|rathole)\.exe</field>
+    <description>CRITICAL: Unauthorized Tunneling / Reverse Proxy tool execution [$(win.eventdata.image)] - Potential Backdoor to Internet</description>
+    <mitre>
+      <id>T1572</id>
+      <id>T1090</id>
+    </mitre>
+    <group>tunneling,backdoor,c2,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100954: Outbound connection to common Hacker / C2 / Reverse Shell ports -->
+  <rule id="100954" level="12">
+    <if_group>sysmon_eid3_detections</if_group>
+    <field name="win.eventdata.destinationPort" type="pcre2">^(4444|1337|5555|6666|7777|8888|9001|9999|31337|4445|8443)$</field>
+    <description>HIGH RISK: Outbound connection to suspicious / C2 / Reverse Shell port $(win.eventdata.destinationPort) [Destination: $(win.eventdata.destinationIp)]</description>
+    <mitre>
+      <id>T1095</id>
+    </mitre>
+    <group>c2,backdoor,suspicious_port,</group>
+  </rule>
+
+</group>
+
+<group name="google_seo_poisoning,cloaking_traffic,">
+
+  <!-- Rule 100960: Traffic arriving from Google Search Referral to Cloaked Gambling URL -->
+  <rule id="100960" level="10">
+    <if_sid>31100,31101,31108</if_sid>
+    <extra_data type="pcre2">(?i)google\.[a-z.]+/url.*(?:usg=AOvVaw|sqi=)</extra_data>
+    <url type="pcre2">(?i)(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin|\.html)</url>
+    <description>SEO Poisoning Alert: Visitor arriving from Google Search referral to legacy cloaked gambling URL [URL: $(url) | Source IP: $(srcip)]</description>
+    <mitre>
+      <id>T1584.004</id>
+      <id>T1505.004</id>
+    </mitre>
+    <group>seo_poisoning,cloaking,audit,</group>
+  </rule>
+
+  <!-- Rule 100961: General access to legacy Cloaked Gambling URLs (regardless of referer) -->
+  <rule id="100961" level="8">
+    <if_sid>31100,31101,31108</if_sid>
+    <url type="pcre2">(?i)(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin)</url>
+    <description>SEO Audit: Access to legacy cloaked gambling endpoint [Status: $(id) | URL: $(url) | Source IP: $(srcip)]</description>
+    <mitre>
+      <id>T1505.004</id>
+    </mitre>
+    <group>seo_audit,cloaking,</group>
+  </rule>
+
+  <!-- Rule 100962: CRITICAL - Cloaked Gambling URL returning 200 OK or 302 Redirection -->
+  <rule id="100962" level="13">
+    <if_sid>100960,100961</if_sid>
+    <id type="pcre2">^(200|301|302|307)$</id>
+    <description>CRITICAL ALERT: Cloaked gambling URL responded with SUCCESS/REDIRECT (Status $(id)) [URL: $(url) | Potential active backdoor / cloak bypass]</description>
+    <mitre>
+      <id>T1505.004</id>
+      <id>T1584.004</id>
+    </mitre>
+    <group>critical,incident_response,seo_cloaking,</group>
+  </rule>
+
+  <!-- Rule 100963: Google Search Console or Webmaster Verification file accessed -->
+  <rule id="100963" level="11">
+    <if_sid>31100,31101,31108</if_sid>
+    <url type="pcre2">(?i)google[a-f0-9]{16}\.html</url>
+    <description>HIGH RISK: Google Search Console verification token file accessed [URL: $(url) | Status: $(id)]</description>
+    <mitre>
+      <id>T1505.003</id>
+      <id>T1584</id>
+    </mitre>
+    <group>search_console_hijack,audit,</group>
+  </rule>
+
+  <!-- Rule 100964: OpenInstall SDK / Gambling App Invitation Parameters Detected (CRITICAL) -->
+  <rule id="100964" level="14">
+    <if_sid>31100,31101,31108</if_sid>
+    <url type="pcre2">(?i)(openInstallAppKey|inviteType|mmh2rv|openinstall)</url>
+    <description>CRITICAL: OpenInstall Gambling Mobile App Download / Redirect Parameter Detected [URL: $(url) | Source IP: $(srcip)]</description>
+    <mitre>
+      <id>T1584.004</id>
+      <id>T1204.002</id>
+      <id>T1505.004</id>
+    </mitre>
+    <group>openinstall,mobile_malware,gambling,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100965: Mobile Visitor arriving from Google Search accessing cloaked endpoints -->
+  <rule id="100965" level="11">
+    <if_sid>100960</if_sid>
+    <extra_data type="pcre2">(?i)(Android|iPhone|Mobile)</extra_data>
+    <description>HIGH RISK: Mobile user from Google Search Referral accessed legacy cloaked endpoint [URL: $(url) | Source IP: $(srcip)]</description>
+    <mitre>
+      <id>T1584.004</id>
+      <id>T1505.004</id>
+    </mitre>
+    <group>mobile_cloaking,seo_poisoning,</group>
+  </rule>
+
+  <!-- Rule 100966: Mobile Cloaking Bypass / Active Redirect to Gambling App (Level 14) -->
+  <rule id="100966" level="14">
+    <if_sid>100965</if_sid>
+    <id type="pcre2">^(200|301|302|307)$</id>
+    <description>EMERGENCY: Mobile Cloaking ACTIVE - User from Google Search received 200/Redirect on legacy URL [URL: $(url) | Status: $(id)]</description>
+    <mitre>
+      <id>T1584.004</id>
+      <id>T1505.004</id>
+    </mitre>
+    <group>mobile_cloaking,emergency,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100967: Core IIS Binary w3wp.exe or inetsrv Tampering (FIM Level 14) -->
+  <rule id="100967" level="14">
+    <if_group>syscheck</if_group>
+    <match>w3wp.exe|iisutil.dll|gzip.dll|asp.dll|webengine.dll|webengine4.dll</match>
+    <description>EMERGENCY: Core IIS Binary Tampering Detected [File: $(file)] - Potential Trojanized w3wp / Rootkit Persistence!</description>
+    <mitre>
+      <id>T1574.002</id>
+      <id>T1505.004</id>
+      <id>T1036</id>
+    </mitre>
+    <group>syscheck,fim,rootkit,trojanized_binary,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100968: Resurgence of mscofxp Malware (FIM Level 14) -->
+  <rule id="100968" level="14">
+    <if_group>syscheck</if_group>
+    <match>mscofxp</match>
+    <description>EMERGENCY: Resurgence of mscofxp SEO Cloaking Malware Detected [File: $(file)]!</description>
+    <mitre>
+      <id>T1505.004</id>
+      <id>T1584.004</id>
+    </mitre>
+    <group>syscheck,fim,malware,resurgence,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100969: Fast Reverse Proxy (frpc / standalone svc.exe) Backdoor Activity (Level 14) -->
+  <rule id="100969" level="14">
+    <if_group>syscheck|windows</if_group>
+    <match>frpc|\\svc\.exe|/svc\.exe|^svc\.exe|89\.116\.220\.233</match>
+    <description>CRITICAL: Fast Reverse Proxy (FRP) C2 Backdoor Activity Detected [Target: $(file)$(win.eventdata.image)]</description>
+    <mitre>
+      <id>T1572</id>
+      <id>T1090.001</id>
+      <id>T1071</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,nist_800_53_SC.7,hipaa_164.312.b,tsc_CC6.8,tsc_CC7.2,c2,tunneling,frp,backdoor,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100970: Whitelist legitimate services & administrative tunnels (Suppression) -->
+  <rule id="100970" level="0">
+    <if_sid>100969, 100953</if_sid>
+    <match>cloudflare|cloudflared|warp-svc.exe|fortissl|fortitray|tailscale|wireguard|openvpn|zabbix|node_exporter</match>
+    <description>Ignore false positive C2 alert for approved administrative tunnels and legitimate services</description>
+    <group>whitelist,suppression,</group>
+  </rule>
+
+  <!-- Rule 100989: VNU Internal and Public IP Whitelist Suppression (Never Alert as C2) -->
+  <rule id="100989" level="0">
+    <list field="srcip" lookup="match_key">etc/lists/vnu_whitelist</list>
+    <description>Suppress C2 evaluation for VNU internal RFC1918 and public infrastructure IPs</description>
+    <group>whitelist,vnu_infrastructure,</group>
+  </rule>
+
+  <!-- Rule 100986: VPN and Cloudflare WARP Audit Traffic (Visibility without High Severity Alarm) -->
+  <rule id="100986" level="4">
+    <list field="srcip" lookup="match_key">etc/lists/vpn_access_list</list>
+    <description>VNU VPN / Cloudflare WARP egress remote access traffic logged for audit</description>
+    <group>vpn_access,audit_trail,</group>
+  </rule>
+
+  <!-- Rule 100976: DNS Resolver Configuration Tampering Detected via Auditd / Syslog -->
+  <rule id="100976" level="12">
+    <match>/etc/resolv.conf|/etc/systemd/resolved.conf|/etc/hosts</match>
+    <description>CRITICAL: Unauthorized DNS Resolver Configuration Tampering Detected via System Logs</description>
+    <mitre>
+      <id>T1565.002</id>
+      <id>T1071.004</id>
+    </mitre>
+    <group>dns_tampering,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100977: DNS Resolver Configuration Tampering Detected on Linux (FIM Syscheck) -->
+  <rule id="100977" level="12">
+    <if_sid>550, 553, 554</if_sid>
+    <field name="file" type="pcre2">(?i)/(resolv\.conf|systemd/resolved\.conf|hosts)$</field>
+    <description>CRITICAL: Unauthorized DNS Resolver Configuration Tampering Detected on Linux Host [File: $(file)]</description>
+    <mitre>
+      <id>T1565.002</id>
+      <id>T1071.004</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.5,nist_800_53_SI.4,nist_800_53_SI.7,tsc_CC6.8,dns_tampering,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100978: DNS Resolver Registry Tampering Detected on Windows (Sysmon Event ID 12/13/14) -->
+  <rule id="100978" level="12">
+    <if_sid>61614, 61615, 61616</if_sid>
+    <field name="win.eventdata.targetObject" type="pcre2">(?i)Tcpip\\Parameters\\Interfaces</field>
+    <description>CRITICAL: Windows Registry DNS Configuration Tampered via Sysmon [Target: $(win.eventdata.targetObject)]</description>
+    <mitre>
+      <id>T1565.002</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.5,nist_800_53_SI.4,tsc_CC6.8,dns_tampering,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100979: DNS Resolver Registry Tampering Detected on Windows (FIM Registry Syscheck) -->
+  <rule id="100979" level="12">
+    <if_sid>594, 597, 598, 750, 751, 752</if_sid>
+    <match>Tcpip\Parameters\Interfaces</match>
+    <description>CRITICAL: Windows FIM detected Registry DNS Configuration Tampered</description>
+    <mitre>
+      <id>T1565.002</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.5,nist_800_53_SI.4,tsc_CC6.8,dns_tampering,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100985: DNS Tunneling / DGA Activity Detected by PowerDNS Recursor -->
+  <rule id="100985" level="13">
+    <match>DNS_TUNNEL_ALERT:</match>
+    <description>EMERGENCY: DNS Tunneling Data Exfiltration / DGA Activity Detected by PowerDNS Recursor [Query: $(data)]</description>
+    <mitre>
+      <id>T1071.004</id>
+      <id>T1048.003</id>
+      <id>T1568.002</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,hipaa_164.312.b,tsc_CC6.8,dns_tunneling,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100990: OpenCTI Threat Intelligence - Confirmed C2 / Malicious IP Communication -->
+  <rule id="100990" level="14">
+    <if_group>syslog|windows|web|firewall</if_group>
+    <list field="srcip" lookup="match_key">etc/lists/malicious-ioc/malicious-ip</list>
+    <description>CRITICAL: Communication with Confirmed Threat Intelligence C2 / Malicious IP [IP: $(srcip)]</description>
+    <mitre>
+      <id>T1071</id>
+      <id>T1572</id>
+      <id>T1090</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,pci_dss_10.2.4,nist_800_53_SI.4,nist_800_53_SC.7,nist_800_53_AU.6,hipaa_164.312.b,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,c2,malicious_ip,opencti,threat_intel,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100991: OpenCTI Threat Intelligence - Confirmed Malicious Domain Query -->
+  <rule id="100991" level="13">
+    <if_group>syslog|windows|web|dns</if_group>
+    <list field="http.hostname" lookup="match_key">etc/lists/malicious-ioc/malicious-domains</list>
+    <description>HIGH ALERT: Connection or DNS Resolution to Confirmed Malicious Domain from OpenCTI [Domain: $(http.hostname)]</description>
+    <mitre>
+      <id>T1071.001</id>
+      <id>T1566.002</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,nist_800_53_SC.7,hipaa_164.312.b,tsc_CC6.8,tsc_CC7.2,malicious_domain,opencti,threat_intel,high_priority,</group>
+  </rule>
+
+  <!-- Rule 100992: OpenCTI Threat Intelligence - Confirmed Malware Binary Hash Execution -->
+  <rule id="100992" level="15">
+    <if_group>syscheck|windows_sysmon</if_group>
+    <list field="sha256" lookup="match_key">etc/lists/malicious-ioc/malware-hashes</list>
+    <description>EMERGENCY ALERT: Known Malware Binary Executed or Created on Host [File: $(file)$(win.eventdata.imageLoaded)]</description>
+    <mitre>
+      <id>T1204.002</id>
+      <id>T1059</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,pci_dss_10.2.5,nist_800_53_SI.4,nist_800_53_SI.3,nist_800_53_AU.6,hipaa_164.312.b,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,malware_hash,opencti,threat_intel,emergency,incident_response,</group>
+  </rule>
+
+</group>
+
+<group name="windows_code_integrity,sysmon_signature_check,">
+
+  <!-- Rule 100971: IIS Worker Process (w3wp.exe) loaded Unsigned DLL / Binary -->
+  <rule id="100971" level="14">
+    <if_group>sysmon_event7</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)w3wp\.exe$</field>
+    <field name="win.eventdata.signed" type="pcre2">(?i)^false$</field>
+    <description>CRITICAL ALERT: IIS Worker Process (w3wp.exe) loaded UNSIGNED DLL/Binary [File: $(win.eventdata.imageLoaded)] - Potential Web Rootkit / Unsigned Malware Injection!</description>
+    <mitre>
+      <id>T1574.002</id>
+      <id>T1505.004</id>
+      <id>T1036</id>
+    </mitre>
+    <group>sysmon_signature,unsigned_binary,rootkit,dll_injection,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100972: IIS Worker Process (w3wp.exe) loaded DLL with Invalid / Tampered Signature -->
+  <rule id="100972" level="14">
+    <if_group>sysmon_event7</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)w3wp\.exe$</field>
+    <field name="win.eventdata.signatureStatus" type="pcre2" negate="yes">(?i)^Valid$</field>
+    <description>CRITICAL ALERT: IIS Worker Process (w3wp.exe) loaded DLL with INVALID/TAMPERED Signature [File: $(win.eventdata.imageLoaded) | Status: $(win.eventdata.signatureStatus)]</description>
+    <mitre>
+      <id>T1574.002</id>
+      <id>T1036</id>
+    </mitre>
+    <group>sysmon_signature,tampered_signature,rootkit,dll_injection,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100973: System Directory DLL loaded by w3wp.exe is NOT signed by Microsoft (Cert Mismatch) -->
+  <rule id="100973" level="14">
+    <if_group>sysmon_event7</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)w3wp\.exe$</field>
+    <field name="win.eventdata.imageLoaded" type="pcre2">(?i)[c-z]:\\\\Windows\\\\(System32|SysWOW64)\\\\</field>
+    <field name="win.eventdata.signature" type="pcre2" negate="yes">(?i)Microsoft</field>
+    <description>CRITICAL ALERT: System DLL loaded by IIS (w3wp.exe) is NOT SIGNED BY MICROSOFT [DLL: $(win.eventdata.imageLoaded) | Signer: $(win.eventdata.signature)] - Possible DLL Hijacking / Sideloading!</description>
+    <mitre>
+      <id>T1574.002</id>
+      <id>T1505.004</id>
+    </mitre>
+    <group>sysmon_signature,cert_mismatch,non_microsoft,dll_hijacking,critical,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100974: Critical System Process loaded Unsigned Module -->
+  <rule id="100974" level="12">
+    <if_group>sysmon_event7</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)(rundll32|regsvr32|powershell|cmd|cscript|wscript)\.exe$</field>
+    <field name="win.eventdata.signed" type="pcre2">(?i)^false$</field>
+    <description>HIGH RISK: Critical Windows Binary $(win.eventdata.image) loaded UNSIGNED Module [$(win.eventdata.imageLoaded)]</description>
+    <mitre>
+      <id>T1574.002</id>
+      <id>T1055</id>
+    </mitre>
+    <group>sysmon_signature,unsigned_binary,dll_injection,</group>
+  </rule>
+
+  <!-- Rule 100975: Sysmon activity referencing mscofxp malware -->
+  <rule id="100975" level="15">
+    <if_group>windows</if_group>
+    <match>mscofxp</match>
+    <description>EMERGENCY: Sysmon detected active execution or module load of mscofxp malware [Image: $(win.eventdata.image) | Loaded: $(win.eventdata.imageLoaded)]!</description>
+    <mitre>
+      <id>T1505.004</id>
+      <id>T1584.004</id>
+    </mitre>
+    <group>malware_execution,mscofxp,emergency,critical,incident_response,</group>
+  </rule>
+
+</group>
+
+<group name="malware_detection_tuning,virustotal_tuning,clamav_tuning,">
+
+  <!-- Rule 100980: Silence VirusTotal rate limit errors and non-malicious info events to prevent flooding -->
+  <rule id="100980" level="0">
+    <if_sid>87101,87102,87103,87104,87106</if_sid>
+    <description>Silence VirusTotal rate limit errors and non-malicious informational events</description>
+  </rule>
+
+  <!-- Rule 100981: Elevate ClamAV on-premise virus detection to Level 13 (Critical) -->
+  <rule id="100981" level="13">
+    <if_sid>52502</if_sid>
+    <description>CRITICAL: ClamAV Antivirus detected MALWARE in file! [$(file)]</description>
+    <mitre>
+      <id>T1204.002</id>
+      <id>T1059</id>
+    </mitre>
+    <group>clamav,virus,malware,critical,incident_response,</group>
+  </rule>
+
+</group>
+
+<group name="vnu_audit,authentication,password_security,">
+
+  <!-- Rule 100501: Base Rule cho mọi sự kiện Audit VNU -->
+  <rule id="100501" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="category">^ADMIN_ACTION|^USER_TRAFFIC|^SYSTEM_EVENT</field>
+    <description>VNU IT Service: Hoạt động hệ thống ghi nhận từ audit log.</description>
+    <group>vnu_audit,audit_trail,</group>
+  </rule>
+
+  <!-- Rule 100502: Thao tác đổi mật khẩu tài khoản -->
+  <rule id="100502" level="5">
+    <if_sid>100501</if_sid>
+    <action type="pcre2">^RESET_PASSWORD_</action>
+    <description>VNU IT Service: Admin $(actor.name) ($(actor.email)) đã đổi mật khẩu tài khoản $(target.user) qua $(platform).</description>
+    <group>password_change,account_management,</group>
+  </rule>
+
+  <!-- Rule 100505: Đổi mật khẩu ngoài giờ hành chính (23h đêm - 5h sáng) -->
+  <rule id="100505" level="7">
+    <if_sid>100502</if_sid>
+    <time>23:00 - 05:00</time>
+    <description>CẢNH BÁO: Thao tác đổi mật khẩu tài khoản $(target.user) diễn ra ngoài giờ làm việc bởi $(actor.email) từ IP $(client_ip).</description>
+    <group>off_hours,policy_violation,</group>
+  </rule>
+
+  <!-- Rule 100510: Đổi mật khẩu hàng loạt / dồn dập (> 5 tài khoản trong 10 phút) -->
+  <rule id="100510" level="10" frequency="5" timeframe="600">
+    <if_matched_sid>100502</if_matched_sid>
+    <same_field>actor.email</same_field>
+    <description>CẢNH BÁO BẬC CAO: Admin $(actor.email) thực hiện đổi mật khẩu dồn dập hơn 5 tài khoản trong 10 phút qua $(platform).</description>
+    <group>mass_password_reset,suspicious_activity,</group>
+  </rule>
+
+  <!-- Rule 100520: Cố ý can thiệp tài khoản ngoài thẩm quyền cây OU trường -->
+  <rule id="100520" level="11">
+    <if_sid>100501</if_sid>
+    <action>UNAUTHORIZED_OU_ACCESS</action>
+    <description>CẢNH BÁO NGUY HIỂM: Cán bộ trường $(actor.email) cố ý truy cập/thay đổi tài khoản ngoài OU thẩm quyền: $(target.user) từ IP $(client_ip).</description>
+    <group>access_violation,privilege_abuse,</group>
+  </rule>
+
+  <!-- Rule 100530: Phát hiện IP flood hoặc quét tự động form hỗ trợ (> 15 request / 5 phút) -->
+  <rule id="100530" level="8" frequency="15" timeframe="300">
+    <if_matched_sid>100501</if_matched_sid>
+    <same_field>client_ip</same_field>
+    <description>CẢNH BÁO LƯU LƯỢNG CAO: Địa chỉ IP $(client_ip) gửi hơn 15 request kiểm tra tài khoản / submit đơn vào hệ thống trong 5 phút.</description>
+    <group>rate_limit,scanner_detected,anti_flood,</group>
+  </rule>
+
+  <!-- Rule 100540: Thao tác thất bại liên tiếp (> 5 lỗi trong 5 phút từ cùng 1 nguồn) -->
+  <rule id="100540" level="9" frequency="5" timeframe="300">
+    <if_matched_sid>100501</if_matched_sid>
+    <status>FAILED</status>
+    <same_field>client_ip</same_field>
+    <description>CẢNH BÁO AN NINH: Phát hiện 5 thao tác thất bại liên tiếp từ IP $(client_ip) trên cổng dịch vụ IT.</description>
+    <group>authentication_failed,brute_force,</group>
+  </rule>
+
+  <!-- Rule 100550: Khôi phục mật khẩu tài khoản về snapshot trước (Rollback) -->
+  <rule id="100550" level="8">
+    <if_sid>100501</if_sid>
+    <action type="pcre2">^ROLLBACK_</action>
+    <description>CẢNH BÁO: Quản trị viên $(actor.email) đã kích hoạt khôi phục trạng thái/mật khẩu tài khoản $(target.user) về bản sao lưu trước đó.</description>
+    <group>account_rollback,audit_trail,high_security,</group>
+  </rule>
+
+  <!-- Rule 100560: Hệ thống AI tự động duyệt & đổi mật khẩu -->
+  <rule id="100560" level="4">
+    <if_sid>100501</if_sid>
+    <action type="pcre2">^AUTO_APPROVE_</action>
+    <description>THÔNG TIN: Hệ thống AI tự động xử lý đổi mật khẩu cho sinh viên $(target.user) theo ticket $(ticket_id).</description>
+    <group>auto_approval,ai_service,account_management,</group>
+  </rule>
+
+  <!-- Rule 100570: Cập nhật / Nạp CCCD vào thuộc tính LDAP -->
+  <rule id="100570" level="5">
+    <if_sid>100501</if_sid>
+    <action type="pcre2">^(SYNC_CCCD_LDAP|CCCD_UPDATE_LDAP)</action>
+    <description>VNU IT Service: Cập nhật thông tin CCCD vào thuộc tính LDAP description cho $(target.user) bởi $(actor.email).</description>
+    <group>cccd_sync,attribute_modification,account_management,</group>
+  </rule>
+
+</group>
+
+<group name="network_infra,cat6_network_infra,">
+
+  <!-- ======================================================== -->
+  <!-- CATEGORY 6: INFRASTRUCTURE & VCENTER OPERATIONAL RULES   -->
+  <!-- ALL RULES ARE STRICTLY ALERT-ONLY (NO AUTOMATED ACTION)  -->
+  <!-- ======================================================== -->
+
+  <!-- 1. Link, Flapping & Hardware Errors -->
+  <rule id="100701" level="7">
+    <match>LINK-3-UPDOWN|LINEPROTO-5-UPDOWN|Interface.*changed state to (down|up)</match>
+    <description>HẠ TẦNG MẠNG: Cổng mạng thay đổi trạng thái UP/DOWN (Link State Changed/Flapping)</description>
+    <group>network_link,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100702" level="10">
+    <match>FAN_FAIL|POWER_SUPPLY|PS_FAIL|TRANSCEIVER.*WARNING|TEMPERATURE.*CRITICAL|ENVMON</match>
+    <description>HẠ TẦNG PHẦN CỨNG: Cảnh báo nguồn, quạt tản nhiệt hoặc suy hao module quang SFP</description>
+    <group>hardware_failure,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <!-- 2. Network Loop & Layer 2 Anomalies -->
+  <rule id="100703" level="10">
+    <match>SPANTREE-2-RECV_PVID_ERR|BLOCK_BPDUGUARD|BPDU Guard|Loopback error</match>
+    <description>CẢNH BÁO NGUY CẤP: Phát hiện vòng lặp mạng (Loop / STP BPDU Guard kích hoạt cô lập cổng)</description>
+    <group>network_loop,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100704" level="8">
+    <match>DHCP_SNOOPING_DROP|DHCP_SNOOPING.*untrusted</match>
+    <description>AN NINH MẠNG TẦNG 2: Phát hiện thiết bị cấp DHCP lạ tranh chấp dải mạng (Rogue DHCP Server)</description>
+    <group>network_security,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100705" level="8">
+    <match>IP-4-DUPADDR|MAC_MOVE|MAC_FLAPPING|Duplicate IP address</match>
+    <description>BẤT THƯỜNG MẠNG: Xung đột địa chỉ IP máy chủ hoặc hiện tượng MAC Flapping giữa các cổng</description>
+    <group>network_anomaly,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <!-- 3. Configuration Audit & Administrative Tracking -->
+  <rule id="100706" level="5">
+    <match>SYS-5-CONFIG_I|SYS-5-CONFIG_FILE|Vim.Event.VmReconfiguredEvent|VmReconfiguredEvent</match>
+    <description>KIỂM TOÁN CẤU HÌNH: Quản trị viên thay đổi và lưu cấu hình thiết bị Switch / Máy ảo vCenter</description>
+    <group>network_audit,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100707" level="9">
+    <match>SEC_LOGIN-4-LOGIN_FAILED|UserLoginFailedEvent|Failed console login</match>
+    <description>XÁC THỰC LÕI: Đăng nhập thất bại vào giao diện quản trị Switch Core / vCenter</description>
+    <group>authentication_failed,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <!-- 4. Virtualization & Storage/HA Failures -->
+  <rule id="100708" level="12">
+    <match negate="yes">snapd</match>
+    <match type="pcre2">(?i)(All Paths Down|Permanent Device Loss|\bAPD\b|\bPDL\b|Datastore.*disconnected)</match>
+    <description>CẢNH BÁO NGUY CẤP VCENTER: Mất kết nối lưu trữ Datastore SAN/NAS (All Paths Down / Permanent Loss)</description>
+    <group>vcenter_storage,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100711" level="9">
+    <match type="pcre2">(?i)(port\s*scan|portscan|syn_flood|tcp_src_session|network\s*sweep|reconnaissance)</match>
+    <description>HẠ TẦNG AN NINH: Phát hiện hành vi quét cổng (Port Scanning / Reconnaissance) nhắm vào hạ tầng mạng</description>
+    <mitre><id>T1046</id></mitre>
+    <group>network_scan,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100712" level="8">
+    <match type="pcre2">(?i)(icmp_flood|ping\s*sweep|ping\s*flood|icmp.*rate\s*limit|echo-request.*flood)</match>
+    <description>HẠ TẦNG BẤT THƯỜNG: Phát hiện tần suất ICMP Ping Sweep / Ping Flood dồn dập vào hạ tầng</description>
+    <mitre><id>T1595.001</id></mitre>
+    <group>icmp_flood,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100713" level="11">
+    <match type="pcre2">(?i)(connection\s*attempt.*(443|902|5480|22|161|8443)|probe.*(443|902|5480|22|161)|dstport=(443|902|5480|161).*action=(deny|drop))</match>
+    <description>CẢNH BÁO NGUY CẤP: Dò quét thăm dò cổng quản trị lõi vCenter (443/902/5480) hoặc Switch Core (22/161)</description>
+    <mitre><id>T1190</id><id>T1046</id></mitre>
+    <group>vcenter_probe,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100714" level="12">
+    <match type="pcre2">(?i)anomaly.*(syn_flood|icmp_flood|port_scan|tcp_src_session|ip_sweep)</match>
+    <description>CẢNH BÁO TẤN CÔNG DoS HẠ TẦNG: Thiết bị mạng phát hiện và chặn DoS Anomaly</description>
+    <mitre><id>T1498</id><id>T1499</id></mitre>
+    <group>network_dos,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100709" level="12">
+    <match>HostConnectionLostEvent|HostNotRespondingEvent|Host.*is not responding</match>
+    <description>CẢNH BÁO NGUY CẤP VCENTER: Máy chủ vật lý ESXi mất kết nối quản trị hoặc ngừng phản hồi</description>
+    <group>vcenter_host,cat6_network_infra,alert_only,</group>
+  </rule>
+
+  <rule id="100710" level="10">
+    <match>VmRemovedEvent|VmDestroyedEvent</match>
+    <description>KIỂM TOÁN VCENTER: Máy chủ ảo bị xóa khỏi kho lưu trữ hệ thống</description>
+    <group>vcenter_audit,cat6_network_infra,alert_only,</group>
+  </rule>
+
+</group>
+
+<group name="linux_execution_guard,process_injection,">
+
+  <!-- Rule 100801: Process Injection via ptrace or LD_PRELOAD -->
+  <rule id="100801" level="14">
+    <match>ptrace|PTRACE_POKETEXT|LD_PRELOAD|/etc/ld.so.preload</match>
+    <description>CRITICAL ALERT: Potential Process Injection or LD_PRELOAD Hijacking detected on Linux host</description>
+    <mitre>
+      <id>T1055.009</id>
+      <id>T1574.006</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,iso_27001_A.12.4,tsc_CC6.8,tsc_CC7.2,process_injection,linux_security,critical,</group>
+  </rule>
+
+  <!-- Rule 100802: Interactive Reverse Shell Execution -->
+  <rule id="100802" level="13">
+    <match type="pcre2">/dev/tcp/|/dev/udp/|nc\s+.*-e\s+|sh\s+-i|pty\.spawn|Socket::sockaddr_in</match>
+    <description>HIGH RISK: Interactive Reverse Shell command line pattern executed</description>
+    <mitre>
+      <id>T1059.004</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,tsc_CC7.2,reverse_shell,execution,</group>
+  </rule>
+
+  <!-- Rule 100803: Piped Download and Execute in Shell -->
+  <rule id="100803" level="12">
+    <match type="pcre2">(curl|wget)\s+.*\|\s*(bash|sh|python|perl|php)</match>
+    <description>HIGH RISK: Piped remote download directly executed into shell interpreter (curl/wget | sh/bash)</description>
+    <mitre>
+      <id>T1059.004</id>
+      <id>T1105</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,dangerous_execution,download_cradle,</group>
+  </rule>
+
+  <!-- Rule 100804: Base64 Obfuscated Command Execution -->
+  <rule id="100804" level="13">
+    <match type="pcre2">echo\s+[A-Za-z0-9+/=]{20,}\s*\|\s*base64\s+-d\s*\|\s*(sh|bash)</match>
+    <description>HIGH RISK: Base64 encoded payload decompressed and piped to shell execution</description>
+    <mitre>
+      <id>T1027</id>
+      <id>T1059.004</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,obfuscation,execution,</group>
+  </rule>
+
+  <!-- Rule 100805: Crontab Persistence Manipulation -->
+  <rule id="100805" level="12">
+    <match type="pcre2">/etc/cron|/var/spool/cron|crontab\s+-e</match>
+    <description>SUSPICIOUS: Crontab schedule configuration modified (Potential persistence)</description>
+    <mitre>
+      <id>T1053.003</id>
+    </mitre>
+    <group>pci_dss_10.2.7,pci_dss_11.5,nist_800_53_SI.7,iso_27001_A.8.16,tsc_CC6.8,persistence,crontab,</group>
+  </rule>
+
+  <!-- Rule 100806: Binary Masquerading / Execution in Temporary Directories -->
+  <rule id="100806" level="14">
+    <match type="pcre2">(/tmp/|/dev/shm/|/var/tmp/)[^\s]+\s+(ELF|executable)</match>
+    <description>CRITICAL ALERT: Executable binary or ELF dropped and executed in temp directory (/tmp, /dev/shm)</description>
+    <mitre>
+      <id>T1036.005</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,binary_masquerade,incident_response,</group>
+  </rule>
+
+  <!-- Rule 100807: SSH Authorized Keys Modification -->
+  <rule id="100807" level="13">
+    <match type="pcre2">\.ssh/authorized_keys</match>
+    <description>HIGH RISK: SSH authorized_keys file modified - Backdoor SSH key addition</description>
+    <mitre>
+      <id>T1098.004</id>
+    </mitre>
+    <group>pci_dss_10.2.7,pci_dss_8.2,nist_800_53_AC.2,iso_27001_A.8.16,tsc_CC6.8,ssh_key,backdoor,</group>
+  </rule>
+
+  <!-- Rule 100808: Web Server User Executed Reconnaissance Commands -->
+  <rule id="100808" level="12">
+    <match type="pcre2">(www-data|nginx|apache|nobody)\s*:.*(whoami|id|uname\s+-a|cat\s+/etc/passwd|iptables|systemctl)</match>
+    <description>HIGH RISK: Web daemon account (www-data/nginx/apache) executed OS reconnaissance commands</description>
+    <mitre>
+      <id>T1505.003</id>
+      <id>T1082</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,owasp_A03_2021,tsc_CC6.8,webshell,command_execution,</group>
+  </rule>
+
+</group>
+
+<group name="windows_execution_guard,sysmon_guard,">
+
+  <!-- Rule 100811: Credential Dumping - Access to LSASS Process Memory -->
+  <rule id="100811" level="14">
+    <if_group>windows</if_group>
+    <match type="pcre2">(?i)(lsass\.exe.*GrantedAccess|procdump.*lsass|rundll32.*comsvcs.*MiniDump)</match>
+    <description>CRITICAL ALERT: Potential LSASS Process Memory dumping / Mimikatz activity detected</description>
+    <mitre>
+      <id>T1003.001</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,credential_dumping,critical,</group>
+  </rule>
+
+  <!-- Rule 100812: Suspicious PowerShell Web Download Cradle -->
+  <rule id="100812" level="13">
+    <if_group>windows</if_group>
+    <match type="pcre2">(?i)(DownloadString|DownloadFile|Invoke-WebRequest|iwr|curl|irm)\s+.*(http|ftp)</match>
+    <description>HIGH RISK: PowerShell Download Cradle observed downloading remote script/binary</description>
+    <mitre>
+      <id>T1059.001</id>
+      <id>T1105</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,powershell,download_cradle,</group>
+  </rule>
+
+  <!-- Rule 100813: Process Injection via CreateRemoteThread -->
+  <rule id="100813" level="14">
+    <if_group>sysmon_event8</if_group>
+    <description>CRITICAL ALERT: Sysmon Event 8 - CreateRemoteThread detected (Cross-Process Injection)</description>
+    <mitre>
+      <id>T1055.012</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,process_injection,critical,</group>
+  </rule>
+
+  <!-- Rule 100814: Living-off-the-Land Binary (LOLBin) Abuse -->
+  <rule id="100814" level="13">
+    <if_group>windows</if_group>
+    <match type="pcre2">(?i)(certutil(\.exe)?\s+(-urlcache|-split)|mshta(\.exe)?\s+http|bitsadmin(\.exe)?\s+/transfer|regsvr32(\.exe)?\s+.*scrobj)</match>
+    <description>HIGH RISK: Windows LOLBin Abuse detected (certutil download, mshta URL, bitsadmin transfer, regsvr32 scrobj)</description>
+    <mitre>
+      <id>T1218</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,lolbin,evasion,</group>
+  </rule>
+
+  <!-- Rule 100815: Suspicious Scheduled Task Created via Command Line -->
+  <rule id="100815" level="12">
+    <if_group>windows</if_group>
+    <match type="pcre2">(?i)schtasks(\.exe)?\s+/create</match>
+    <description>SUSPICIOUS: Windows Scheduled Task created via command line (schtasks /create)</description>
+    <mitre>
+      <id>T1053.005</id>
+    </mitre>
+    <group>pci_dss_10.2.7,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,scheduled_task,persistence,</group>
+  </rule>
+
+  <!-- Rule 100816: Service Binary Path Modification -->
+  <rule id="100816" level="13">
+    <if_group>windows</if_group>
+    <match type="pcre2">(?i)sc(\.exe)?\s+(create|config)\s+.*binpath=</match>
+    <description>HIGH RISK: Windows Service binary path configured via sc.exe (Persistence / Privilege Escalation)</description>
+    <mitre>
+      <id>T1543.003</id>
+    </mitre>
+    <group>pci_dss_10.2.7,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,service_tampering,privilege_escalation,</group>
+  </rule>
+
+  <!-- Rule 100817: AMSI Bypass Attempt in PowerShell -->
+  <rule id="100817" level="14">
+    <if_group>windows</if_group>
+    <match type="pcre2">(?i)(AmsiUtils|amsiInitFailed|System\.Management\.Automation\.AmsiUtils)</match>
+    <description>CRITICAL ALERT: Antimalware Scan Interface (AMSI) bypass technique detected in PowerShell execution</description>
+    <mitre>
+      <id>T1562.001</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,amsi_bypass,defense_evasion,critical,</group>
+  </rule>
+
+  <!-- Rule 100818: Mimikatz Command or Module Execution -->
+  <rule id="100818" level="14">
+    <if_group>windows</if_group>
+    <match type="pcre2">(?i)(sekurlsa|logonpasswords|lsadump|kerberos::ptt|privilege::debug)</match>
+    <description>CRITICAL ALERT: Mimikatz credential dumping commands or modules detected</description>
+    <mitre>
+      <id>T1003</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,mimikatz,credential_dumping,critical,</group>
+  </rule>
+
+</group>
+
+<group name="web_attacks,owasp_detection,">
+
+  <!-- Rule 100821: PHP Webshell Execution Signatures -->
+  <rule id="100821" level="14">
+    <match type="pcre2">(?i)(eval\s*\(base64_decode|assert\s*\(\$_(POST|GET|REQUEST)|shell_exec\s*\(\$_(POST|GET|REQUEST)|passthru\s*\(\$_(POST|GET|REQUEST))</match>
+    <description>CRITICAL ALERT: Web Shell execution signature detected (eval base64_decode, assert POST, shell_exec)</description>
+    <mitre>
+      <id>T1505.003</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,owasp_A03_2021,tsc_CC6.8,webshell,critical,</group>
+  </rule>
+
+  <!-- Rule 100822: SQL Injection Attack Pattern in URI / Request -->
+  <rule id="100822" level="13">
+    <match type="pcre2">(?i)(union\s+select|select\s+.*\s+from\s+information_schema|waitfor\s+delay\s+'|sleep\(\d+\)|benchmark\(\d+,)</match>
+    <description>HIGH RISK: SQL Injection signature detected in web access request (UNION SELECT, sleep, information_schema)</description>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,owasp_A03_2021,tsc_CC6.8,sqli,web_attack,</group>
+  </rule>
+
+  <!-- Rule 100823: Path Traversal / LFI Attempt -->
+  <rule id="100823" level="12">
+    <match type="pcre2">(\.\./\.\./|%2e%2e%2f|%252e%252e%252f|/etc/passwd|win\.ini|boot\.ini)</match>
+    <description>SUSPICIOUS: Directory Traversal / Local File Inclusion attempt (../../ or sensitive system files)</description>
+    <mitre>
+      <id>T1083</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,owasp_A01_2021,tsc_CC6.8,lfi,path_traversal,</group>
+  </rule>
+
+  <!-- Rule 100824: PHP Object Deserialization Attack -->
+  <rule id="100824" level="13">
+    <match type="pcre2">(?i)(O:\d+:".*":\d+:\{|__destruct|__wakeup)</match>
+    <description>HIGH RISK: Potential PHP Object Injection / Insecure Deserialization attack observed</description>
+    <mitre>
+      <id>T1059.004</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,owasp_A03_2021,tsc_CC6.8,php_deserialization,web_attack,</group>
+  </rule>
+
+  <!-- Rule 100825: SEO Cloaking & Search Bot Manipulation -->
+  <rule id="100825" level="14">
+    <match type="pcre2">(?i)(Googlebot|bingbot|Baiduspider|YandexBot).*(\.php\?|eval|base64|document\.write)</match>
+    <description>CRITICAL ALERT: Search engine User-Agent querying obfuscated payload - Potential SEO Cloaking Attack</description>
+    <mitre>
+      <id>T1584.004</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,seo_cloaking,tampering,critical,</group>
+  </rule>
+
+  <!-- Rule 100826: Vulnerability Scanner Reconnaissance -->
+  <rule id="100826" level="12">
+    <match type="pcre2">(?i)(sqlmap|nikto|dirbuster|gobuster|wpscan|acunetix|nuclei|masscan)</match>
+    <description>SUSPICIOUS: Automated vulnerability scanner User-Agent detected (sqlmap/nikto/dirbuster/nuclei)</description>
+    <mitre>
+      <id>T1595</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,owasp_A06_2021,tsc_CC6.8,vulnerability_scanner,reconnaissance,</group>
+  </rule>
+
+</group>
+
+<group name="network_ioc,outbound_anomaly,">
+
+  <!-- Rule 100831: Outbound Communication to Tor Network -->
+  <rule id="100831" level="14">
+    <match type="pcre2">(?i)(torproject|exit-node|\.onion)</match>
+    <description>CRITICAL ALERT: Host attempting outbound connection to Tor Anonymity Network or Hidden Service</description>
+    <mitre>
+      <id>T1090.003</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_11.4,nist_800_53_SC.7,iso_27001_A.8.16,tsc_CC6.8,tor_network,outbound_anomaly,critical,</group>
+  </rule>
+
+  <!-- Rule 100832: Cryptocurrency Mining Activity -->
+  <rule id="100832" level="13">
+    <match type="pcre2">(?i)(stratum\+tcp|minexmr|supportxmr|nanopool|coinhive|monerohash|hashvault)</match>
+    <description>HIGH RISK: Cryptocurrency mining pool communication or Stratum protocol detected</description>
+    <mitre>
+      <id>T1496</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,cryptomining,unauthorized_resource,</group>
+  </rule>
+
+  <!-- Rule 100833: Suspicious Outbound Port Communication -->
+  <rule id="100833" level="12">
+    <match type="pcre2">(:6667|:1337|:4444|:5555|:8888)\b</match>
+    <description>SUSPICIOUS: Traffic destined to high-risk C2/Backdoor port (IRC 6667, Metasploit 4444, 1337, 5555)</description>
+    <mitre>
+      <id>T1571</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SC.7,iso_27001_A.8.16,tsc_CC6.8,suspicious_port,outbound_traffic,</group>
+  </rule>
+
+  <!-- Rule 100834: Query to High-Risk Dynamic DNS / TLD -->
+  <rule id="100834" level="13">
+    <match type="pcre2">(?i)\.(tk|top|pw|duckdns\.org|ngrok\.io|ngrok-free\.app)\b</match>
+    <description>HIGH RISK: Outbound query or connection to high-risk dynamic DNS / TLD (.tk/.top/.pw/duckdns/ngrok)</description>
+    <mitre>
+      <id>T1583.001</id>
+      <id>T1572</id>
+    </mitre>
+    <group>pci_dss_10.6.1,nist_800_53_SC.7,iso_27001_A.8.16,tsc_CC6.8,dynamic_dns,tunneling,</group>
+  </rule>
+
+</group>
+
+

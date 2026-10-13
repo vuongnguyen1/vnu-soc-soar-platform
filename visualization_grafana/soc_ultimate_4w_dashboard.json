@@ -1,0 +1,4621 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 189,
+  "links": [],
+  "panels": [
+    {
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 20,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"text-align: center; background-color: #111217; padding: 6px 16px; border-bottom: 2px solid #eba434; position: relative; display: flex; align-items: center; justify-content: space-between;\">\n  <div style=\"display: flex; align-items: center; gap: 8px; width: 220px;\">\n    <span style=\"color: #94a3b8; font-size: 0.75rem;\">HỆ THỐNG GIÁM SÁT AN NINH</span>\n  </div>\n  <div style=\"display: flex; align-items: center; justify-content: center; gap: 10px;\">\n    <img src=\"/public/img/duac_thumb.png?v=1791859521\" style=\"width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #eba434; box-shadow: 0 0 12px rgba(235,164,52,0.7); object-fit: contain; background: rgba(15,23,42,0.7); padding: 2px;\" alt=\"socduac\">\n    <h2 style=\"color: #eba434; margin:0; letter-spacing: 2px; font-size: 1.25rem;\">TRUNG TÂM GIÁM SÁT AN NINH MẠNG VNU - SIEM XDR</h2>\n  </div>\n  <div style=\"display: flex; align-items: center; justify-content: flex-end; width: 220px;\">\n    <div onclick=\"if(window.toggleSocduac){window.toggleSocduac();}else{var el=document.getElementById('socduac-fab');if(el)el.click();}\"\n         style=\"cursor: pointer; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid #eba434; border-radius: 20px; padding: 4px 12px; box-shadow: 0 0 12px rgba(235,164,52,0.4); user-select: none;\">\n      <img src=\"/public/img/duac_thumb.png?v=1791859521\" style=\"width: 22px; height: 22px; border-radius: 50%; border: 1px solid #38bdf8; object-fit: contain; background: rgba(15,23,42,0.7); padding: 1px;\" alt=\"socduac\">\n      <span style=\"font-weight: 700; color: #eba434; font-size: 0.8rem;\">socduac AI</span>\n      <span style=\"display: inline-block; width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 6px #10b981;\"></span>\n      <span style=\"color: #38bdf8; font-size: 0.72rem;\">Mở Chat ↘</span>\n    </div>\n  </div>\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "12.3.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 100,
+      "panels": [],
+      "title": "🔰 TAB 1: TỔNG QUAN HỆ THỐNG",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "efu5eomlpn6yof"
+      },
+      "description": "Trạng thái kết nối của toàn bộ Agent hạ tầng: Sống (Online), Chết (Mất kết nối/Offline) và Tổng số Agent trong 24 giờ qua (cố định 24h).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ON"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#1F7832",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "OFF"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#C4162A",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TỔNG AGENT"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#1F60C4",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 3
+      },
+      "hideTimeOverride": false,
+      "id": 50,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "efu5eomlpn6yof"
+          },
+          "editorMode": "code",
+          "expr": "wazuh_agents_active",
+          "instant": true,
+          "legendFormat": "ON",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "efu5eomlpn6yof"
+          },
+          "editorMode": "code",
+          "expr": "wazuh_agents_disconnected",
+          "instant": true,
+          "legendFormat": "OFF",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "efu5eomlpn6yof"
+          },
+          "editorMode": "code",
+          "expr": "wazuh_agents_total",
+          "instant": true,
+          "legendFormat": "TỔNG AGENT",
+          "range": false,
+          "refId": "C"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "SỐ LƯỢNG AGENT (24H - ON / OFF)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "description": "Tổng số sự kiện an ninh ghi nhận trong 24 giờ qua (cố định 24h, độc lập với bộ lọc thời gian).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 3
+      },
+      "hideTimeOverride": false,
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Tổng log",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "*",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "TỔNG SỰ KIỆN (24H)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "description": "Tổng số cảnh báo nguy cấp từ Level 12 trở lên trong 24 giờ qua (cố định 24h, độc lập với bộ lọc thời gian).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 3
+      },
+      "hideTimeOverride": false,
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Nguy hiểm",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.level:[12 TO *]",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "CẢNH BÁO CAO (LVL 12+ - 24H)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "description": "Tổng số sự kiện xác thực thất bại, tấn công dò mật khẩu trong 24 giờ qua (cố định 24h, độc lập với bộ lọc thời gian).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 3
+      },
+      "hideTimeOverride": false,
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Auth Fails",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.groups:(*auth* OR *logon* OR *fail* OR *pam* OR *sshd*) AND rule.level:>=5",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "LỖI XÁC THỰC (24H)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mức 15 (Critical)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mức 12-14 (High)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mức 7-11 (Medium)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mức 4-6 (Low)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mức 1-3 (Info)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Mức 15 (Critical)",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.level:15",
+          "refId": "L15",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Mức 12-14 (High)",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.level:[12 TO 14]",
+          "refId": "L12_14",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Mức 7-11 (Medium)",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.level:[7 TO 11]",
+          "refId": "L7_11",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Mức 4-6 (Low)",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.level:[4 TO 6]",
+          "refId": "L4_6",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Mức 1-3 (Info)",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.level:[1 TO 3]",
+          "refId": "L1_3",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "XU HƯỚNG MỨC ĐỘ CẢNH BÁO (VULNERABILITY LVL)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 101,
+      "panels": [],
+      "title": "🌍 TAB 2: BẢN ĐỒ & NGUỒN GỐC TẤN CÔNG",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#FA6400",
+                "value": 0
+              },
+              {
+                "color": "#E02F44",
+                "value": 5
+              },
+              {
+                "color": "#8F3BB8",
+                "value": 20
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 16,
+        "x": 0,
+        "y": 15
+      },
+      "id": 6,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "CartoDB Dark",
+          "noRepeat": false,
+          "type": "osm-standard"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": false,
+          "showDebug": false,
+          "showMeasure": false,
+          "showScale": true,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "Count",
+                  "fixed": "#E02F44"
+                },
+                "opacity": 0.85,
+                "size": {
+                  "field": "Count",
+                  "fixed": 6,
+                  "max": 35,
+                  "min": 5,
+                  "mode": "measure"
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                }
+              }
+            },
+            "location": {
+              "gazetteer": "public/gazetteer/countries.json",
+              "lookup": "Country",
+              "mode": "lookup"
+            },
+            "name": "Attacker IP Distribution",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "zero",
+          "lat": 16,
+          "lon": 106,
+          "noRepeat": false,
+          "zoom": 2
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "GeoLocation.country_name",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "50"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:GeoLocation.country_name",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "GLOBAL THREAT MAP (BẢN ĐỒ TẤN CÔNG TOÀN CẦU - 24H)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "indexByName": {
+              "Count": 1,
+              "Country": 0
+            },
+            "renameByName": {
+              "GeoLocation.country_name": "Country",
+              "Metric: Count": "Count",
+              "doc_count": "Count",
+              "key": "Country"
+            }
+          }
+        }
+      ],
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#FA6400"
+              },
+              {
+                "color": "#E02F44",
+                "value": 20
+              },
+              {
+                "color": "#8F3BB8",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 8,
+        "x": 16,
+        "y": 15
+      },
+      "id": 12,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "GeoLocation.country_name",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:GeoLocation.country_name",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "TOP QUỐC GIA TẤN CÔNG",
+      "type": "bargauge"
+    },
+    {
+      "description": "Thống kê Top 30 IP tấn công và phân nhóm mối đe dọa trong 24 giờ qua (Cố định 24h, không phụ thuộc bộ lọc thời gian).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#FA6400"
+              },
+              {
+                "color": "#E02F44",
+                "value": 20
+              },
+              {
+                "color": "#8F3BB8",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 6,
+        "x": 0,
+        "y": 29
+      },
+      "hideTimeOverride": false,
+      "id": 210,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "data.srcip",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:data.srcip AND (rule.level:[4 TO *] OR rule.groups:(*attack* OR *bruteforce* OR *web* OR *sshd* OR *sql_injection* OR *recon* OR *authentication_failed* OR *fortigate* OR *firewall*) OR data.soar_event:(*ENFORCEMENT* OR *INFRA*)) AND NOT (rule.id:(550 OR 554 OR 502 OR 503 OR 504) OR (agent.name:(wazuh-grafana* OR wazuh-master OR node01 OR node02 OR node03) AND NOT (rule.groups:(*fortigate* OR *attack* OR *bruteforce*) OR data.devname:* OR data.soar_event:*)))",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "TOP IP NGUỒN TẤN CÔNG (TOP ATTACKER IPS - 24H)",
+      "type": "bargauge"
+    },
+    {
+      "id": 213,
+      "title": "TOP AGENT BỊ TẤN CÔNG (TOP TARGET AGENTS - 24H)",
+      "type": "bargauge",
+      "description": "Thống kê Top các Wazuh Agent / Máy chủ mục tiêu bị tấn công nhiều nhất trong 24 giờ qua (Nhóm theo tên Agent nguyên bản).",
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 6,
+        "x": 6,
+        "y": 29
+      },
+      "timeFrom": "24h",
+      "hideTimeOverride": false,
+      "pluginVersion": "12.3.0",
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#5794F2"
+              },
+              {
+                "color": "#FA6400",
+                "value": 100
+              },
+              {
+                "color": "#E02F44",
+                "value": 1000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "timeField": "@timestamp",
+          "query": "_exists_:data.srcip AND (rule.level:[4 TO *] OR rule.groups:(*attack* OR *bruteforce* OR *web* OR *sshd* OR *sql_injection* OR *recon* OR *authentication_failed* OR *fortigate* OR *firewall*) OR data.soar_event:(*ENFORCEMENT* OR *INFRA*)) AND NOT (rule.id:(550 OR 554 OR 502 OR 503 OR 504) OR (agent.name:(wazuh-grafana* OR wazuh-master OR node01 OR node02 OR node03) AND NOT (rule.groups:(*fortigate* OR *attack* OR *bruteforce*) OR data.devname:* OR data.soar_event:*)))",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "bucketAggs": [
+            {
+              "id": "2",
+              "type": "terms",
+              "field": "agent.name",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [
+            {
+              "options": {
+                "CEA_NEW_198.51.100.10": {
+                  "text": "cea.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "198.51.100.10": {
+                  "text": "cea.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "idp_web_112.137.142.6": {
+                  "text": "idp.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "112.137.142.6": {
+                  "text": "idp.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "aapanel-web-01": {
+                  "text": "hosting-portal.example.edu / qpan.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "112.137.133.14": {
+                  "text": "hosting-portal.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "daotao_112.137.142.44": {
+                  "text": "daotao.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "112.137.142.44": {
+                  "text": "daotao.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "Web_TuyensinhSDH_NEW_10.0.2.15": {
+                  "text": "tssdh.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "10.0.2.15": {
+                  "text": "tssdh.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "khaosat_ulis_10.0.2.15": {
+                  "text": "khaosat.ulis.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "10.0.2.15": {
+                  "text": "khaosat.ulis.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "cybersafe_10.0.2.15": {
+                  "text": "it.example.edu / cybersafe.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "it-cyber": {
+                  "text": "it.example.edu / cybersafe.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "10.0.2.15": {
+                  "text": "it.example.edu / cybersafe.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "100years_112.137.143.34": {
+                  "text": "100years.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "112.137.143.34": {
+                  "text": "100years.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "eoffice_web_112.137.142.20": {
+                  "text": "eoffice.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "112.137.142.20": {
+                  "text": "eoffice.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "eoffice_db_112.137.142.21": {
+                  "text": "eoffice-db.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "112.137.142.21": {
+                  "text": "eoffice-db.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "dev-idp-dev-01": {
+                  "text": "idp-dev.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "prod-idp-web-01": {
+                  "text": "idp.example.edu (Web 01)"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "prod-idp-web-02": {
+                  "text": "idp.example.edu (Web 02)"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "prod-idp-lb-01": {
+                  "text": "idp.example.edu (LB 01)"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "prod-idp-lb-02": {
+                  "text": "idp.example.edu (LB 02)"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "prod-idp-db-01": {
+                  "text": "idp-db (DB 01)"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "prod-idp-db-02": {
+                  "text": "idp-db (DB 02)"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "dksdh": {
+                  "text": "dksdh.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "dongbo_daotao_db": {
+                  "text": "dongbo.daotao.example.edu"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "type": "value",
+              "options": {
+                "FG300D": {
+                  "text": "10.243.1.1 (FG300D - Firewall Bien)"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "10.243.1.1": {
+                  "text": "10.243.1.1 (FG300D - Firewall Bien)"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "FG200F": {
+                  "text": "10.243.5.1 (FG200F - Firewall Core)"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "10.243.5.1": {
+                  "text": "10.243.5.1 (FG200F - Firewall Core)"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "FG_DV": {
+                  "text": "112.137.143.18 (FG-DV - Firewall Dich Vu)"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "112.137.143.18": {
+                  "text": "112.137.143.18 (FG-DV - Firewall Dich Vu)"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "ingest-01": {
+                  "text": "ingest-01 (Syslog HA Ingest Node)"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "ingest-02": {
+                  "text": "ingest-02 (Syslog HA Ingest Node)"
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#5794F2"
+              },
+              {
+                "color": "#FA6400",
+                "value": 20
+              },
+              {
+                "color": "#E02F44",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 6,
+        "x": 12,
+        "y": 29
+      },
+      "id": 212,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "agent.name",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:data.srcip AND (rule.level:[4 TO *] OR rule.groups:(*attack* OR *bruteforce* OR *web* OR *sshd* OR *sql_injection* OR *recon* OR *authentication_failed* OR *fortigate* OR *firewall*) OR data.soar_event:(*ENFORCEMENT* OR *INFRA*)) AND NOT (rule.id:(550 OR 554 OR 502 OR 503 OR 504) OR (agent.name:(wazuh-grafana* OR wazuh-master OR node01 OR node02 OR node03) AND NOT (rule.groups:(*fortigate* OR *attack* OR *bruteforce*) OR data.devname:* OR data.soar_event:*)))",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "TOP DỊCH VỤ / WEBSITE BỊ TẤN CÔNG (TARGET SERVICES - 24H)",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#FA6400"
+              },
+              {
+                "color": "#E02F44",
+                "value": 20
+              },
+              {
+                "color": "#8F3BB8",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 6,
+        "x": 18,
+        "y": 29
+      },
+      "id": 211,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "rule.description",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:data.srcip AND (rule.level:[4 TO *] OR rule.groups:(*attack* OR *bruteforce* OR *web* OR *sshd* OR *sql_injection* OR *recon* OR *authentication_failed* OR *fortigate* OR *firewall*) OR data.soar_event:(*ENFORCEMENT* OR *INFRA*)) AND NOT (rule.id:(550 OR 554 OR 502 OR 503 OR 504) OR (agent.name:(wazuh-grafana* OR wazuh-master OR node01 OR node02 OR node03) AND NOT (rule.groups:(*fortigate* OR *attack* OR *bruteforce*) OR data.devname:* OR data.soar_event:*)))",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "PHÂN NHÓM HÀNH VI TẤN CÔNG (THREAT CLASSIFICATION - 24H)",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 102,
+      "panels": [],
+      "title": "🛡️ TAB 3: TUÂN THỦ & MITRE ATT&CK",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 40
+      },
+      "id": 31,
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "rule.mitre.tactic",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:rule.mitre.tactic",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "MITRE Tactic",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 40
+      },
+      "id": 32,
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "rule.mitre.id",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:rule.mitre.id",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "MITRE ID",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 40
+      },
+      "id": 33,
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "rule.gdpr",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:rule.gdpr",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "GDPR Compliance",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 40
+      },
+      "id": 34,
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "rule.nist_800_53",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:rule.nist_800_53",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "NIST 800.53",
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 103,
+      "panels": [],
+      "title": "📋 TAB 4: CHI TIẾT CẢNH BÁO",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 49
+      },
+      "id": 41,
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Count$/",
+          "values": true
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "rule.groups",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "_exists_:rule.groups",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "NHÓM RULE (RULE GROUPS)",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mã Rule (Rule ID)"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Mã Rule (Rule ID)"
+              },
+              {
+                "id": "custom.width",
+                "value": 140
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mô tả Chi tiết Rule"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Mô tả Chi tiết Rule"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 450
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Số lượt phát hiện"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Số lượt phát hiện"
+              },
+              {
+                "id": "custom.width",
+                "value": 160
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#5794F2"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 50
+                    },
+                    {
+                      "color": "#FA6400",
+                      "value": 200
+                    },
+                    {
+                      "color": "#E02F44",
+                      "value": 1000
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 16,
+        "x": 8,
+        "y": 49
+      },
+      "id": 42,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "enablePagination": true,
+          "pagination": {
+            "pageSize": 10
+          },
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Số lượt phát hiện"
+          }
+        ]
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "rule.id",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "100"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "rule.description",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "1"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "*",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "DANH SÁCH CHI TIẾT RULE",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "indexByName": {
+              "Mã Rule (Rule ID)": 0,
+              "Mô tả Chi tiết Rule": 1,
+              "Số lượt phát hiện": 2
+            },
+            "renameByName": {
+              "Count": "Số lượt phát hiện",
+              "Metric: Count": "Số lượt phát hiện",
+              "doc_count": "Số lượt phát hiện",
+              "rule.description": "Mô tả Chi tiết Rule",
+              "rule.description: Descending": "Mô tả Chi tiết Rule",
+              "rule.id": "Mã Rule (Rule ID)",
+              "rule.id: Descending": "Mã Rule (Rule ID)",
+              "rule_description": "Mô tả Chi tiết Rule",
+              "rule_id": "Mã Rule (Rule ID)"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 200,
+      "panels": [],
+      "title": "🛡️ TAB 5: SOAR ACTIVE RESPONSE, THREAT TAXONOMY & INFRASTRUCTURE CONSOLE",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#E02F44",
+            "mode": "fixed"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 60
+      },
+      "hideTimeOverride": false,
+      "id": 202,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "alias": "Unique Foreign Blocked IPs",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "7d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "cardinality",
+              "field": "data.srcip"
+            }
+          ],
+          "query": "(rule.level:[12 TO *] OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995) AND _exists_:data.srcip AND NOT data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 112.137.*)",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "TƯỜNG LỬA BIÊN CHẶN IP NƯỚC NGOÀI (24H)",
+      "type": "stat",
+      "description": "Số lượng địa chỉ IP nước ngoài duy nhất bị phát hiện tấn công nguy cấp / thực thi chặn trong 24 giờ qua (Unique Foreign Blocked IPs)."
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#5794F2",
+            "mode": "fixed"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 60
+      },
+      "hideTimeOverride": false,
+      "id": 204,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "alias": "Total Ingest HA Events",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "agent.name:ingest* OR agent.id:(011 OR 012) OR data.asset_type:network OR rule.groups:(cat6_network_infra OR vcenter OR vmware)",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "HẠ TẦNG & INGEST HA (24H)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#73BF69",
+            "mode": "fixed"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 60
+      },
+      "hideTimeOverride": false,
+      "id": 205,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "alias": "Total Internal Monitored",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "bfay8umd54feoc"
+          },
+          "format": "time_series",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "rule.level:[6 TO *] AND data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 112.137.*)",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "ALLOWLIST NỘI BỘ VNU (24H)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "description": "Luồng giám sát sự cố thời gian thực từ Tường lửa FortiGate và Cụm dịch vụ Web VNU. Tự động liên kết điều tra 5W1H (Kẻ tấn công, Người thao tác, Mục tiêu, Phương thức, Trạng thái phản hồi, Hành động tường lửa và Thực thi SOAR).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Timestamp"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Timestamp"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rule ID"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Rule ID"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Tra cuu Rule: ${__data.fields['Rule ID']}",
+                    "url": "/explore?left=%7B%22datasource%22:%22bfay8umd54feoc%22,%22queries%22:%5B%7B%22query%22:%22rule.id:%5C%22${__data.fields['Rule ID']}%5C%22%22%7D%5D%7D"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 80
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Severity"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 12,
+                      "result": {
+                        "color": "#E02F44",
+                        "text": "CRITICAL"
+                      },
+                      "to": 100
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 10,
+                      "result": {
+                        "color": "#FA6400",
+                        "text": "HIGH"
+                      },
+                      "to": 11
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 6,
+                      "result": {
+                        "color": "#EAB839",
+                        "text": "MEDIUM"
+                      },
+                      "to": 9
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "#5794F2",
+                        "text": "LOW"
+                      },
+                      "to": 5
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MITRE Technique"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MITRE Technique"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#B877D9",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": ".*T1190.*",
+                      "result": {
+                        "text": "T1190 (Exploit Web)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1110\\.001.*",
+                      "result": {
+                        "text": "T1110.001 (Password Guess)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1110.*",
+                      "result": {
+                        "text": "T1110 (Brute Force)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1505\\.003.*",
+                      "result": {
+                        "text": "T1505.003 (WebShell FIM)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1505.*",
+                      "result": {
+                        "text": "T1505 (Persistence)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1059\\.003.*",
+                      "result": {
+                        "text": "T1059.003 (w3wp Shell)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1059\\.001.*",
+                      "result": {
+                        "text": "T1059.001 (PowerShell)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1059.*",
+                      "result": {
+                        "text": "T1059 (Command Exec)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1595\\.002.*",
+                      "result": {
+                        "text": "T1595.002 (Web Scan)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1595.*",
+                      "result": {
+                        "text": "T1595 (Recon)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1498.*",
+                      "result": {
+                        "text": "T1498 (DoS Flood)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1499.*",
+                      "result": {
+                        "text": "T1499 (App DoS)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1078.*",
+                      "result": {
+                        "text": "T1078 (Valid Accounts)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1204.*",
+                      "result": {
+                        "text": "T1204 (User Execution)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1021\\.004.*",
+                      "result": {
+                        "text": "T1021.004 (SSH)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1068.*",
+                      "result": {
+                        "text": "T1068 (Priv Escalation)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*T1105.*",
+                      "result": {
+                        "text": "T1105 (Ingress Tool)"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Source IP"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Source IP"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Drilldown IOC: ${__data.fields['Source IP']}",
+                    "url": "/explore?left=%7B%22datasource%22:%22bfay8umd54feoc%22,%22queries%22:%5B%7B%22query%22:%22data.srcip:%5C%22${__data.fields['Source IP']}%5C%22%22%7D%5D%7D"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "User / Actor"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "User / Actor"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Geo / Country"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Geo / Country"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "Australia": {
+                        "color": "blue",
+                        "text": "Australia"
+                      },
+                      "Brazil": {
+                        "color": "green",
+                        "text": "Brazil"
+                      },
+                      "Canada": {
+                        "color": "red",
+                        "text": "Canada"
+                      },
+                      "China": {
+                        "color": "red",
+                        "text": "China"
+                      },
+                      "France": {
+                        "color": "blue",
+                        "text": "France"
+                      },
+                      "Germany": {
+                        "color": "yellow",
+                        "text": "Germany"
+                      },
+                      "Hong Kong": {
+                        "color": "red",
+                        "text": "Hong Kong"
+                      },
+                      "India": {
+                        "color": "orange",
+                        "text": "India"
+                      },
+                      "Indonesia": {
+                        "color": "red",
+                        "text": "Indonesia"
+                      },
+                      "Iran": {
+                        "color": "purple",
+                        "text": "Iran"
+                      },
+                      "Japan": {
+                        "color": "red",
+                        "text": "Japan"
+                      },
+                      "Netherlands": {
+                        "color": "blue",
+                        "text": "Netherlands"
+                      },
+                      "Poland": {
+                        "color": "red",
+                        "text": "Poland"
+                      },
+                      "Republic of Korea": {
+                        "color": "blue",
+                        "text": "South Korea"
+                      },
+                      "Russia": {
+                        "color": "red",
+                        "text": "Russia"
+                      },
+                      "Singapore": {
+                        "color": "green",
+                        "text": "Singapore"
+                      },
+                      "South Korea": {
+                        "color": "blue",
+                        "text": "South Korea"
+                      },
+                      "Taiwan": {
+                        "color": "blue",
+                        "text": "Taiwan"
+                      },
+                      "Thailand": {
+                        "color": "blue",
+                        "text": "Thailand"
+                      },
+                      "Turkey": {
+                        "color": "red",
+                        "text": "Turkey"
+                      },
+                      "Ukraine": {
+                        "color": "blue",
+                        "text": "Ukraine"
+                      },
+                      "United Kingdom": {
+                        "color": "blue",
+                        "text": "United Kingdom"
+                      },
+                      "United States": {
+                        "color": "blue",
+                        "text": "United States"
+                      },
+                      "Vietnam": {
+                        "color": "orange",
+                        "text": "Vietnam"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Target Web / Host"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Target Web / Host"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "100years.example.edu": {
+                        "text": "100years.example.edu (Kỷ niệm)"
+                      },
+                      "100years_112.137.143.34": {
+                        "text": "100years.example.edu (Kỷ niệm)"
+                      },
+                      "CEA_NEW_198.51.100.10": {
+                        "text": "cea.example.edu (KĐCLGD)"
+                      },
+                      "Web_TuyensinhSDH_NEW_10.0.2.15": {
+                        "text": "tssdh.example.edu (Tuyển sinh SDH)"
+                      },
+                      "aapanel-web-01": {
+                        "text": "hosting-portal.example.edu (Cổng Web ĐHQG)"
+                      },
+                      "cea.example.edu": {
+                        "text": "cea.example.edu (KĐCLGD)"
+                      },
+                      "cybersafe.example.edu": {
+                        "text": "it.example.edu / cybersafe.example.edu"
+                      },
+                      "daotao.example.edu": {
+                        "text": "daotao.example.edu (Portal SV)"
+                      },
+                      "daotao_112.137.142.44": {
+                        "text": "daotao.example.edu (Portal SV)"
+                      },
+                      "dev-idp-dev-01": {
+                        "text": "idp-dev.example.edu (Dev)"
+                      },
+                      "eoffice.example.edu": {
+                        "text": "eoffice.example.edu (Văn bản)"
+                      },
+                      "eoffice_198.51.100.10": {
+                        "text": "eoffice.example.edu (Văn bản)"
+                      },
+                      "idp-dev.example.edu": {
+                        "text": "idp-dev.example.edu (Dev)"
+                      },
+                      "idp.example.edu": {
+                        "text": "idp.example.edu (Keycloak SSO)"
+                      },
+                      "idp_web_112.137.142.6": {
+                        "text": "idp.example.edu (Keycloak SSO)"
+                      },
+                      "it-cyber": {
+                        "text": "it.example.edu / cybersafe.example.edu"
+                      },
+                      "it.example.edu": {
+                        "text": "it.example.edu / cybersafe.example.edu"
+                      },
+                      "prod-idp-db-01": {
+                        "text": "idp.example.edu (DB Patroni 01)"
+                      },
+                      "prod-idp-db-02": {
+                        "text": "idp.example.edu (DB Patroni 02)"
+                      },
+                      "prod-idp-lb-01": {
+                        "text": "idp.example.edu (HAProxy LB 01)"
+                      },
+                      "prod-idp-lb-02": {
+                        "text": "idp.example.edu (HAProxy LB 02)"
+                      },
+                      "prod-idp-web-01": {
+                        "text": "idp.example.edu (Web 01)"
+                      },
+                      "prod-idp-web-02": {
+                        "text": "idp.example.edu (Web 02)"
+                      },
+                      "tssdh.example.edu": {
+                        "text": "tssdh.example.edu (Tuyển sinh SDH)"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 150
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Request URL / URI"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Request URL / URI"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "HTTP Status Code"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "HTTP Status Code"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "200": {
+                        "color": "#73BF69",
+                        "text": "200 OK"
+                      },
+                      "201": {
+                        "color": "#73BF69",
+                        "text": "201 Created"
+                      },
+                      "204": {
+                        "color": "#73BF69",
+                        "text": "204 No Content"
+                      },
+                      "301": {
+                        "color": "#5794F2",
+                        "text": "301 Redirect"
+                      },
+                      "302": {
+                        "color": "#5794F2",
+                        "text": "302 Found"
+                      },
+                      "400": {
+                        "color": "#EAB839",
+                        "text": "400 Bad Request"
+                      },
+                      "401": {
+                        "color": "#FA6400",
+                        "text": "401 Unauthorized"
+                      },
+                      "403": {
+                        "color": "#E02F44",
+                        "text": "403 Forbidden"
+                      },
+                      "404": {
+                        "color": "#EAB839",
+                        "text": "404 Not Found"
+                      },
+                      "405": {
+                        "color": "#EAB839",
+                        "text": "405 Method Not Allowed"
+                      },
+                      "500": {
+                        "color": "#E02F44",
+                        "text": "500 Server Error"
+                      },
+                      "502": {
+                        "color": "#E02F44",
+                        "text": "502 Bad Gateway"
+                      },
+                      "503": {
+                        "color": "#E02F44",
+                        "text": "503 Unavailable"
+                      },
+                      "504": {
+                        "color": "#E02F44",
+                        "text": "504 Gateway Timeout"
+                      },
+                      "TICKET_SUBMIT": {
+                        "color": "#5794F2",
+                        "text": "TICKET_SUBMIT"
+                      },
+                      "audit": {
+                        "color": "#5794F2",
+                        "text": "AUDIT"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Firewall Action (Raw)"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Firewall Action (Raw)"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "noValue",
+                "value": "PASS"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "empty",
+                      "result": {
+                        "text": "PASS"
+                      }
+                    },
+                    "type": "special"
+                  },
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "text": "PASS"
+                      }
+                    },
+                    "type": "special"
+                  },
+                  {
+                    "options": {
+                      "": {
+                        "text": "PASS"
+                      },
+                      "-": {
+                        "text": "PASS"
+                      },
+                      "ALLOW": {
+                        "text": "ALLOW"
+                      },
+                      "ALLOW / NO_BLOCK": {
+                        "text": "ALLOW"
+                      },
+                      "BLOCKED": {
+                        "text": "BLOCKED"
+                      },
+                      "CLOSE": {
+                        "text": "CLOSE"
+                      },
+                      "accept": {
+                        "text": "ALLOW"
+                      },
+                      "block": {
+                        "text": "BLOCKED"
+                      },
+                      "close": {
+                        "text": "CLOSE"
+                      },
+                      "deny": {
+                        "text": "BLOCKED"
+                      },
+                      "drop": {
+                        "text": "BLOCKED"
+                      },
+                      "permit": {
+                        "text": "ALLOW"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rule Description"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Rule Description (Realtime Event)"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 250
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 64
+      },
+      "id": 208,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "enablePagination": true,
+          "pagination": {
+            "pageSize": 10
+          },
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Timestamp"
+          }
+        ]
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "bucketAggs": [],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "bfay8umd54feoc"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "order": "desc",
+                "size": "150"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "(data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce* OR *audit*) OR rule.level:[8 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\")",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "LIVE INCIDENT & ENFORCEMENT STREAM (LUỒNG SỰ CỐ & THI HÀNH THỜI GIAN THỰC)",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "@timestamp",
+                "rule.id",
+                "rule.level",
+                "rule.mitre.id",
+                "data.srcip",
+                "data.dstuser",
+                "data.srcuser",
+                "GeoLocation.country_name",
+                "agent.name",
+                "data.url",
+                "data.status",
+                "data.action",
+                "rule.description"
+              ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_score": true,
+              "_type": true,
+              "agent.id": true,
+              "agent.ip": true,
+              "cluster.name": true,
+              "data.devname": true,
+              "data.srcuser": true,
+              "decoder.name": true,
+              "full_log": true,
+              "id": true,
+              "location": true,
+              "manager.name": true
+            },
+            "indexByName": {
+              "Firewall Action (Raw)": 10,
+              "Geo / Country": 6,
+              "HTTP Status Code": 9,
+              "MITRE Technique": 3,
+              "Request URL / URI": 8,
+              "Rule Description": 11,
+              "Rule ID": 1,
+              "Severity": 2,
+              "Source IP": 4,
+              "Target Web / Host": 7,
+              "Timestamp": 0,
+              "User / Actor": 5
+            },
+            "renameByName": {
+              "@timestamp": "Timestamp",
+              "GeoLocation.country_name": "Geo / Country",
+              "agent.name": "Target Web / Host",
+              "data.action": "Firewall Action (Raw)",
+              "data.dstuser": "User / Actor",
+              "data.srcip": "Source IP",
+              "data.srcuser": "User / Actor",
+              "data.status": "HTTP Status Code",
+              "data.url": "Request URL / URI",
+              "rule.description": "Rule Description",
+              "rule.id": "Rule ID",
+              "rule.level": "Severity",
+              "rule.mitre.id": "MITRE Technique"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "uid": "bfay8umd54feoc"
+      },
+      "description": "Bảng điều khiển cảnh báo sự cố hạ tầng Switch Core, Router, Ingest HA, Cụm ảo hóa vCenter/ESXi và Dò quét trinh sát mạng. Chế độ 100% ALERT-ONLY - Tuyệt đối không tự động chặn (Zero Automated Action).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rule ID"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Rule ID"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Explore Rule ${__data.fields['Rule ID']}",
+                    "url": "/explore?left=%7B%22datasource%22:%22bfay8umd54feoc%22,%22queries%22:%5B%7B%22query%22:%22rule.id:%5C%22${__data.fields['Rule ID']}%5C%22%22%7D%5D%7D"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 80
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Severity"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 12,
+                      "result": {
+                        "color": "#E02F44",
+                        "text": "CRITICAL"
+                      },
+                      "to": 100
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 10,
+                      "result": {
+                        "color": "#FA6400",
+                        "text": "HIGH"
+                      },
+                      "to": 11
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 6,
+                      "result": {
+                        "color": "#EAB839",
+                        "text": "MEDIUM"
+                      },
+                      "to": 9
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "#5794F2",
+                        "text": "LOW"
+                      },
+                      "to": 5
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Source / Initiator IP"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Source / Initiator IP"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Investigate IP ${__data.fields['Source / Initiator IP']}",
+                    "url": "/explore?left=%7B%22datasource%22:%22bfay8umd54feoc%22,%22queries%22:%5B%7B%22query%22:%22data.srcip:%5C%22${__data.fields['Source / Initiator IP']}%5C%22%22%7D%5D%7D"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Target User / Actor"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Target User / Actor"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Origin / Region"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Origin / Region"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Affected Infra Asset"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Affected Infra Asset"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#EAB839",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.1\\.1.*",
+                      "result": {
+                        "text": "10.243.1.1 (FG300D)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.5\\.1.*",
+                      "result": {
+                        "text": "10.243.5.1 (FG200F)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*112\\.137\\.143\\.18.*",
+                      "result": {
+                        "text": "112.137.143.18 (FG_DV)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*112\\.137\\.143\\.2.*",
+                      "result": {
+                        "text": "112.137.143.2 (FG300D)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*112\\.137\\.143\\.4.*",
+                      "result": {
+                        "text": "112.137.143.4 (FG200F)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.99\\.88.*",
+                      "result": {
+                        "text": "10.243.99.88 (Switch Core)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*(10\\.243\\.2\\.1[^0-9]|.*vcenter).*",
+                      "result": {
+                        "text": "10.243.2.1 (vCenter)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.2\\.10.*",
+                      "result": {
+                        "text": "10.243.2.10 (ESXi-01)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.2\\.11.*",
+                      "result": {
+                        "text": "10.243.2.11 (ESXi-02)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.2\\.12.*",
+                      "result": {
+                        "text": "10.243.2.12 (ESXi-03)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.50.*",
+                      "result": {
+                        "text": "10.0.6.119 (ESXi-IFI)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.51.*",
+                      "result": {
+                        "text": "10.0.6.119 (ESXi-IFI)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.52.*",
+                      "result": {
+                        "text": "10.0.6.119 (ESXi-IFI)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.8[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (ESXi)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.7[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (ESXi)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.20[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (ESXi)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.21[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (ESXi)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.15[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (ESXi)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.16[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (ESXi)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.22[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (SAN-SW)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.6\\.23[0-9].*",
+                      "result": {
+                        "text": "10.0.6.119x (SAN-Storage)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*172\\.16\\.10\\.[0-9].*",
+                      "result": {
+                        "text": "172.16.10.x (iDrac)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.1\\.33.*",
+                      "result": {
+                        "text": "10.243.1.33 (Syslog VIP)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.1\\.30.*",
+                      "result": {
+                        "text": "10.243.1.30 (ingest-01)"
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*10\\.243\\.1\\.31.*",
+                      "result": {
+                        "text": "10.243.1.31 (ingest-02)"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 180
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Target Port / Service"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Target Port / Service"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Operational Incident Details"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Operational Incident Details"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 250
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device Event / Action"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Device Event / Action"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "alarm": {
+                        "text": "ALARM"
+                      },
+                      "close": {
+                        "text": "CLOSE"
+                      },
+                      "deny": {
+                        "text": "DENY"
+                      },
+                      "drop": {
+                        "text": "DROP"
+                      },
+                      "failed": {
+                        "text": "FAILED"
+                      },
+                      "login": {
+                        "text": "LOGIN"
+                      },
+                      "status_alert": {
+                        "text": "ALARM"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SOAR Policy"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "SOAR Policy"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "text": "ALERT_ONLY"
+                      },
+                      "to": 100
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "ALERT-ONLY": {
+                        "text": "ALERT_ONLY"
+                      },
+                      "ALERT_ONLY": {
+                        "text": "ALERT_ONLY"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Status"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 12,
+                      "result": {
+                        "color": "#E02F44",
+                        "text": "ESCALATED_NOC"
+                      },
+                      "to": 100
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 10,
+                      "result": {
+                        "color": "#FA6400",
+                        "text": "CONFIRMED"
+                      },
+                      "to": 11
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 6,
+                      "result": {
+                        "color": "#EAB839",
+                        "text": "INVESTIGATING"
+                      },
+                      "to": 9
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "#5794F2",
+                        "text": "MONITORING"
+                      },
+                      "to": 5
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Risk Score"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Risk Score"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#5794F2"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 40
+                    },
+                    {
+                      "color": "#FA6400",
+                      "value": 70
+                    },
+                    {
+                      "color": "#E02F44",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 80
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 79
+      },
+      "id": 209,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "pagination": {
+            "pageSize": 10
+          },
+          "reducer": [],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Time"
+          }
+        ]
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "bfay8umd54feoc"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "order": "desc",
+                "size": "200"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "(agent.id:(011 OR 012) OR data.devname:(FG300D OR FG200F OR FG_DV) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\" OR rule.id:100996 OR location:(*sec* OR *net* OR *wazuh-syslog*) OR (agent.name:(ingest* OR *vcenter* OR *esxi* OR *vmware* OR *switch* OR *router* OR *FG300D* OR *FG200F* OR *FG_DV*) AND data.asset_type:network)) AND NOT (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024) OR agent.name:(prod-idp* OR dev-idp* OR eoffice* OR CEA* OR daotao* OR aapanel* OR 100years* OR cybersafe* OR dksdh*) OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995)",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "INFRASTRUCTURE & VCENTER OPERATIONAL ALERT CONSOLE (HẠ TẦNG MẠNG & VCENTER - ALERT-ONLY)",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "@timestamp",
+                "rule.id",
+                "rule.level",
+                "data.srcip",
+                "data.dstuser",
+                "data.srcuser",
+                "GeoLocation.country_name",
+                "location",
+                "data.devname",
+                "data.dstport",
+                "rule.description",
+                "data.action",
+                "data.status"
+              ]
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Risk Score",
+            "binary": {
+              "left": "rule.level",
+              "operator": "*",
+              "right": "6.5"
+            },
+            "mode": "binary"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "SOAR Policy",
+            "binary": {
+              "left": "rule.level",
+              "operator": "+",
+              "right": "0"
+            },
+            "mode": "binary"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Incident Status",
+            "binary": {
+              "left": "rule.level",
+              "operator": "+",
+              "right": "0"
+            },
+            "mode": "binary"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_score": true,
+              "_type": true,
+              "agent.id": true,
+              "agent.ip": true,
+              "agent.name": true,
+              "agent_id": true,
+              "agent_ip": true,
+              "cluster.name": true,
+              "data.devname": true,
+              "data.srcuser": true,
+              "data.status": true,
+              "decoder.name": true,
+              "full_log": true,
+              "id": true,
+              "manager.name": true,
+              "rule.groups": true
+            },
+            "indexByName": {
+              "Affected Infra Asset": 6,
+              "Device Event / Action": 9,
+              "Operational Incident Details": 8,
+              "Origin / Region": 5,
+              "Risk Score": 12,
+              "Rule ID": 1,
+              "SOAR Policy": 10,
+              "Severity": 2,
+              "Source / Initiator IP": 3,
+              "Status": 11,
+              "Target Port / Service": 7,
+              "Target User / Actor": 4,
+              "Time": 0
+            },
+            "renameByName": {
+              "@timestamp": "Time",
+              "GeoLocation.country_name": "Origin / Region",
+              "Incident Status": "Status",
+              "Risk Score": "Risk Score",
+              "SOAR Policy": "SOAR Policy",
+              "data.action": "Device Event / Action",
+              "data.dstport": "Target Port / Service",
+              "data.dstuser": "Target User / Actor",
+              "data.srcip": "Source / Initiator IP",
+              "data.srcuser": "Target User / Actor",
+              "location": "Affected Infra Asset",
+              "rule.description": "Operational Incident Details",
+              "rule.id": "Rule ID",
+              "rule.level": "Severity"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "refresh": "1m",
+  "schemaVersion": 42,
+  "tags": [
+    "VNU",
+    "SOC",
+    "Compliance"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "VNU - SOC Ultimate",
+  "uid": "vnu-soc-ultimate",
+  "version": 64,
+  "weekStart": ""
+}

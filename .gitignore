@@ -1,0 +1,26 @@
+# Environments & Secrets
+.env
+.env.*
+!.env.example
+*.secrets
+.secrets/
+*.pem
+*.key
+*.crt
+*.id_rsa
+
+# Database & Cache
+*.db
+*.sqlite
+*.sqlite3
+*.wal
+*.log
+__pycache__/
+*.pyc
+
+# Local runtime & OS
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+build/

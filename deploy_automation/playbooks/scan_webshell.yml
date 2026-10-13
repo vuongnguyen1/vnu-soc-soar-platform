@@ -1,0 +1,22 @@
+---
+- name: Rà soát tệp tin đáng ngờ và webshell trong thư mục web_root
+  hosts: all
+  gather_facts: no
+  vars:
+    target_dir: "{{ web_root | default('/mnt/data/website') }}"
+  tasks:
+    - name: "[Linux] Tìm các tệp PHP/ASPX mới được tạo hoặc sửa đổi trong 7 ngày qua"
+      when: os_type == 'linux'
+      ansible.builtin.shell: |
+        if [ -d "{{ target_dir }}" ]; then
+          find "{{ target_dir }}" -maxdepth 5 -type f \( -name "*.php" -o -name "*.phtml" -o -name "*.sh" \) -mtime -7 -ls | head -n 30
+        else
+          echo "Thư mục {{ target_dir }} không tồn tại trên máy chủ."
+        fi
+      register: scan_res
+      ignore_errors: yes
+
+    - name: "[Linux] Hiển thị kết quả tệp mới chỉnh sửa"
+      when: os_type == 'linux'
+      ansible.builtin.debug:
+        msg: "{{ scan_res.stdout_lines }}"

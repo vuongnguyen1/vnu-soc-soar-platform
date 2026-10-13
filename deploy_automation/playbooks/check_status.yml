@@ -1,0 +1,39 @@
+---
+- name: Kiểm tra trạng thái máy chủ và dịch vụ Web/Wazuh
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: "[Linux] Kiểm tra trạng thái Wazuh Agent"
+      when: ansible_system == 'Linux'
+      ansible.builtin.shell: "systemctl is-active wazuh-agent || echo 'inactive'"
+      register: wazuh_status_linux
+      ignore_errors: yes
+
+    - name: "[Linux] Kiểm tra các dịch vụ Web đang chạy"
+      when: ansible_system == 'Linux'
+      ansible.builtin.shell: "ps aux | grep -E '(nginx|httpd|apache2|php-fpm|mysqld|mariadb)' | grep -v grep | head -n 10"
+      register: web_proc_linux
+      ignore_errors: yes
+
+    - name: "[Linux] Báo cáo tình trạng hệ thống"
+      when: ansible_system == 'Linux'
+      ansible.builtin.debug:
+        msg:
+          - "Máy chủ: {{ inventory_hostname }} (IP: {{ ansible_default_ipv4.address | default(ansible_host) }})"
+          - "Wazuh Agent: {{ wazuh_status_linux.stdout | default('Unknown') }}"
+          - "Thư mục Web root: {{ web_root | default('Chưa cấu hình') }}"
+          - "Tên miền: {{ domains | default('Chưa cấu hình') }}"
+
+    - name: "[Windows] Kiểm tra dịch vụ Wazuh trên Windows"
+      when: ansible_os_family == 'Windows'
+      ansible.windows.win_service:
+        name: Wazuh
+      register: wazuh_status_win
+      ignore_errors: yes
+
+    - name: "[Windows] Báo cáo tình trạng Windows"
+      when: ansible_os_family == 'Windows'
+      ansible.builtin.debug:
+        msg:
+          - "Máy chủ: {{ inventory_hostname }}"
+          - "Wazuh Agent Status: {{ wazuh_status_win.state | default('Not installed') }}"
