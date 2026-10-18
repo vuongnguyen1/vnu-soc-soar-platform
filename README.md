@@ -18,8 +18,7 @@
 3. [Ma Trận Phân Loại Đe Dọa (CAT1 - CAT6)](#-ma-trận-phân-loại-đe-dọa-cat1---cat6)
 4. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
 5. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
-6. [Bộ Câu Hỏi Phản Biện Chuyên Sâu Khi Đi Phỏng Vấn](#-bộ-câu-hỏi-phản-biện-chuyên-sâu-khi-đi-phỏng-vấn)
-7. [Bản Quyền & Tác Giả](#-bản-quyền--tác-giả)
+6. [Bản Quyền](#-bản-quyền)
 
 ---
 
@@ -111,7 +110,7 @@ enterprise-wazuh-soc-soar/
 ├── docs/                              # Tài liệu kỹ thuật chuyên sâu
 │   ├── architecture_design.md         # Thiết kế kiến trúc 4 lớp chi tiết
 │   ├── threat_taxonomy_matrix.md      # Bảng phân loại đe dọa CAT1-CAT6
-│   └── interview_qa_guide.md          # 5 câu hỏi phỏng vấn thực chiến đỉnh cao
+│   └── learn.md                       # Cẩm nang vận hành & kiến trúc toàn diện
 ├── detection_rules/                   # Module Luật phát hiện (Detection Engineering)
 │   └── local_rules.xml                # Tập luật tùy biến phát hiện SQLi, XSS, RCE, Cloaking
 ├── soar_automation/                   # Module Tự động hóa Phản ứng (SOAR)
@@ -165,16 +164,6 @@ python3 copilot_server.py
 
 ---
 
-## 🎯 BỘ CÂU HỎI PHẢN BIỆN CHUYÊN SÂU KHI ĐI PHỎNG VẤN
-
-Dự án này được thiết kế để trả lời hoàn hảo các câu hỏi phỏng vấn khó nhất của các nhà tuyển dụng:
-1. *“Làm sao bảo vệ SOAR không bị nghẽn khi bị flood hàng chục nghìn log/phút?”* ➔ Xem [Câu hỏi 1 trong Interview Guide](docs/interview_qa_guide.md#câu-hỏi-1).
-2. *“Tại sao không được tự động chặn mọi IP vi phạm và xử lý CGNAT thế nào?”* ➔ Xem [Câu hỏi 2 trong Interview Guide](docs/interview_qa_guide.md#câu-hỏi-2).
-3. *“Cách giám sát FIM hàng triệu file mà không làm treo Agent (Rule 233)?”* ➔ Xem [Câu hỏi 3 trong Interview Guide](docs/interview_qa_guide.md#câu-hỏi-3).
-4. *“Phát hiện kỹ thuật SEO Cloaking / Redirect cờ bạc lậu trên IIS/Nginx ra sao?”* ➔ Xem [Câu hỏi 4 trong Interview Guide](docs/interview_qa_guide.md#câu-hỏi-4).
-5. *“Cách tích hợp AI LLM vào SOC mà không sợ lộ dữ liệu và tránh ảo tưởng?”* ➔ Xem [Câu hỏi 5 trong Interview Guide](docs/interview_qa_guide.md#câu-hỏi-5).
-
----
-
 ## 📄 BẢN QUYỀN
-Phát hành theo giấy phép [MIT License](LICENSE). Dự án được chuẩn hóa cho mục đích nghiên cứu, học thuật và portfolio năng lực kỹ sư an toàn thông tin chuyên nghiệp.
+Phát hành theo giấy phép [MIT License](LICENSE).
+
