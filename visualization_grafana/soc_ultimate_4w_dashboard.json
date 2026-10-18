@@ -1211,7 +1211,7 @@
             },
             {
               "options": {
-                "idp_web_112.137.142.6": {
+                "IDP_WEB_PORTAL": {
                   "text": "idp.example.edu"
                 }
               },
@@ -1219,7 +1219,7 @@
             },
             {
               "options": {
-                "112.137.142.6": {
+                "198.51.100.6": {
                   "text": "idp.example.edu"
                 }
               },
@@ -1235,7 +1235,7 @@
             },
             {
               "options": {
-                "112.137.133.14": {
+                "198.51.100.14": {
                   "text": "hosting-portal.example.edu"
                 }
               },
@@ -1243,7 +1243,7 @@
             },
             {
               "options": {
-                "daotao_112.137.142.44": {
+                "STUDENT_PORTAL": {
                   "text": "daotao.example.edu"
                 }
               },
@@ -1251,7 +1251,7 @@
             },
             {
               "options": {
-                "112.137.142.44": {
+                "198.51.100.44": {
                   "text": "daotao.example.edu"
                 }
               },
@@ -1315,7 +1315,7 @@
             },
             {
               "options": {
-                "100years_112.137.143.34": {
+                "PORTAL_100YEARS": {
                   "text": "100years.example.edu"
                 }
               },
@@ -1323,7 +1323,7 @@
             },
             {
               "options": {
-                "112.137.143.34": {
+                "198.51.100.34": {
                   "text": "100years.example.edu"
                 }
               },
@@ -1331,7 +1331,7 @@
             },
             {
               "options": {
-                "eoffice_web_112.137.142.20": {
+                "EOFFICE_WEB": {
                   "text": "eoffice.example.edu"
                 }
               },
@@ -1339,7 +1339,7 @@
             },
             {
               "options": {
-                "112.137.142.20": {
+                "198.51.100.20": {
                   "text": "eoffice.example.edu"
                 }
               },
@@ -1347,7 +1347,7 @@
             },
             {
               "options": {
-                "eoffice_db_112.137.142.21": {
+                "EOFFICE_DB": {
                   "text": "eoffice-db.example.edu"
                 }
               },
@@ -1355,7 +1355,7 @@
             },
             {
               "options": {
-                "112.137.142.21": {
+                "198.51.100.21": {
                   "text": "eoffice-db.example.edu"
                 }
               },
@@ -1437,15 +1437,15 @@
               "type": "value",
               "options": {
                 "FG300D": {
-                  "text": "10.243.1.1 (FG300D - Firewall Bien)"
+                  "text": "10.0.1.1 (FG300D - Firewall Bien)"
                 }
               }
             },
             {
               "type": "value",
               "options": {
-                "10.243.1.1": {
-                  "text": "10.243.1.1 (FG300D - Firewall Bien)"
+                "10.0.1.1": {
+                  "text": "10.0.1.1 (FG300D - Firewall Bien)"
                 }
               }
             },
@@ -1453,15 +1453,15 @@
               "type": "value",
               "options": {
                 "FG200F": {
-                  "text": "10.243.5.1 (FG200F - Firewall Core)"
+                  "text": "10.0.5.1 (FG200F - Firewall Core)"
                 }
               }
             },
             {
               "type": "value",
               "options": {
-                "10.243.5.1": {
-                  "text": "10.243.5.1 (FG200F - Firewall Core)"
+                "10.0.5.1": {
+                  "text": "10.0.5.1 (FG200F - Firewall Core)"
                 }
               }
             },
@@ -1469,15 +1469,15 @@
               "type": "value",
               "options": {
                 "FG_DV": {
-                  "text": "112.137.143.18 (FG-DV - Firewall Dich Vu)"
+                  "text": "198.51.100.18 (FG-DV - Firewall Dich Vu)"
                 }
               }
             },
             {
               "type": "value",
               "options": {
-                "112.137.143.18": {
-                  "text": "112.137.143.18 (FG-DV - Firewall Dich Vu)"
+                "198.51.100.18": {
+                  "text": "198.51.100.18 (FG-DV - Firewall Dich Vu)"
                 }
               }
             },
@@ -2441,7 +2441,7 @@
               "field": "data.srcip"
             }
           ],
-          "query": "(rule.level:[12 TO *] OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995) AND _exists_:data.srcip AND NOT data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 112.137.*)",
+          "query": "(rule.level:[12 TO *] OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995) AND _exists_:data.srcip AND NOT data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 198.51.100.*)",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -2594,7 +2594,7 @@
               "type": "count"
             }
           ],
-          "query": "rule.level:[6 TO *] AND data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 112.137.*)",
+          "query": "rule.level:[6 TO *] AND data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 198.51.100.*)",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -3190,7 +3190,7 @@
                       "100years.example.edu": {
                         "text": "100years.example.edu (Kỷ niệm)"
                       },
-                      "100years_112.137.143.34": {
+                      "PORTAL_100YEARS": {
                         "text": "100years.example.edu (Kỷ niệm)"
                       },
                       "CEA_NEW_198.51.100.10": {
@@ -3211,7 +3211,7 @@
                       "daotao.example.edu": {
                         "text": "daotao.example.edu (Portal SV)"
                       },
-                      "daotao_112.137.142.44": {
+                      "STUDENT_PORTAL": {
                         "text": "daotao.example.edu (Portal SV)"
                       },
                       "dev-idp-dev-01": {
@@ -3229,7 +3229,7 @@
                       "idp.example.edu": {
                         "text": "idp.example.edu (Keycloak SSO)"
                       },
-                      "idp_web_112.137.142.6": {
+                      "IDP_WEB_PORTAL": {
                         "text": "idp.example.edu (Keycloak SSO)"
                       },
                       "it-cyber": {
@@ -3915,7 +3915,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.1\\.1.*",
                       "result": {
-                        "text": "10.243.1.1 (FG300D)"
+                        "text": "10.0.1.1 (FG300D)"
                       }
                     },
                     "type": "regex"
@@ -3924,7 +3924,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.5\\.1.*",
                       "result": {
-                        "text": "10.243.5.1 (FG200F)"
+                        "text": "10.0.5.1 (FG200F)"
                       }
                     },
                     "type": "regex"
@@ -3933,7 +3933,7 @@
                     "options": {
                       "pattern": ".*112\\.137\\.143\\.18.*",
                       "result": {
-                        "text": "112.137.143.18 (FG_DV)"
+                        "text": "198.51.100.18 (FG_DV)"
                       }
                     },
                     "type": "regex"
@@ -3942,7 +3942,7 @@
                     "options": {
                       "pattern": ".*112\\.137\\.143\\.2.*",
                       "result": {
-                        "text": "112.137.143.2 (FG300D)"
+                        "text": "198.51.100.2 (FG300D)"
                       }
                     },
                     "type": "regex"
@@ -3951,7 +3951,7 @@
                     "options": {
                       "pattern": ".*112\\.137\\.143\\.4.*",
                       "result": {
-                        "text": "112.137.143.4 (FG200F)"
+                        "text": "198.51.100.4 (FG200F)"
                       }
                     },
                     "type": "regex"
@@ -3960,7 +3960,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.99\\.88.*",
                       "result": {
-                        "text": "10.243.99.88 (Switch Core)"
+                        "text": "10.0.99.88 (Switch Core)"
                       }
                     },
                     "type": "regex"
@@ -3969,7 +3969,7 @@
                     "options": {
                       "pattern": ".*(10\\.243\\.2\\.1[^0-9]|.*vcenter).*",
                       "result": {
-                        "text": "10.243.2.1 (vCenter)"
+                        "text": "10.0.2.1 (vCenter)"
                       }
                     },
                     "type": "regex"
@@ -3978,7 +3978,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.2\\.10.*",
                       "result": {
-                        "text": "10.243.2.10 (ESXi-01)"
+                        "text": "10.0.2.10 (ESXi-01)"
                       }
                     },
                     "type": "regex"
@@ -3987,7 +3987,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.2\\.11.*",
                       "result": {
-                        "text": "10.243.2.11 (ESXi-02)"
+                        "text": "10.0.2.11 (ESXi-02)"
                       }
                     },
                     "type": "regex"
@@ -3996,7 +3996,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.2\\.12.*",
                       "result": {
-                        "text": "10.243.2.12 (ESXi-03)"
+                        "text": "10.0.2.12 (ESXi-03)"
                       }
                     },
                     "type": "regex"
@@ -4113,7 +4113,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.1\\.33.*",
                       "result": {
-                        "text": "10.243.1.33 (Syslog VIP)"
+                        "text": "10.0.1.33 (Syslog VIP)"
                       }
                     },
                     "type": "regex"
@@ -4122,7 +4122,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.1\\.30.*",
                       "result": {
-                        "text": "10.243.1.30 (ingest-01)"
+                        "text": "10.0.1.30 (ingest-01)"
                       }
                     },
                     "type": "regex"
@@ -4131,7 +4131,7 @@
                     "options": {
                       "pattern": ".*10\\.243\\.1\\.31.*",
                       "result": {
-                        "text": "10.243.1.31 (ingest-02)"
+                        "text": "10.0.1.31 (ingest-02)"
                       }
                     },
                     "type": "regex"

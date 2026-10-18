@@ -43,7 +43,7 @@ def load_config() -> Dict[str, str]:
     conf = {
         "GEMINI_API_KEY": os.environ.get("GEMINI_API_KEY", ""),
         "GEMINI_MODEL": os.environ.get("GEMINI_MODEL", "gemini-1.5-flash"),
-        "WAZUH_INDEXER_URL": "https://10.241.1.30:9200",
+        "WAZUH_INDEXER_URL": "https://10.0.1.30:9200",
         "WAZUH_INDEXER_USER": "admin",
         "WAZUH_INDEXER_PASS": ""
     }
@@ -169,7 +169,7 @@ def collect_24h_forensics() -> Dict[str, Any]:
             vn_cnt = 0
             foreign_cnt = 0
             for ip in unique_ips:
-                if ip.startswith("10.") or ip.startswith("172.16.") or ip.startswith("192.168.") or ip.startswith("112.137."):
+                if ip.startswith("10.") or ip.startswith("172.16.") or ip.startswith("192.168.") or ip.startswith("198.51.100."):
                     continue
                 # All current blocked in 24h are foreign
                 foreign_cnt += 1
@@ -660,7 +660,7 @@ def serve_web_ui():
 @app.get("/widget.js", response_class=Response)
 def serve_widget_script():
     b64_img = get_duac_b64()
-    img_src = f"data:image/jpeg;base64,{b64_img}" if b64_img else "http://10.241.1.27:8090/duac.jpg"
+    img_src = f"data:image/jpeg;base64,{b64_img}" if b64_img else "http://10.0.1.27:8090/duac.jpg"
 
     js_code = f"""
 (function() {{
@@ -735,7 +735,7 @@ def serve_widget_script():
 
   const modal = document.createElement('div');
   modal.id = 'socduac-modal';
-  modal.innerHTML = '<iframe src="http://10.241.1.27:8090/"></iframe>';
+  modal.innerHTML = '<iframe src="http://10.0.1.27:8090/"></iframe>';
   root.appendChild(modal);
 
   btn.addEventListener('click', () => {{

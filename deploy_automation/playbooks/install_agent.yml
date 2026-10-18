@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: yes
   vars:
-    manager_ip: "{{ lookup('env', 'WAZUH_MANAGER_IP') | default('10.241.6.14', true) }}"
+    manager_ip: "{{ lookup('env', 'WAZUH_MANAGER_IP') | default('10.0.0.10', true) }}"
     agent_version: "{{ lookup('env', 'WAZUH_AGENT_VERSION') | default('4.9.0', true) }}"
 
   tasks:

@@ -1,10 +1,10 @@
 ---
-- name: Cấu hình DNS Server VIP 10.243.1.32 & FIM Anti-Tampering trên Agent
+- name: Cấu hình DNS Server VIP 10.0.1.32 & FIM Anti-Tampering trên Agent
   hosts: all
   gather_facts: yes
   vars:
-    primary_dns_vip: "10.243.1.32"
-    backup_dns: "10.243.1.30"
+    primary_dns_vip: "10.0.1.32"
+    backup_dns: "10.0.1.30"
     public_fallback_dns: "8.8.8.8"
   tasks:
     - name: "[Linux] Kiểm tra kết nối port 53 đến DNS VIP trước khi áp dụng"
@@ -17,7 +17,7 @@
       register: dns_reachable_linux
       ignore_errors: yes
 
-    - name: "[Linux] Cấu hình DNS Nameserver trỏ về VIP 10.243.1.32 & Fallback 8.8.8.8 (Khi kết nối OK)"
+    - name: "[Linux] Cấu hình DNS Nameserver trỏ về VIP 10.0.1.32 & Fallback 8.8.8.8 (Khi kết nối OK)"
       when: ansible_system == 'Linux' and dns_reachable_linux is succeeded
       ansible.builtin.shell: |
         if systemctl is-active --quiet systemd-resolved; then
@@ -36,7 +36,7 @@
       ansible.builtin.debug:
         msg: "CẢNH BÁO: Host {{ inventory_hostname }} không thông port 53 tới {{ primary_dns_vip }}. Giữ nguyên DNS hiện tại để tránh chậm dịch vụ!"
 
-    - name: "[Windows] Cấu hình DNS trên Card mạng chính trỏ về VIP 10.243.1.32 & Fallback 8.8.8.8 (Chỉ khi thông port)"
+    - name: "[Windows] Cấu hình DNS trên Card mạng chính trỏ về VIP 10.0.1.32 & Fallback 8.8.8.8 (Chỉ khi thông port)"
       when: ansible_os_family == 'Windows'
       ansible.windows.win_shell: |
         $test = Test-NetConnection -ComputerName "{{ primary_dns_vip }}" -Port 53 -WarningAction SilentlyContinue
@@ -44,7 +44,7 @@
             $adapter = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' } | Select-Object -First 1
             if ($adapter) {
                 Set-DnsClientServerAddress -InterfaceIndex $adapter.InterfaceIndex -ServerAddresses ("{{ primary_dns_vip }}", "{{ backup_dns }}", "{{ public_fallback_dns }}")
-                Resolve-DnsName -Name "vnu.edu.vn" -Server "{{ primary_dns_vip }}"
+                Resolve-DnsName -Name "example.com" -Server "{{ primary_dns_vip }}"
             }
         } else {
             Write-Output "SKIP: Khong thong port 53 toi {{ primary_dns_vip }}, giu nguyen DNS de khong gay gian doan!"

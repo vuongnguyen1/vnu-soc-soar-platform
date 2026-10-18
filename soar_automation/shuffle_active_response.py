@@ -91,9 +91,9 @@ PROTECTED_NETWORKS = [
     ipaddress.ip_network('172.16.0.0/12'),
     ipaddress.ip_network('192.168.0.0/16'),
     ipaddress.ip_network('127.0.0.0/8'),
-    ipaddress.ip_network('112.137.128.0/19'),
+    ipaddress.ip_network('198.51.100.0/24'),
 ]
-TRUSTED_IPS = {'8.8.8.8', '8.8.4.4', '1.1.1.1', '10.243.1.32', '10.243.1.33'}
+TRUSTED_IPS = {'8.8.8.8', '8.8.4.4', '1.1.1.1', '10.0.1.32', '10.0.1.33'}
 
 
 def get_asset_map():
@@ -130,7 +130,7 @@ def get_exposure(ip_str: str) -> str:
         ip = ipaddress.ip_address(ip_str)
         if ip.is_private or ip.is_loopback:
             return "internal"
-        if ip in ipaddress.ip_network('112.137.128.0/19'):
+        if ip in ipaddress.ip_network('198.51.100.0/24'):
             return "internal"
     except Exception:
         return "internal"
@@ -216,7 +216,7 @@ def resolve_asset(alert: dict) -> dict:
             "role": info.get("role", "")
         }
 
-    # 5. Khớp từ khóa trong full_log (vcenter, esxi, 10.243.1.33, FG300D, FG200F, FG_DV...)
+    # 5. Khớp từ khóa trong full_log (vcenter, esxi, 10.0.1.33, FG300D, FG200F, FG_DV...)
     lower_log = full_log.lower()
     for key, info in asset_map.items():
         if len(key) >= 4 and key.lower() in lower_log and key not in COLLECTOR_NAMES:

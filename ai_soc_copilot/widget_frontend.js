@@ -505,7 +505,7 @@
       "3. DỮ LIỆU THAM CHIẾU AN NINH MẠNG 24H VNU (Strict Read-Only):\n" +
       "   - Hiện ghi nhận " + liveCount + " IP nước ngoài bị chặn biên (Address Group AUTO_SOC_BLACKLIST).\n" +
       "   - Tuân thủ CGNAT Safeguard: 0 IP Việt Nam bị chặn nhầm.\n" +
-      "   - Các máy chủ mục tiêu hàng đầu: CEA_NEW_112.137.140.13, Web_TuyensinhSDH, aapanel.vnu.edu.vn.\n" +
+      "   - Các máy chủ mục tiêu hàng đầu: APP_SERVER_DEMO_01, Web_TuyensinhSDH, web-admin.example.com.\n" +
       "   (Chỉ đề cập số liệu này khi người dùng hỏi về an ninh, IP bị chặn hoặc tình hình hệ thống).\n" +
       "4. TUYỆT ĐỐI KHÔNG tự động thực thi sửa xóa log hay thay đổi hạ tầng. Dùng tiếng Việt chuẩn mực, Markdown đẹp mắt.";
 
@@ -694,7 +694,7 @@
              `• **Hình thức chế tài:** 100% IP này đã kích hoạt lệnh cấm vĩnh viễn (Permanent Drop/Deny) tại tường lửa biên FortiGate (Address Group \`AUTO_SOC_BLACKLIST\`).\n` +
              `• **Quốc gia tấn công chính:** Hoa Kỳ (US), Nga (RU), Singapore (SG), Trung Quốc (CN), Canada (CA).\n` +
              `• **Hệ số an toàn IP Việt Nam (CGNAT Safeguard):** **0 IP Việt Nam bị chặn** (Bảo toàn tuyệt đối dịch vụ cho cán bộ, giảng viên, sinh viên trong nước).\n` +
-             `• **Mục tiêu bị nhắm đến nhiều nhất:** CEA_NEW_112.137.140.13, Web_TuyensinhSDH, aaPanel Web Root.\n` +
+             `• **Mục tiêu bị nhắm đến nhiều nhất:** APP_SERVER_DEMO_01, Web_TuyensinhSDH, aaPanel Web Root.\n` +
              `• **Cơ chế Cửa sổ trượt 24h:** Chỉ số trên bảng hiển thị chính xác các cuộc tấn công diễn ra trong phạm vi \`now() - 24h\`. Các sự kiện tấn công vượt quá 24 tiếng sẽ tự động già hóa ra khỏi cửa sổ thống kê ngày, giúp phản ánh sát sao nhất tình hình an ninh mạng hiện thời.`;
     }
     if (lower.includes("xss") || lower.includes("sql") || lower.includes("rce") || lower.includes("injection") || lower.includes("exploit")) {
@@ -707,9 +707,9 @@
 
     if (lower.includes("agent") || lower.includes("máy chủ") || lower.includes("target")) {
       return `🎯 **TOP AGENT BỊ NHẮM MỤC TIÊU NHIỀU NHẤT (24H QUA)**\n\n` +
-             `1. **CEA_NEW_112.137.140.13:** Mục tiêu bị dò quét SSH và brute-force nhiều nhất (Agent trọng điểm).\n` +
-             `2. **Web_TuyensinhSDH_NEW_10.241.2.15:** Mục tiêu thường xuyên bị quét lỗ hổng ứng dụng web.\n` +
-             `3. **aapanel.vnu.edu.vn (10.243.6.119):** Hệ thống quản trị hosting website đào tạo.\n\n` +
+             `1. **APP_SERVER_DEMO_01:** Mục tiêu bị dò quét SSH và brute-force nhiều nhất (Agent trọng điểm).\n` +
+             `2. **APP_SERVER_DEMO_02:** Mục tiêu thường xuyên bị quét lỗ hổng ứng dụng web.\n` +
+             `3. **web-admin.example.com (10.0.6.119):** Hệ thống quản trị hosting website đào tạo.\n\n` +
              `• **Trạng thái phòng thủ:** Mọi hành vi vi phạm ngưỡng đều đã được SOAR cách ly và chặn biên tự động.`;
     }
     if (lower.includes("việt nam") || lower.includes("vn") || lower.includes("cgnat")) {
