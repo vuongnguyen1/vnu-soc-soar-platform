@@ -1765,4 +1765,57 @@
 
 </group>
 
+<!-- ===================================================================== -->
+<!-- SURICATA NIDS INTELLIGENCE & ZERO-BLOAT NOISE FILTERING RULES         -->
+<!-- ===================================================================== -->
+<group name="ids,suricata,">
+
+  <!-- Rule 100850: Drop Suricata Informational Noise & Policy Probes (Level 0) -->
+  <rule id="100850" level="0">
+    <if_sid>86601</if_sid>
+    <field name="alert.signature" type="pcre2">(?i)^(ET INFO|GPL ICMP PING|ET POLICY|SURICATA STREAM|ET SCAN Behavioral Unusual Port)</field>
+    <description>Suricata: Dropped routine informational/policy event ($(alert.signature))</description>
+  </rule>
+
+  <!-- Rule 100851: Drop Suricata Low-Risk Activity & Protocol Decodes (Level 0) -->
+  <rule id="100851" level="0">
+    <if_sid>86601</if_sid>
+    <field name="alert.category" type="pcre2">^(Misc activity|Generic Protocol Command Decode|Not Suspicious Traffic)$</field>
+    <description>Suricata: Dropped low-priority misc activity ($(alert.signature))</description>
+  </rule>
+
+  <!-- Rule 100852: Standard Suricata IDS Event (Level 5 - Monitoring) -->
+  <rule id="100852" level="5">
+    <if_sid>86601</if_sid>
+    <description>Suricata IDS: Alert detected - $(alert.signature)</description>
+    <group>ids,suricata,network_anomaly,</group>
+  </rule>
+
+  <!-- Rule 100855: Critical Suricata NIDS Exploit / Web Attack Category (Level 12 -> SOAR) -->
+  <rule id="100855" level="12">
+    <if_sid>86601</if_sid>
+    <field name="alert.category" type="pcre2">^(Web Application Attack|Attempted Administrator Privilege Gain|Attempted User Privilege Gain|A Network Trojan was detected|Trojan Activity|Exploit Kit Activity|Malware Command and Control)$</field>
+    <description>CRITICAL SURICATA NIDS ATTACK: $(alert.signature) [Category: $(alert.category)]</description>
+    <mitre>
+      <id>T1190</id>
+      <id>T1059</id>
+    </mitre>
+    <group>ids,suricata,soar,attack,exploit,active_response,</group>
+  </rule>
+
+  <!-- Rule 100856: Critical Suricata NIDS Exploit by Signature Pattern (Level 13 -> SOAR) -->
+  <rule id="100856" level="13">
+    <if_sid>86601</if_sid>
+    <field name="alert.signature" type="pcre2">(?i)(SQL Injection|Remote Code Execution|Webshell|CVE-20\d{2}|Log4j|Spring4Shell|Command Injection|Path Traversal|Metasploit|Cobalt Strike)</field>
+    <description>CRITICAL SURICATA NIDS SIGNATURE MATCH: $(alert.signature)</description>
+    <mitre>
+      <id>T1190</id>
+      <id>T1204</id>
+    </mitre>
+    <group>ids,suricata,soar,attack,exploit,active_response,</group>
+  </rule>
+
+</group>
+
+
 

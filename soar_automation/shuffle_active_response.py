@@ -378,6 +378,8 @@ TAXONOMY_MAP = {
     "100950": ("CAT5_PERSISTENCE_C2", "w3wp.exe Outbound C2 Connection", "T1071.001", 95),
     "100940": ("CAT5_PERSISTENCE_C2", "ClamAV Malware Detected", "T1204.002", 90),
     "108000": ("CAT5_PERSISTENCE_C2", "YARA Rule Malware Match", "T1204.002", 90),
+    "100855": ("CAT1_WEB_EXPLOIT", "Suricata NIDS Attack Detected", "T1190", 90),
+    "100856": ("CAT1_WEB_EXPLOIT", "Suricata NIDS Exploit Signature", "T1190", 95),
     "999914": ("CAT1_WEB_EXPLOIT", "VNU AR Positive Test (Dry-run)", "T1505.003", 90),
     "999912": ("CAT1_WEB_EXPLOIT", "VNU AR Positive Test (Dry-run)", "T1505.003", 90),
     "100900": ("CAT1_WEB_EXPLOIT", "VNU SOAR E2E Test (WebShell)", "T1505.003", 90),

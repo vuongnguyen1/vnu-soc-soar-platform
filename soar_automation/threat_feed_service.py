@@ -687,6 +687,41 @@ def evaluate_and_enforce_ioc(ip, threat_category="CAT1_WEB_EXPLOIT", risk_score=
                 "reason": f"Dry-run: Đủ điều kiện chặn biên 30 ngày ({risk_label})"
             }
 
+        now_dt = datetime.now(timezone.utc)
+        now_iso = now_dt.isoformat()
+        new_exp_iso = (now_dt + timedelta(seconds=ttl_seconds)).isoformat()
+
+        # CHỐT CHẶN TRIỆT TIÊU LẶP (Stateful Idempotency):
+        with DB_LOCK:
+            conn = get_db()
+            cursor = conn.cursor()
+            cursor.execute("SELECT ip, expires_at FROM active_feeds WHERE ip = ? AND status='ACTIVE' AND expires_at > ?", (ip, now_iso))
+            existing_active = cursor.fetchone()
+            if existing_active:
+                cursor.execute("UPDATE active_feeds SET expires_at = ?, risk_score = MAX(risk_score, ?), reason = ? WHERE ip = ?", (new_exp_iso, risk_score, reason, ip))
+                conn.commit()
+                conn.close()
+                return {
+                    "ip": ip,
+                    "decision": "ALREADY_ENFORCED_RENEWED",
+                    "action": "AUTO_RENEWED_30D",
+                    "enforced": True,
+                    "enforcement_verified": True,
+                    "country": country,
+                    "asn": asn,
+                    "risk_score": risk_score,
+                    "threat_category": threat_category,
+                    "source_rule_id": str(source_rule_id or "N/A"),
+                    "enforcement_rule_id": "100995",
+                    "mitre_id": str(mitre_id or "T1190"),
+                    "external_dstport": str(external_dstport or "443"),
+                    "internal_sensor_port": str(internal_sensor_port or "8088"),
+                    "ttl_seconds": ttl_seconds,
+                    "expires_at": new_exp_iso,
+                    "reason": "IP đã nằm trong danh sách cấm biên active, tự động gia hạn thêm 30 ngày (Triệt tiêu lặp)."
+                }
+            conn.close()
+
         # Ghi nhận vào Feed với thời hạn 30 ngày
         res = add_ip_to_feed(
             ip, threat_category, country, asn, risk_score, reason,
