@@ -111,28 +111,28 @@ flowchart LR
 
 ```text
 enterprise-wazuh-soc-soar/
-├── README.md                          # Tài liệu tổng quan dự án
-├── .gitignore                         # Loại bỏ mật khẩu, token, cache, db
-├── .env.example                       # Mẫu cấu hình biến môi trường an toàn
-├── docs/                              # Tài liệu kỹ thuật chuyên sâu
-│   ├── architecture_design.md         # Thiết kế kiến trúc 4 lớp chi tiết
-│   ├── threat_taxonomy_matrix.md      # Bảng phân loại đe dọa CAT1-CAT6
-│   └── learn.md                       # Cẩm nang vận hành & kiến trúc toàn diện
-├── detection_rules/                   # Module Luật phát hiện (Detection Engineering)
-│   └── local_rules.xml                # Tập luật tùy biến phát hiện SQLi, XSS, RCE, Cloaking
-├── soar_automation/                   # Module Tự động hóa Phản ứng (SOAR)
-│   ├── shuffle_active_response.py     # Script khử trùng lặp & chuyển giao luồng sự cố
-│   └── threat_feed_service.py         # Geo-Aware Threat Feed Service & FortiGate Enforcement Gateway (Aging 30D)
-├── visualization_grafana/             # Module Trực quan hóa (Mission Control)
-│   ├── soc_ultimate_4w_dashboard.json # File JSON Dashboard 28 panels chuẩn 4W
-│   └── silent_background_update.css   # CSS Anti-Flicker triệt tiêu chớp nháy màn hình
-├── ai_soc_copilot/                    # Module Trợ lý ảo AI (LLM Ops & Security)
-│   ├── copilot_server.py              # Backend FastAPI tích hợp Gemini đa lượt
-│   ├── widget_frontend.js             # Giao diện ChatBotDUAC nổi trên Grafana
-│   └── guardrails.md                  # Quy chuẩn an toàn Strict Read-Only
-└── deploy_automation/                 # Module Tự động hóa Triển khai
-    ├── deploy_wazuh_agent.sh          # Script cài đặt Agent tự động
-    └── playbooks/                     # Ansible Playbooks quét webshell, remediation & kiểm toán
+├── README.md                          
+├── .gitignore                       
+├── .env.example                      
+├── docs/                              
+│   ├── architecture_design.md         
+│   ├── threat_taxonomy_matrix.md      
+│   └── learn.md                       
+├── detection_rules/                   
+│   └── local_rules.xml                
+├── soar_automation/                   
+│   ├── shuffle_active_response.py     
+│   └── threat_feed_service.py        
+├── visualization_grafana/             
+│   ├── soc_ultimate_4w_dashboard.json 
+│   └── silent_background_update.css   
+├── ai_soc_copilot/                   
+│   ├── copilot_server.py              
+│   ├── widget_frontend.js             
+│   └── guardrails.md                  
+└── deploy_automation/                 
+    ├── deploy_wazuh_agent.sh          
+    └── playbooks/                     
         ├── install_agent.yml
         ├── check_status.yml
         ├── scan_webshell.yml
