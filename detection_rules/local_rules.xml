@@ -952,7 +952,7 @@
   <rule id="100960" level="10">
     <if_sid>31100,31101,31108</if_sid>
     <extra_data type="pcre2">(?i)google\.[a-z.]+/url.*(?:usg=AOvVaw|sqi=)</extra_data>
-    <url type="pcre2">(?i)(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin|\.html)</url>
+    <url type="pcre2">(?i)\b(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin)\b</url>
     <description>SEO Poisoning Alert: Visitor arriving from Google Search referral to legacy cloaked gambling URL [URL: $(url) | Source IP: $(srcip)]</description>
     <mitre>
       <id>T1584.004</id>
@@ -964,8 +964,7 @@
   <!-- Rule 100961: General access to legacy Cloaked Gambling URLs (regardless of referer) -->
   <rule id="100961" level="8">
     <if_sid>31100,31101,31108</if_sid>
-    <url type="pcre2">(?i)(?:^|/)(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin)(?:/|\.|\?|$)</url>
-    <url negate="yes">/auth/realms/|/realms/</url>
+    <url type="pcre2">(?i)^(?!.*/(?:auth/)?realms/).*\b(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin)\b</url>
     <description>SEO Audit: Access to legacy cloaked gambling endpoint [Status: $(id) | URL: $(url) | Source IP: $(srcip)]</description>
     <mitre>
       <id>T1505.004</id>
