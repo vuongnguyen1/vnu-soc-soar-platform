@@ -85,6 +85,13 @@ flowchart LR
 * **Tích hợp:** Google Gemini 3.5 Flash / Flash Lite đàm thoại tự nhiên đa lượt ngay trong giao diện giám sát.
 * **Nguyên tắc an toàn (Guardrails):** **Strict Read-Only & Zero-Mutation** (AI chỉ cố vấn tham mưu, tuyệt đối không tự ý sửa/xóa log hay can thiệp hệ thống) kết hợp **On-Demand Token Saver**.
 
+### 6. Mô Hình Thực Thi Kép Hybrid & Vòng Đời IP Aging 30 Ngày (CMDB Anti-Bloat)
+* **Vấn đề:** Khi số lượng IP tấn công tích lũy theo thời gian lên tới hàng nghìn hoặc hàng chục nghìn IP, việc tạo lẻ Object Address vào CMDB tường lửa sẽ gây tràn bộ nhớ thiết bị mạng (CMDB Bloat / Memory Leak).
+* **Giải pháp:**
+  - **Mô hình Hybrid (Thực thi kép):** REST API phản ứng tức thì (0.5s) đưa IP vào `WZ_AR_BLOCKLIST` để ngắt ngay cuộc tấn công nguy hiểm, đồng thời đẩy vào External Threat Feed (`/feeds/vnu_soc_blocklist.txt`) để tường lửa nạp vào RAM độc lập không phình file cấu hình.
+  - **Vòng đời Aging 30 ngày:** Tự động giải phóng các IP sau 30 ngày im lặng; tự động gia hạn thêm 30 ngày nếu phát hiện tiếp tục có hành vi xâm nhập; toàn bộ lịch sử được lưu trữ vĩnh viễn trong bảng `feed_history` phục vụ pháp y số.
+  - **Chống vòng lặp phản hồi (Anti-Echo Loop):** Cô lập triệt để các mã luật SOAR Feedback (Rule 100995) khỏi Alert Engine để ngăn chặn bão đệ quy tự kích hoạt chặn chéo.
+
 ---
 
 ## 📊 MA TRẬN PHÂN LOẠI ĐE DỌA (CAT1 - CAT6)
@@ -114,7 +121,8 @@ enterprise-wazuh-soc-soar/
 ├── detection_rules/                   # Module Luật phát hiện (Detection Engineering)
 │   └── local_rules.xml                # Tập luật tùy biến phát hiện SQLi, XSS, RCE, Cloaking
 ├── soar_automation/                   # Module Tự động hóa Phản ứng (SOAR)
-│   └── shuffle_active_response.py     # Script khử trùng lặp & gọi API FortiGate
+│   ├── shuffle_active_response.py     # Script khử trùng lặp & chuyển giao luồng sự cố
+│   └── threat_feed_service.py         # Geo-Aware Threat Feed Service & FortiGate Enforcement Gateway (Aging 30D)
 ├── visualization_grafana/             # Module Trực quan hóa (Mission Control)
 │   ├── soc_ultimate_4w_dashboard.json # File JSON Dashboard 28 panels chuẩn 4W
 │   └── silent_background_update.css   # CSS Anti-Flicker triệt tiêu chớp nháy màn hình
@@ -124,7 +132,12 @@ enterprise-wazuh-soc-soar/
 │   └── guardrails.md                  # Quy chuẩn an toàn Strict Read-Only
 └── deploy_automation/                 # Module Tự động hóa Triển khai
     ├── deploy_wazuh_agent.sh          # Script cài đặt Agent tự động
-    └── playbooks/                     # Ansible Playbooks quét webshell & kiểm toán
+    └── playbooks/                     # Ansible Playbooks quét webshell, remediation & kiểm toán
+        ├── install_agent.yml
+        ├── check_status.yml
+        ├── scan_webshell.yml
+        ├── remediate_seo_malware.yml  # Kịch bản dọn sạch mã độc & khôi phục binary w3wp.exe
+        └── patch_cve_packages.yml
 ```
 
 ---

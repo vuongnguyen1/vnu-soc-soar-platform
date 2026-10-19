@@ -510,7 +510,7 @@
   </rule>
 </group>
 
-<group name="fortigate_custom,">
+<group name="fortigate_custom,cat6_network_infra,">
   <rule id="100610" level="10" frequency="6" timeframe="900">
     <if_matched_sid>81606</if_matched_sid>
     <same_location />
@@ -520,6 +520,50 @@
       <id>T1110.003</id>
     </mitre>
     <group>authentication_failures,fortigate,syslog,mitre,brute_force,</group>
+  </rule>
+
+  <!-- Rule 100611: FortiGate Admin Login Failed -->
+  <rule id="100611" level="6">
+    <if_sid>81606</if_sid>
+    <description>FortiGate $(devname): Admin login failed from $(srcip) for user '$(dstuser)' [ALERT-ONLY]</description>
+    <group>cat6_network_infra,fortigate,authentication_failed,syslog,</group>
+  </rule>
+
+  <!-- Rule 100612: FortiGate Admin Login Success -->
+  <rule id="100612" level="6">
+    <if_sid>81605</if_sid>
+    <description>FortiGate $(devname): Admin login successful from $(srcip) for user '$(dstuser)' [ALERT-ONLY]</description>
+    <group>cat6_network_infra,fortigate,authentication_success,syslog,</group>
+  </rule>
+
+  <!-- Rule 100613: FortiGate Configuration Changed -->
+  <rule id="100613" level="8">
+    <if_sid>81609</if_sid>
+    <description>FortiGate $(devname): Firewall configuration changed by user '$(dstuser)' [ALERT-ONLY]</description>
+    <group>cat6_network_infra,fortigate,config_change,syslog,</group>
+  </rule>
+
+  <!-- Rule 100614: FortiGate System Alert / Warning / Error -->
+  <rule id="100614" level="8">
+    <if_sid>81610,81611,81612</if_sid>
+    <description>FortiGate $(devname): $(logdesc) - $(msg) [ALERT-ONLY]</description>
+    <group>cat6_network_infra,fortigate,system_alert,syslog,</group>
+  </rule>
+
+  <!-- Rule 100615: FortiGate HA / Cluster Failover / Interface State Change -->
+  <rule id="100615" level="8">
+    <if_group>fortigate</if_group>
+    <match>HA cluster|failover|link down|Interface.*down|dead peer</match>
+    <description>FortiGate $(devname): High Availability or Interface state change - $(msg) [ALERT-ONLY]</description>
+    <group>cat6_network_infra,fortigate,ha_failover,network,</group>
+  </rule>
+
+  <!-- Rule 100616: FortiGate Security Anomaly / Attack Detected -->
+  <rule id="100616" level="8">
+    <if_group>fortigate</if_group>
+    <field name="type">anomaly|utm|ips|virus</field>
+    <description>FortiGate $(devname): Security anomaly event $(type) from $(srcip) - $(msg) [ALERT-ONLY]</description>
+    <group>cat6_network_infra,fortigate,anomaly,threat,</group>
   </rule>
 </group>
 
@@ -537,15 +581,16 @@
     <group>vnu_soar_test,</group>
   </rule>
 
+</group>
+
+<group name="vnu_soar_feedback,soar,enforcement,">
+
   <!-- Rule 100995: VNU SOAR Feedback Loop - Realtime Incident & FortiGate Enforcement Stream -->
   <rule id="100995" level="14">
     <decoded_as>json</decoded_as>
     <field name="soar_event">LIVE_INCIDENT_ENFORCEMENT</field>
     <description>VNU SOAR: [$(threat_category)] $(attack_action) from $(srcip) -> $(soar_decision)</description>
     <group>soar,enforcement,incident_response,active_response,attack,</group>
-    <mitre>
-      <id>T1190</id>
-    </mitre>
   </rule>
 
   <!-- Rule 100996: VNU SOAR Feedback Loop - Infrastructure & vCenter Operational Alert Stream (ALERT ONLY) -->
@@ -919,7 +964,8 @@
   <!-- Rule 100961: General access to legacy Cloaked Gambling URLs (regardless of referer) -->
   <rule id="100961" level="8">
     <if_sid>31100,31101,31108</if_sid>
-    <url type="pcre2">(?i)(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin)</url>
+    <url type="pcre2">(?i)(?:^|/)(v9bet|xin88|jun88|8xbet|sv388|full88|nohu|hit88|99bet|max88|f8bet|okwin)(?:/|\.|\?|$)</url>
+    <url negate="yes">/auth/realms/|/realms/</url>
     <description>SEO Audit: Access to legacy cloaked gambling endpoint [Status: $(id) | URL: $(url) | Source IP: $(srcip)]</description>
     <mitre>
       <id>T1505.004</id>
@@ -1016,7 +1062,7 @@
   <!-- Rule 100969: Fast Reverse Proxy (frpc / standalone svc.exe) Backdoor Activity (Level 14) -->
   <rule id="100969" level="14">
     <if_group>syscheck|windows</if_group>
-    <match>frpc|\\svc\.exe|/svc\.exe|^svc\.exe|89\.116\.220\.233</match>
+    <match>frpc.exe|frpc.ini|/frpc |\frpc |\\svc\.exe|/svc\.exe|^svc\.exe|89\.116\.220\.233</match>
     <description>CRITICAL: Fast Reverse Proxy (FRP) C2 Backdoor Activity Detected [Target: $(file)$(win.eventdata.image)]</description>
     <mitre>
       <id>T1572</id>
@@ -1029,8 +1075,8 @@
   <!-- Rule 100970: Whitelist legitimate services & administrative tunnels (Suppression) -->
   <rule id="100970" level="0">
     <if_sid>100969, 100953</if_sid>
-    <match>cloudflare|cloudflared|warp-svc.exe|fortissl|fortitray|tailscale|wireguard|openvpn|zabbix|node_exporter</match>
-    <description>Ignore false positive C2 alert for approved administrative tunnels and legitimate services</description>
+    <match>cloudflare|cloudflared|warp-svc.exe|fortissl|fortitray|tailscale|wireguard|openvpn|zabbix|node_exporter|/tmp/tmp.</match>
+    <description>Ignore false positive C2 alert for approved administrative tunnels, mktemp files, and legitimate services</description>
     <group>whitelist,suppression,</group>
   </rule>
 
@@ -1374,8 +1420,8 @@
 
   <!-- 4. Virtualization & Storage/HA Failures -->
   <rule id="100708" level="12">
-    <match negate="yes">snapd</match>
-    <match type="pcre2">(?i)(All Paths Down|Permanent Device Loss|\bAPD\b|\bPDL\b|Datastore.*disconnected)</match>
+    <hostname>vcenter|esx|vcsa|vmware|san|nas|storage|ingest</hostname>
+    <match>All Paths Down|Permanent Device Loss|APD alert|PDL alert|Datastore disconnected</match>
     <description>CẢNH BÁO NGUY CẤP VCENTER: Mất kết nối lưu trữ Datastore SAN/NAS (All Paths Down / Permanent Loss)</description>
     <group>vcenter_storage,cat6_network_infra,alert_only,</group>
   </rule>
@@ -1467,9 +1513,17 @@
     <group>pci_dss_10.6.1,nist_800_53_SI.4,iso_27001_A.8.16,tsc_CC6.8,obfuscation,execution,</group>
   </rule>
 
+  <!-- Rule 100809: Suppress benign system cron executions -->
+  <rule id="100809" level="0">
+    <program_name>CRON</program_name>
+    <match>CMD \(|run-parts</match>
+    <description>Ignore standard system cron executions</description>
+    <group>cron_benign,</group>
+  </rule>
+
   <!-- Rule 100805: Crontab Persistence Manipulation -->
   <rule id="100805" level="12">
-    <match type="pcre2">/etc/cron|/var/spool/cron|crontab\s+-e</match>
+    <match>crontab -e|crontab -r|editing crontab|REPLACE \(root\)|REPLACE \([a-zA-Z0-9_-]+\)</match>
     <description>SUSPICIOUS: Crontab schedule configuration modified (Potential persistence)</description>
     <mitre>
       <id>T1053.003</id>

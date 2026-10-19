@@ -59,9 +59,13 @@ flowchart TD
 * **Bảo vệ IP nội địa (CGNAT Safeguard):**
   - Tích hợp MaxMind GeoLite2 City & ASN database.
   - Phân tách tuyệt đối giữa IP nước ngoài và IP trong nước, đảm bảo không bao giờ tự động chặn nhầm các dải CGNAT của nhà mạng 4G Viettel, VNPT, FPT.
-* **Tự động chặn biên tường lửa (Boundary Enforcement):**
-  - Gọi REST API trực tiếp đến FortiGate (`FG300D`, `FG200F`) đưa IP vào nhóm `AUTO_SOC_BLACKLIST`.
-  - Hỗ trợ chế tài: Cấm tạm thời (Temporary Ban) và Cấm vĩnh viễn (Permanent Drop).
+* **Mô hình Thực thi Kép (Hybrid Dual-Track Enforcement):**
+  - **Kênh tức thì (REST API <0.5s):** Đưa IP vào Address Group `WZ_AR_BLOCKLIST` trên cụm FortiGate để ngắt kết nối phiên tấn công đang diễn ra.
+  - **Kênh tình báo dài hạn (External Threat Feed URL):** Sinh danh sách `vnu_soc_blocklist.txt` chuẩn RFC, cho phép FortiGate tải trực tiếp vào RAM, giữ file cấu hình tường lửa luôn gọn gàng.
+* **Quản lý Vòng đời IP Aging 30 ngày (Anti-Bloat Lifecycle):**
+  - Cơ chế tự động giải phóng các IP sau 30 ngày im lặng; tự động gia hạn thêm 30 ngày nếu phát hiện tiếp tục có hành vi xâm nhập.
+  - Bảng `feed_history` bảo toàn 100% dữ liệu lịch sử phục vụ điều tra hồi cứu và chứng minh pháp lý.
+  - Nút dừng khẩn cấp (Emergency Kill-Switch / Flush) phản hồi dưới 1ms cho phép SOC trực ban giải phóng toàn bộ dải cấm khi có sự cố.
 
 ### Lớp 4: Trực quan hóa & Trợ lý ảo AI (Mission Control & AI Copilot)
 * **Mô hình chu trình điều tra 4W:**
