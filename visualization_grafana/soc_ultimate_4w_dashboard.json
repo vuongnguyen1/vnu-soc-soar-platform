@@ -2123,7 +2123,7 @@
     },
     {
       "gridPos": {
-        "h": 3,
+        "h": 2,
         "w": 24,
         "x": 0,
         "y": 64
@@ -2135,7 +2135,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "\n<div style=\"display: flex; flex-direction: column; gap: 8px; padding: 10px 14px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);\">\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 15px;\">🎯</span>\n      <span style=\"font-size: 12px; font-weight: 700; color: #EAB839; text-transform: uppercase; letter-spacing: 0.5px;\">BỘ LỌC WEBSITE MỤC TIÊU (LIVE STREAM FILTER):</span>\n      <span style=\"font-size: 11px; color: #94a3b8;\">Chọn nhanh cổng web cần giám sát hoặc loại trừ IDP để xem các sự cố web khác</span>\n    </div>\n  </div>\n  <div style=\"display: flex; flex-wrap: wrap; gap: 6px; align-items: center;\">\n    <button onclick=\"setSocFilter('*')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #334155; color: #ffffff; border: 1px solid #64748b; transition: all 0.2s;\">🌟 Tất cả (All)</button>\n    <button onclick=\"setSocFilter('NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 700; background: #991b1b; color: #ffffff; border: 1px solid #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.4); transition: all 0.2s;\">🚫 Ngoại trừ IDP (Exclude IDP)</button>\n    <button onclick=\"setSocFilter('agent.name:(CEA_NEW* OR *cce*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 cce.vnu.edu.vn (Khảo thí)</button>\n    <button onclick=\"setSocFilter('agent.name:(*TuyensinhSDH* OR *tssdh*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 tssdh.vnu.edu.vn (Tuyển sinh)</button>\n    <button onclick=\"setSocFilter('agent.name:(*daotao*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 daotao.vnu.edu.vn (Đào tạo)</button>\n    <button onclick=\"setSocFilter('agent.name:(*cybersafe* OR *it-cyber*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 cybersafe.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(prod-idp* OR dev-idp* OR idp_web*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #facc15; border: 1px solid #ca8a04; transition: all 0.2s;\">🌐 idp.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(*eoffice*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 eoffice.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(*aapanel*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 aapanel.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(*khaosat*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 khaosat.ulis</button>\n    <button onclick=\"setSocFilter('agent.name:(*100years*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 100years</button>\n    <button onclick=\"setSocFilter('agent.name:(*dksdh*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 dksdh</button>\n    <button onclick=\"setSocFilter('agent.name:(*Suricata* OR *SecurityOnion*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #4ade80; border: 1px solid #16a34a; transition: all 0.2s;\">🛡️ Suricata NIDS</button>\n  </div>\n</div>\n<script>\nfunction setSocFilter(val) {\n  const url = new URL(window.location.href);\n  url.searchParams.set('var-target_web', val);\n  window.location.href = url.toString();\n}\n</script>\n",
+        "content": "\n<div style=\"display: flex; flex-direction: column; gap: 8px; padding: 10px 14px; background: rgba(18, 22, 31, 0.95); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px 6px 0 0; border-bottom: none;\">\n  <div style=\"font-size: 14px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 8px; letter-spacing: 0.3px;\">\n    <span>⚡</span>\n    <span>LIVE INCIDENT & ENFORCEMENT STREAM (LUỒNG SỰ CỐ & THI HÀNH THỜI GIAN THỰC)</span>\n  </div>\n  <div style=\"display: flex; align-items: center; gap: 10px; margin-top: 2px;\">\n    <label for=\"soc_web_filter\" style=\"font-size: 12px; font-weight: 700; color: #EAB839; text-transform: uppercase; letter-spacing: 0.5px; margin: 0; white-space: nowrap;\">Mục tiêu (Website):</label>\n    <select id=\"soc_web_filter\" onchange=\"setSocWebFilter(this.value)\" style=\"background: #0f172a; color: #f8fafc; border: 1px solid #475569; border-radius: 4px; padding: 5px 12px; font-size: 12px; font-weight: 500; cursor: pointer; outline: none; min-width: 320px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);\">\n      <option value=\"*\">🌟 Tất cả Website (All Sites)</option>\n      <option value=\"NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)\">🚫 Ngoại trừ IDP (Exclude IDP)</option>\n      <option value=\"agent.name:(prod-idp* OR dev-idp* OR idp_web*)\">🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)</option>\n      <option value=\"agent.name:(CEA_NEW* OR *cce*)\">🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)</option>\n      <option value=\"agent.name:(*TuyensinhSDH* OR *tssdh*)\">🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)</option>\n      <option value=\"agent.name:(*daotao*)\">🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)</option>\n      <option value=\"agent.name:(*eoffice*)\">🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)</option>\n      <option value=\"agent.name:(*cybersafe* OR *it-cyber*)\">🌐 cybersafe.vnu.edu.vn (Cybersafe & IT)</option>\n      <option value=\"agent.name:(*khaosat*)\">🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)</option>\n      <option value=\"agent.name:(*100years*)\">🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)</option>\n      <option value=\"agent.name:(*aapanel*)\">🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)</option>\n      <option value=\"agent.name:(*dksdh*)\">🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)</option>\n      <option value=\"agent.name:(*Suricata* OR *SecurityOnion*)\">🛡️ Suricata NIDS (Cảm biến mạng)</option>\n      <option value=\"agent.name:(wazuh-grafana*)\">🛡️ SOC Perimeter Gateway (Cổng biên SOC)</option>\n    </select>\n  </div>\n</div>\n<script>\n(function() {\n  const sel = document.getElementById('soc_web_filter');\n  if (!sel) return;\n  const u = new URL(window.location.href);\n  const cur = u.searchParams.get('var-target_web');\n  if (cur) {\n    for (let i = 0; i < sel.options.length; i++) {\n      if (sel.options[i].value === cur) {\n        sel.selectedIndex = i;\n        break;\n      }\n    }\n  }\n})();\nfunction setSocWebFilter(val) {\n  const u = new URL(window.location.href);\n  u.searchParams.set('var-target_web', val);\n  window.location.href = u.toString();\n}\n</script>\n",
         "mode": "html"
       },
       "pluginVersion": "12.3.0",
@@ -3557,7 +3557,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 66
       },
       "id": 208,
       "options": {
@@ -3600,7 +3600,7 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "LIVE INCIDENT & ENFORCEMENT STREAM (LUỒNG SỰ CỐ & THI HÀNH THỜI GIAN THỰC)",
+      "title": "",
       "transformations": [
         {
           "id": "filterFieldsByName",
@@ -4512,7 +4512,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 81
       },
       "id": 209,
       "options": {
@@ -4697,7 +4697,7 @@
           "value": "*"
         },
         "description": "Lọc toàn bộ luồng sự cố SOC theo từng Website hoặc xem tất cả",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "Mục tiêu (Website)",
         "multi": false,
