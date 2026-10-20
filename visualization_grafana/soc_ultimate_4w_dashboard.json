@@ -3486,14 +3486,14 @@
               "Rule ID": 1,
               "Severity": 2,
               "Source IP": 3,
-              "Geo / Country": 4,
-              "Target Web / Host": 5,
-              "Target Port": 6,
+              "Target Port": 4,
+              "Geo / Country": 5,
+              "Target Web / Host": 6,
               "Request URL / URI": 7,
               "HTTP Status Code": 8,
-              "User / Actor": 9,
-              "Firewall Action (Raw)": 10,
-              "SOAR Decision": 11,
+              "SOAR Decision": 9,
+              "User / Actor": 10,
+              "Firewall Action (Raw)": 11,
               "Rule Description": 12
             },
             "renameByName": {
@@ -4497,6 +4497,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 70,
+  "version": 71,
   "weekStart": ""
 }
