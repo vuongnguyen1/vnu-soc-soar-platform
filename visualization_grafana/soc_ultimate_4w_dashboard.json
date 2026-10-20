@@ -2772,199 +2772,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "MITRE Technique"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "MITRE Technique"
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              },
-              {
-                "id": "custom.displayMode",
-                "value": "color-text"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#B877D9",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "noValue",
-                "value": "-"
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": ".*T1190.*",
-                      "result": {
-                        "text": "T1190 (Exploit Web)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1110\\.001.*",
-                      "result": {
-                        "text": "T1110.001 (Password Guess)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1110.*",
-                      "result": {
-                        "text": "T1110 (Brute Force)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1505\\.003.*",
-                      "result": {
-                        "text": "T1505.003 (WebShell FIM)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1505.*",
-                      "result": {
-                        "text": "T1505 (Persistence)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1059\\.003.*",
-                      "result": {
-                        "text": "T1059.003 (w3wp Shell)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1059\\.001.*",
-                      "result": {
-                        "text": "T1059.001 (PowerShell)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1059.*",
-                      "result": {
-                        "text": "T1059 (Command Exec)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1595\\.002.*",
-                      "result": {
-                        "text": "T1595.002 (Web Scan)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1595.*",
-                      "result": {
-                        "text": "T1595 (Recon)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1498.*",
-                      "result": {
-                        "text": "T1498 (DoS Flood)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1499.*",
-                      "result": {
-                        "text": "T1499 (App DoS)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1078.*",
-                      "result": {
-                        "text": "T1078 (Valid Accounts)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1204.*",
-                      "result": {
-                        "text": "T1204 (User Execution)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1021\\.004.*",
-                      "result": {
-                        "text": "T1021.004 (SSH)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1068.*",
-                      "result": {
-                        "text": "T1068 (Priv Escalation)"
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": ".*T1105.*",
-                      "result": {
-                        "text": "T1105 (Ingress Tool)"
-                      }
-                    },
-                    "type": "regex"
-                  }
-                ]
-              },
-              {
-                "id": "custom.minWidth",
-                "value": 120
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "Source IP"
             },
             "properties": [
@@ -3540,6 +3347,107 @@
                 "value": 250
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Target Port"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Target Port"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 85
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SOAR Decision"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "SOAR Decision"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "PERMANENT_BLOCK_APPROVED": {
+                        "color": "#E02F44",
+                        "text": "PERM BLOCK (SOAR)"
+                      },
+                      "TEMPORARY_BLOCK_APPROVED": {
+                        "color": "#FA6400",
+                        "text": "30-DAY BLOCK (SOAR)"
+                      },
+                      "AUTOMATED_AGENT_BLOCK": {
+                        "color": "#E02F44",
+                        "text": "BLOCKED (AGENT)"
+                      },
+                      "VIETNAM_ALERT_ONLY": {
+                        "color": "#EAB839",
+                        "text": "VN CGNAT ALERT"
+                      },
+                      "ALLOWLIST_SUPPRESSED": {
+                        "color": "#73BF69",
+                        "text": "ALLOWLIST"
+                      },
+                      "BLOCK": {
+                        "color": "#E02F44",
+                        "text": "BLOCKED"
+                      },
+                      "BLOCKED": {
+                        "color": "#E02F44",
+                        "text": "BLOCKED"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 150
+              }
+            ]
           }
         ]
       },
@@ -3600,7 +3508,6 @@
                 "@timestamp",
                 "rule.id",
                 "rule.level",
-                "rule.mitre.id",
                 "data.srcip",
                 "data.dstuser",
                 "data.srcuser",
@@ -3609,7 +3516,9 @@
                 "data.url",
                 "data.status",
                 "data.action",
-                "rule.description"
+                "rule.description",
+                "data.dstport",
+                "data.soar_decision"
               ]
             }
           }
@@ -3634,18 +3543,19 @@
               "manager.name": true
             },
             "indexByName": {
-              "Firewall Action (Raw)": 10,
-              "Geo / Country": 6,
-              "HTTP Status Code": 9,
-              "MITRE Technique": 3,
-              "Request URL / URI": 8,
-              "Rule Description": 11,
+              "Timestamp": 0,
               "Rule ID": 1,
               "Severity": 2,
-              "Source IP": 4,
-              "Target Web / Host": 7,
-              "Timestamp": 0,
-              "User / Actor": 5
+              "Source IP": 3,
+              "Geo / Country": 4,
+              "Target Web / Host": 5,
+              "Target Port": 6,
+              "Request URL / URI": 7,
+              "HTTP Status Code": 8,
+              "User / Actor": 9,
+              "Firewall Action (Raw)": 10,
+              "SOAR Decision": 11,
+              "Rule Description": 12
             },
             "renameByName": {
               "@timestamp": "Timestamp",
@@ -3660,7 +3570,8 @@
               "rule.description": "Rule Description",
               "rule.id": "Rule ID",
               "rule.level": "Severity",
-              "rule.mitre.id": "MITRE Technique"
+              "data.dstport": "Target Port",
+              "data.soar_decision": "SOAR Decision"
             }
           }
         }
