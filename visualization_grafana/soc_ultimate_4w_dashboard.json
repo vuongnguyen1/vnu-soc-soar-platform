@@ -2821,146 +2821,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Target Web / Host"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Target Web / Host"
-              },
-              {
-                "id": "custom.displayMode",
-                "value": "color-text"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#5794F2",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "noValue",
-                "value": "-"
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "100years.vnu.edu.vn": {
-                        "text": "100years.vnu.edu.vn (K\u1ef7 ni\u1ec7m)"
-                      },
-                      "100years_112.137.143.34": {
-                        "text": "100years.vnu.edu.vn (K\u1ef7 ni\u1ec7m)"
-                      },
-                      "CEA_NEW_112.137.140.13": {
-                        "text": "cea.vnu.edu.vn (K\u0110CLGD)"
-                      },
-                      "Web_TuyensinhSDH_NEW_10.241.2.15": {
-                        "text": "tssdh.vnu.edu.vn (Tuy\u1ec3n sinh SDH)"
-                      },
-                      "aapanel-web-01": {
-                        "text": "aapanel.vnu.edu.vn (C\u1ed5ng Web \u0110HQG)"
-                      },
-                      "cea.vnu.edu.vn": {
-                        "text": "cea.vnu.edu.vn (K\u0110CLGD)"
-                      },
-                      "cybersafe.vnu.edu.vn": {
-                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
-                      },
-                      "daotao.vnu.edu.vn": {
-                        "text": "daotao.vnu.edu.vn (Portal SV)"
-                      },
-                      "daotao_112.137.142.44": {
-                        "text": "daotao.vnu.edu.vn (Portal SV)"
-                      },
-                      "dev-idp-dev-01": {
-                        "text": "idp-dev.vnu.edu.vn (Dev)"
-                      },
-                      "eoffice.vnu.edu.vn": {
-                        "text": "eoffice.vnu.edu.vn (V\u0103n b\u1ea3n)"
-                      },
-                      "eoffice_112.137.140.16": {
-                        "text": "eoffice.vnu.edu.vn (V\u0103n b\u1ea3n)"
-                      },
-                      "idp-dev.vnu.edu.vn": {
-                        "text": "idp-dev.vnu.edu.vn (Dev)"
-                      },
-                      "idp.vnu.edu.vn": {
-                        "text": "idp.vnu.edu.vn (Keycloak SSO)"
-                      },
-                      "idp_web_112.137.142.6": {
-                        "text": "idp.vnu.edu.vn (Keycloak SSO)"
-                      },
-                      "it-cyber": {
-                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
-                      },
-                      "it.vnu.edu.vn": {
-                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
-                      },
-                      "prod-idp-db-01": {
-                        "text": "idp.vnu.edu.vn (DB Patroni 01)"
-                      },
-                      "prod-idp-db-02": {
-                        "text": "idp.vnu.edu.vn (DB Patroni 02)"
-                      },
-                      "prod-idp-lb-01": {
-                        "text": "idp.vnu.edu.vn (HAProxy LB 01)"
-                      },
-                      "prod-idp-lb-02": {
-                        "text": "idp.vnu.edu.vn (HAProxy LB 02)"
-                      },
-                      "prod-idp-web-01": {
-                        "text": "idp.vnu.edu.vn (Web 01)"
-                      },
-                      "prod-idp-web-02": {
-                        "text": "idp.vnu.edu.vn (Web 02)"
-                      },
-                      "tssdh.vnu.edu.vn": {
-                        "text": "tssdh.vnu.edu.vn (Tuy\u1ec3n sinh SDH)"
-                      },
-                      "SecurityOnion_Suricata_10.243.1.38": {
-                        "text": "Suricata NIDS \u0110HQGHN (bond0)"
-                      },
-                      "securityonion": {
-                        "text": "Suricata NIDS \u0110HQGHN (bond0)"
-                      },
-                      "10.243.1.38": {
-                        "text": "Suricata NIDS \u0110HQGHN (bond0)"
-                      },
-                      "cybersafe_10.241.2.70": {
-                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
-                      },
-                      "eoffice_web_112.137.142.20": {
-                        "text": "eoffice.vnu.edu.vn (V\u0103n b\u1ea3n)"
-                      },
-                      "eoffice_db_112.137.142.21": {
-                        "text": "eoffice-db.vnu.edu.vn"
-                      },
-                      "khaosat_ulis_10.241.2.19": {
-                        "text": "khaosat.ulis.vnu.edu.vn"
-                      },
-                      "dksdh": {
-                        "text": "dksdh.vnu.edu.vn (\u0110\u0103ng k\u00fd SDH)"
-                      },
-                      "dongbo_daotao_db": {
-                        "text": "dongbo.daotao.vnu.edu.vn"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              },
-              {
-                "id": "custom.minWidth",
-                "value": 150
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "Request URL / URI"
             },
             "properties": [
@@ -3252,6 +3112,22 @@
           {
             "matcher": {
               "id": "byName",
+              "options": "Target Web / Host"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Target Web / Host"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 160
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
               "options": "SOAR Decision"
             },
             "properties": [
@@ -3274,6 +3150,47 @@
               {
                 "id": "mappings",
                 "value": [
+                  {
+                    "type": "range",
+                    "options": {
+                      "from": 15,
+                      "to": 100,
+                      "result": {
+                        "text": "PERM BLOCK (SOAR)",
+                        "color": "#E02F44"
+                      }
+                    }
+                  },
+                  {
+                    "type": "range",
+                    "options": {
+                      "from": 14,
+                      "to": 14,
+                      "result": {
+                        "text": "30-DAY BLOCK (SOAR)",
+                        "color": "#FA6400"
+                      }
+                    }
+                  },
+                  {
+                    "type": "range",
+                    "options": {
+                      "from": 0,
+                      "to": 13,
+                      "result": {
+                        "text": "-"
+                      }
+                    }
+                  },
+                  {
+                    "type": "special",
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "text": "-"
+                      }
+                    }
+                  },
                   {
                     "type": "value",
                     "options": {
@@ -3308,24 +3225,6 @@
                       "BLOCKED": {
                         "color": "#E02F44",
                         "text": "BLOCKED"
-                      }
-                    }
-                  },
-                  {
-                    "type": "special",
-                    "options": {
-                      "match": "null+nan",
-                      "result": {
-                        "text": "-"
-                      }
-                    }
-                  },
-                  {
-                    "type": "special",
-                    "options": {
-                      "match": "empty",
-                      "result": {
-                        "text": "-"
                       }
                     }
                   }
@@ -3402,7 +3301,6 @@
                 "data.srcuser",
                 "agent.name",
                 "data.status",
-                "data.soar_decision",
                 "data.url",
                 "rule.description",
                 "rule.id",
@@ -3423,6 +3321,18 @@
               ],
               "reducer": "max"
             }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "SOAR Decision",
+            "binary": {
+              "left": "rule.level",
+              "operator": "+",
+              "right": "0"
+            },
+            "mode": "binary"
           }
         },
         {
@@ -3462,7 +3372,6 @@
               "Target Web / Host": 5,
               "data.status": 6,
               "HTTP Status Code": 6,
-              "data.soar_decision": 7,
               "SOAR Decision": 7,
               "data.url": 8,
               "Request URL / URI": 8,
@@ -3481,7 +3390,7 @@
               "data.srcuser": "User / Actor",
               "agent.name": "Target Web / Host",
               "data.status": "HTTP Status Code",
-              "data.soar_decision": "SOAR Decision",
+              "SOAR Decision": "SOAR Decision",
               "data.url": "Request URL / URI",
               "rule.description": "Rule Description",
               "rule.id": "Rule ID",
@@ -4474,6 +4383,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 75,
+  "version": 76,
   "weekStart": ""
 }
