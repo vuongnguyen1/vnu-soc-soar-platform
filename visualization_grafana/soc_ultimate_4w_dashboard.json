@@ -35,7 +35,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<div style=\"text-align: center; background-color: #111217; padding: 6px 16px; border-bottom: 2px solid #eba434; position: relative; display: flex; align-items: center; justify-content: space-between;\">\n  <div style=\"display: flex; align-items: center; gap: 8px; width: 220px;\">\n    <span style=\"color: #94a3b8; font-size: 0.75rem;\">HỆ THỐNG GIÁM SÁT AN NINH</span>\n  </div>\n  <div style=\"display: flex; align-items: center; justify-content: center; gap: 10px;\">\n    <img src=\"/public/img/duac_thumb.png?v=1791859521\" style=\"width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #eba434; box-shadow: 0 0 12px rgba(235,164,52,0.7); object-fit: contain; background: rgba(15,23,42,0.7); padding: 2px;\" alt=\"socduac\">\n    <h2 style=\"color: #eba434; margin:0; letter-spacing: 2px; font-size: 1.25rem;\">TRUNG TÂM GIÁM SÁT AN NINH MẠNG VNU - SIEM XDR</h2>\n  </div>\n  <div style=\"display: flex; align-items: center; justify-content: flex-end; width: 220px;\">\n    <div onclick=\"if(window.toggleSocduac){window.toggleSocduac();}else{var el=document.getElementById('socduac-fab');if(el)el.click();}\"\n         style=\"cursor: pointer; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid #eba434; border-radius: 20px; padding: 4px 12px; box-shadow: 0 0 12px rgba(235,164,52,0.4); user-select: none;\">\n      <img src=\"/public/img/duac_thumb.png?v=1791859521\" style=\"width: 22px; height: 22px; border-radius: 50%; border: 1px solid #38bdf8; object-fit: contain; background: rgba(15,23,42,0.7); padding: 1px;\" alt=\"socduac\">\n      <span style=\"font-weight: 700; color: #eba434; font-size: 0.8rem;\">socduac AI</span>\n      <span style=\"display: inline-block; width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 6px #10b981;\"></span>\n      <span style=\"color: #38bdf8; font-size: 0.72rem;\">Mở Chat ↘</span>\n    </div>\n  </div>\n</div>",
+        "content": "<div style=\"text-align: center; background-color: #111217; padding: 6px 16px; border-bottom: 2px solid #eba434; position: relative; display: flex; align-items: center; justify-content: space-between;\">\n  <div style=\"display: flex; align-items: center; gap: 8px; width: 220px;\">\n    <span style=\"color: #94a3b8; font-size: 0.75rem;\">H\u1ec6 TH\u1ed0NG GI\u00c1M S\u00c1T AN NINH</span>\n  </div>\n  <div style=\"display: flex; align-items: center; justify-content: center; gap: 10px;\">\n    <img src=\"/public/img/duac_thumb.png?v=1791859521\" style=\"width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #eba434; box-shadow: 0 0 12px rgba(235,164,52,0.7); object-fit: contain; background: rgba(15,23,42,0.7); padding: 2px;\" alt=\"socduac\">\n    <h2 style=\"color: #eba434; margin:0; letter-spacing: 2px; font-size: 1.25rem;\">TRUNG T\u00c2M GI\u00c1M S\u00c1T AN NINH M\u1ea0NG VNU - SIEM XDR</h2>\n  </div>\n  <div style=\"display: flex; align-items: center; justify-content: flex-end; width: 220px;\">\n    <div onclick=\"if(window.toggleSocduac){window.toggleSocduac();}else{var el=document.getElementById('socduac-fab');if(el)el.click();}\"\n         style=\"cursor: pointer; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid #eba434; border-radius: 20px; padding: 4px 12px; box-shadow: 0 0 12px rgba(235,164,52,0.4); user-select: none;\">\n      <img src=\"/public/img/duac_thumb.png?v=1791859521\" style=\"width: 22px; height: 22px; border-radius: 50%; border: 1px solid #38bdf8; object-fit: contain; background: rgba(15,23,42,0.7); padding: 1px;\" alt=\"socduac\">\n      <span style=\"font-weight: 700; color: #eba434; font-size: 0.8rem;\">socduac AI</span>\n      <span style=\"display: inline-block; width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 6px #10b981;\"></span>\n      <span style=\"color: #38bdf8; font-size: 0.72rem;\">M\u1edf Chat \u2198</span>\n    </div>\n  </div>\n</div>",
         "mode": "html"
       },
       "pluginVersion": "12.3.0",
@@ -52,7 +52,7 @@
       },
       "id": 100,
       "panels": [],
-      "title": "🔰 TAB 1: TỔNG QUAN HỆ THỐNG",
+      "title": "\ud83d\udd30 TAB 1: T\u1ed4NG QUAN H\u1ec6 TH\u1ed0NG",
       "type": "row"
     },
     {
@@ -60,7 +60,7 @@
         "type": "prometheus",
         "uid": "efu5eomlpn6yof"
       },
-      "description": "Trạng thái kết nối của toàn bộ Agent hạ tầng: Sống (Online), Chết (Mất kết nối/Offline) và Tổng số Agent trong 24 giờ qua (cố định 24h).",
+      "description": "Tr\u1ea1ng th\u00e1i k\u1ebft n\u1ed1i c\u1ee7a to\u00e0n b\u1ed9 Agent h\u1ea1 t\u1ea7ng: S\u1ed1ng (Online), Ch\u1ebft (M\u1ea5t k\u1ebft n\u1ed1i/Offline) v\u00e0 T\u1ed5ng s\u1ed1 Agent trong 24 gi\u1edd qua (c\u1ed1 \u0111\u1ecbnh 24h).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -110,7 +110,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "TỔNG AGENT"
+              "options": "T\u1ed4NG AGENT"
             },
             "properties": [
               {
@@ -183,20 +183,20 @@
           "editorMode": "code",
           "expr": "wazuh_agents_total",
           "instant": true,
-          "legendFormat": "TỔNG AGENT",
+          "legendFormat": "T\u1ed4NG AGENT",
           "range": false,
           "refId": "C"
         }
       ],
       "timeFrom": "24h",
-      "title": "SỐ LƯỢNG AGENT (24H - ON / OFF)",
+      "title": "S\u1ed0 L\u01af\u1ee2NG AGENT (24H - ON / OFF)",
       "type": "stat"
     },
     {
       "datasource": {
         "uid": "bfay8umd54feoc"
       },
-      "description": "Tổng số sự kiện an ninh ghi nhận trong 24 giờ qua (cố định 24h, độc lập với bộ lọc thời gian).",
+      "description": "T\u1ed5ng s\u1ed1 s\u1ef1 ki\u1ec7n an ninh ghi nh\u1eadn trong 24 gi\u1edd qua (c\u1ed1 \u0111\u1ecbnh 24h, \u0111\u1ed9c l\u1eadp v\u1edbi b\u1ed9 l\u1ecdc th\u1eddi gian).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -243,7 +243,7 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "alias": "Tổng log",
+          "alias": "T\u1ed5ng log",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -270,14 +270,14 @@
         }
       ],
       "timeFrom": "24h",
-      "title": "TỔNG SỰ KIỆN (24H)",
+      "title": "T\u1ed4NG S\u1ef0 KI\u1ec6N (24H)",
       "type": "stat"
     },
     {
       "datasource": {
         "uid": "bfay8umd54feoc"
       },
-      "description": "Tổng số cảnh báo nguy cấp từ Level 12 trở lên trong 24 giờ qua (cố định 24h, độc lập với bộ lọc thời gian).",
+      "description": "T\u1ed5ng s\u1ed1 c\u1ea3nh b\u00e1o nguy c\u1ea5p t\u1eeb Level 12 tr\u1edf l\u00ean trong 24 gi\u1edd qua (c\u1ed1 \u0111\u1ecbnh 24h, \u0111\u1ed9c l\u1eadp v\u1edbi b\u1ed9 l\u1ecdc th\u1eddi gian).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -325,7 +325,7 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "alias": "Nguy hiểm",
+          "alias": "Nguy hi\u1ec3m",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -352,14 +352,14 @@
         }
       ],
       "timeFrom": "24h",
-      "title": "CẢNH BÁO CAO (LVL 12+ - 24H)",
+      "title": "C\u1ea2NH B\u00c1O CAO (LVL 12+ - 24H)",
       "type": "stat"
     },
     {
       "datasource": {
         "uid": "bfay8umd54feoc"
       },
-      "description": "Tổng số sự kiện xác thực thất bại, tấn công dò mật khẩu trong 24 giờ qua (cố định 24h, độc lập với bộ lọc thời gian).",
+      "description": "T\u1ed5ng s\u1ed1 s\u1ef1 ki\u1ec7n x\u00e1c th\u1ef1c th\u1ea5t b\u1ea1i, t\u1ea5n c\u00f4ng d\u00f2 m\u1eadt kh\u1ea9u trong 24 gi\u1edd qua (c\u1ed1 \u0111\u1ecbnh 24h, \u0111\u1ed9c l\u1eadp v\u1edbi b\u1ed9 l\u1ecdc th\u1eddi gian).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -434,7 +434,7 @@
         }
       ],
       "timeFrom": "24h",
-      "title": "LỖI XÁC THỰC (24H)",
+      "title": "L\u1ed6I X\u00c1C TH\u1ef0C (24H)",
       "type": "stat"
     },
     {
@@ -499,7 +499,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mức 15 (Critical)"
+              "options": "M\u1ee9c 15 (Critical)"
             },
             "properties": [
               {
@@ -514,7 +514,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mức 12-14 (High)"
+              "options": "M\u1ee9c 12-14 (High)"
             },
             "properties": [
               {
@@ -529,7 +529,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mức 7-11 (Medium)"
+              "options": "M\u1ee9c 7-11 (Medium)"
             },
             "properties": [
               {
@@ -544,7 +544,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mức 4-6 (Low)"
+              "options": "M\u1ee9c 4-6 (Low)"
             },
             "properties": [
               {
@@ -559,7 +559,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mức 1-3 (Info)"
+              "options": "M\u1ee9c 1-3 (Info)"
             },
             "properties": [
               {
@@ -596,7 +596,7 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "alias": "Mức 15 (Critical)",
+          "alias": "M\u1ee9c 15 (Critical)",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -622,7 +622,7 @@
           "timeField": "@timestamp"
         },
         {
-          "alias": "Mức 12-14 (High)",
+          "alias": "M\u1ee9c 12-14 (High)",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -648,7 +648,7 @@
           "timeField": "@timestamp"
         },
         {
-          "alias": "Mức 7-11 (Medium)",
+          "alias": "M\u1ee9c 7-11 (Medium)",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -674,7 +674,7 @@
           "timeField": "@timestamp"
         },
         {
-          "alias": "Mức 4-6 (Low)",
+          "alias": "M\u1ee9c 4-6 (Low)",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -700,7 +700,7 @@
           "timeField": "@timestamp"
         },
         {
-          "alias": "Mức 1-3 (Info)",
+          "alias": "M\u1ee9c 1-3 (Info)",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -726,7 +726,7 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "XU HƯỚNG MỨC ĐỘ CẢNH BÁO (VULNERABILITY LVL)",
+      "title": "XU H\u01af\u1edaNG M\u1ee8C \u0110\u1ed8 C\u1ea2NH B\u00c1O (VULNERABILITY LVL)",
       "type": "timeseries"
     },
     {
@@ -739,7 +739,7 @@
       },
       "id": 101,
       "panels": [],
-      "title": "🌍 TAB 2: BẢN ĐỒ & NGUỒN GỐC TẤN CÔNG",
+      "title": "\ud83c\udf0d TAB 2: B\u1ea2N \u0110\u1ed2 & NGU\u1ed2N G\u1ed0C T\u1ea4N C\u00d4NG",
       "type": "row"
     },
     {
@@ -876,7 +876,7 @@
         }
       ],
       "timeFrom": "24h",
-      "title": "GLOBAL THREAT MAP (BẢN ĐỒ TẤN CÔNG TOÀN CẦU - 24H)",
+      "title": "GLOBAL THREAT MAP (B\u1ea2N \u0110\u1ed2 T\u1ea4N C\u00d4NG TO\u00c0N C\u1ea6U - 24H)",
       "transformations": [
         {
           "id": "organize",
@@ -988,11 +988,11 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "TOP QUỐC GIA TẤN CÔNG",
+      "title": "TOP QU\u1ed0C GIA T\u1ea4N C\u00d4NG",
       "type": "bargauge"
     },
     {
-      "description": "Thống kê Top 30 IP tấn công và phân nhóm mối đe dọa trong 24 giờ qua (Cố định 24h, không phụ thuộc bộ lọc thời gian).",
+      "description": "Th\u1ed1ng k\u00ea Top 30 IP t\u1ea5n c\u00f4ng v\u00e0 ph\u00e2n nh\u00f3m m\u1ed1i \u0111e d\u1ecda trong 24 gi\u1edd qua (C\u1ed1 \u0111\u1ecbnh 24h, kh\u00f4ng ph\u1ee5 thu\u1ed9c b\u1ed9 l\u1ecdc th\u1eddi gian).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1083,14 +1083,14 @@
         }
       ],
       "timeFrom": "24h",
-      "title": "TOP IP NGUỒN TẤN CÔNG (TOP ATTACKER IPS - 24H)",
+      "title": "TOP IP NGU\u1ed2N T\u1ea4N C\u00d4NG (TOP ATTACKER IPS - 24H)",
       "type": "bargauge"
     },
     {
       "id": 213,
-      "title": "TOP AGENT BỊ TẤN CÔNG (TOP TARGET AGENTS - 24H)",
+      "title": "TOP AGENT B\u1eca T\u1ea4N C\u00d4NG (TOP TARGET AGENTS - 24H)",
       "type": "bargauge",
-      "description": "Thống kê Top các Wazuh Agent / Máy chủ mục tiêu bị tấn công nhiều nhất trong 24 giờ qua (Nhóm theo tên Agent nguyên bản).",
+      "description": "Th\u1ed1ng k\u00ea Top c\u00e1c Wazuh Agent / M\u00e1y ch\u1ee7 m\u1ee5c ti\u00eau b\u1ecb t\u1ea5n c\u00f4ng nhi\u1ec1u nh\u1ea5t trong 24 gi\u1edd qua (Nh\u00f3m theo t\u00ean Agent nguy\u00ean b\u1ea3n).",
       "datasource": {
         "uid": "bfay8umd54feoc"
       },
@@ -1195,16 +1195,16 @@
           "mappings": [
             {
               "options": {
-                "CEA_NEW_198.51.100.10": {
-                  "text": "cea.example.edu"
+                "CEA_NEW_112.137.140.13": {
+                  "text": "cea.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "198.51.100.10": {
-                  "text": "cea.example.edu"
+                "112.137.140.13": {
+                  "text": "cea.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1212,15 +1212,15 @@
             {
               "options": {
                 "IDP_WEB_PORTAL": {
-                  "text": "idp.example.edu"
+                  "text": "idp.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "198.51.100.6": {
-                  "text": "idp.example.edu"
+                "112.137.142.6": {
+                  "text": "idp.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1228,15 +1228,15 @@
             {
               "options": {
                 "aapanel-web-01": {
-                  "text": "hosting-portal.example.edu / qpan.example.edu"
+                  "text": "aapanel.vnu.edu.vn (C\u1ed5ng Web \u0110HQG) / qpan.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "198.51.100.14": {
-                  "text": "hosting-portal.example.edu"
+                "112.137.140.13": {
+                  "text": "aapanel.vnu.edu.vn (C\u1ed5ng Web \u0110HQG)"
                 }
               },
               "type": "value"
@@ -1244,55 +1244,55 @@
             {
               "options": {
                 "STUDENT_PORTAL": {
-                  "text": "daotao.example.edu"
+                  "text": "daotao.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "198.51.100.44": {
-                  "text": "daotao.example.edu"
+                "112.137.142.44": {
+                  "text": "daotao.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "Web_TuyensinhSDH_NEW_10.0.2.15": {
-                  "text": "tssdh.example.edu"
+                "Web_TuyensinhSDH_NEW_10.241.2.15": {
+                  "text": "tssdh.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "10.0.2.15": {
-                  "text": "tssdh.example.edu"
+                "10.241.2.15": {
+                  "text": "tssdh.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "khaosat_ulis_10.0.2.15": {
-                  "text": "khaosat.ulis.example.edu"
+                "khaosat_ulis_10.241.2.15": {
+                  "text": "khaosat.ulis.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "10.0.2.15": {
-                  "text": "khaosat.ulis.example.edu"
+                "10.241.2.15": {
+                  "text": "khaosat.ulis.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "cybersafe_10.0.2.15": {
-                  "text": "it.example.edu / cybersafe.example.edu"
+                "cybersafe_10.241.2.15": {
+                  "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1300,15 +1300,15 @@
             {
               "options": {
                 "it-cyber": {
-                  "text": "it.example.edu / cybersafe.example.edu"
+                  "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "10.0.2.15": {
-                  "text": "it.example.edu / cybersafe.example.edu"
+                "10.241.2.15": {
+                  "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1316,15 +1316,15 @@
             {
               "options": {
                 "PORTAL_100YEARS": {
-                  "text": "100years.example.edu"
+                  "text": "100years.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "198.51.100.34": {
-                  "text": "100years.example.edu"
+                "112.137.143.34": {
+                  "text": "100years.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1332,15 +1332,15 @@
             {
               "options": {
                 "EOFFICE_WEB": {
-                  "text": "eoffice.example.edu"
+                  "text": "eoffice.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "198.51.100.20": {
-                  "text": "eoffice.example.edu"
+                "112.137.142.20": {
+                  "text": "eoffice.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1348,15 +1348,15 @@
             {
               "options": {
                 "EOFFICE_DB": {
-                  "text": "eoffice-db.example.edu"
+                  "text": "eoffice-db.vnu.edu.vn"
                 }
               },
               "type": "value"
             },
             {
               "options": {
-                "198.51.100.21": {
-                  "text": "eoffice-db.example.edu"
+                "112.137.142.21": {
+                  "text": "eoffice-db.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1364,7 +1364,7 @@
             {
               "options": {
                 "dev-idp-dev-01": {
-                  "text": "idp-dev.example.edu"
+                  "text": "idp-dev.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1372,7 +1372,7 @@
             {
               "options": {
                 "prod-idp-web-01": {
-                  "text": "idp.example.edu (Web 01)"
+                  "text": "idp.vnu.edu.vn (Web 01)"
                 }
               },
               "type": "value"
@@ -1380,7 +1380,7 @@
             {
               "options": {
                 "prod-idp-web-02": {
-                  "text": "idp.example.edu (Web 02)"
+                  "text": "idp.vnu.edu.vn (Web 02)"
                 }
               },
               "type": "value"
@@ -1388,7 +1388,7 @@
             {
               "options": {
                 "prod-idp-lb-01": {
-                  "text": "idp.example.edu (LB 01)"
+                  "text": "idp.vnu.edu.vn (LB 01)"
                 }
               },
               "type": "value"
@@ -1396,7 +1396,7 @@
             {
               "options": {
                 "prod-idp-lb-02": {
-                  "text": "idp.example.edu (LB 02)"
+                  "text": "idp.vnu.edu.vn (LB 02)"
                 }
               },
               "type": "value"
@@ -1420,7 +1420,7 @@
             {
               "options": {
                 "dksdh": {
-                  "text": "dksdh.example.edu"
+                  "text": "dksdh.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1428,7 +1428,7 @@
             {
               "options": {
                 "dongbo_daotao_db": {
-                  "text": "dongbo.daotao.example.edu"
+                  "text": "dongbo.daotao.vnu.edu.vn"
                 }
               },
               "type": "value"
@@ -1469,15 +1469,15 @@
               "type": "value",
               "options": {
                 "FG_DV": {
-                  "text": "198.51.100.18 (FG-DV - Firewall Dich Vu)"
+                  "text": "10.241.1.18 (FG-DV - Firewall Dich Vu)"
                 }
               }
             },
             {
               "type": "value",
               "options": {
-                "198.51.100.18": {
-                  "text": "198.51.100.18 (FG-DV - Firewall Dich Vu)"
+                "10.241.1.18": {
+                  "text": "10.241.1.18 (FG-DV - Firewall Dich Vu)"
                 }
               }
             },
@@ -1580,7 +1580,7 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "TOP DỊCH VỤ / WEBSITE BỊ TẤN CÔNG (TARGET SERVICES - 24H)",
+      "title": "TOP D\u1ecaCH V\u1ee4 / WEBSITE B\u1eca T\u1ea4N C\u00d4NG (TARGET SERVICES - 24H)",
       "type": "bargauge"
     },
     {
@@ -1675,7 +1675,7 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "PHÂN NHÓM HÀNH VI TẤN CÔNG (THREAT CLASSIFICATION - 24H)",
+      "title": "PH\u00c2N NH\u00d3M H\u00c0NH VI T\u1ea4N C\u00d4NG (THREAT CLASSIFICATION - 24H)",
       "type": "bargauge"
     },
     {
@@ -1688,7 +1688,7 @@
       },
       "id": 102,
       "panels": [],
-      "title": "🛡️ TAB 3: TUÂN THỦ & MITRE ATT&CK",
+      "title": "\ud83d\udee1\ufe0f TAB 3: TU\u00c2N TH\u1ee6 & MITRE ATT&CK",
       "type": "row"
     },
     {
@@ -2049,7 +2049,7 @@
       },
       "id": 103,
       "panels": [],
-      "title": "📋 TAB 4: CHI TIẾT CẢNH BÁO",
+      "title": "\ud83d\udccb TAB 4: CHI TI\u1ebeT C\u1ea2NH B\u00c1O",
       "type": "row"
     },
     {
@@ -2136,7 +2136,7 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "NHÓM RULE (RULE GROUPS)",
+      "title": "NH\u00d3M RULE (RULE GROUPS)",
       "type": "piechart"
     },
     {
@@ -2174,12 +2174,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mã Rule (Rule ID)"
+              "options": "M\u00e3 Rule (Rule ID)"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Mã Rule (Rule ID)"
+                "value": "M\u00e3 Rule (Rule ID)"
               },
               {
                 "id": "custom.width",
@@ -2205,12 +2205,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mô tả Chi tiết Rule"
+              "options": "M\u00f4 t\u1ea3 Chi ti\u1ebft Rule"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Mô tả Chi tiết Rule"
+                "value": "M\u00f4 t\u1ea3 Chi ti\u1ebft Rule"
               },
               {
                 "id": "custom.minWidth",
@@ -2221,12 +2221,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Số lượt phát hiện"
+              "options": "S\u1ed1 l\u01b0\u1ee3t ph\u00e1t hi\u1ec7n"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Số lượt phát hiện"
+                "value": "S\u1ed1 l\u01b0\u1ee3t ph\u00e1t hi\u1ec7n"
               },
               {
                 "id": "custom.width",
@@ -2287,7 +2287,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Số lượt phát hiện"
+            "displayName": "S\u1ed1 l\u01b0\u1ee3t ph\u00e1t hi\u1ec7n"
           }
         ]
       },
@@ -2334,26 +2334,26 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "DANH SÁCH CHI TIẾT RULE",
+      "title": "DANH S\u00c1CH CHI TI\u1ebeT RULE",
       "transformations": [
         {
           "id": "organize",
           "options": {
             "indexByName": {
-              "Mã Rule (Rule ID)": 0,
-              "Mô tả Chi tiết Rule": 1,
-              "Số lượt phát hiện": 2
+              "M\u00e3 Rule (Rule ID)": 0,
+              "M\u00f4 t\u1ea3 Chi ti\u1ebft Rule": 1,
+              "S\u1ed1 l\u01b0\u1ee3t ph\u00e1t hi\u1ec7n": 2
             },
             "renameByName": {
-              "Count": "Số lượt phát hiện",
-              "Metric: Count": "Số lượt phát hiện",
-              "doc_count": "Số lượt phát hiện",
-              "rule.description": "Mô tả Chi tiết Rule",
-              "rule.description: Descending": "Mô tả Chi tiết Rule",
-              "rule.id": "Mã Rule (Rule ID)",
-              "rule.id: Descending": "Mã Rule (Rule ID)",
-              "rule_description": "Mô tả Chi tiết Rule",
-              "rule_id": "Mã Rule (Rule ID)"
+              "Count": "S\u1ed1 l\u01b0\u1ee3t ph\u00e1t hi\u1ec7n",
+              "Metric: Count": "S\u1ed1 l\u01b0\u1ee3t ph\u00e1t hi\u1ec7n",
+              "doc_count": "S\u1ed1 l\u01b0\u1ee3t ph\u00e1t hi\u1ec7n",
+              "rule.description": "M\u00f4 t\u1ea3 Chi ti\u1ebft Rule",
+              "rule.description: Descending": "M\u00f4 t\u1ea3 Chi ti\u1ebft Rule",
+              "rule.id": "M\u00e3 Rule (Rule ID)",
+              "rule.id: Descending": "M\u00e3 Rule (Rule ID)",
+              "rule_description": "M\u00f4 t\u1ea3 Chi ti\u1ebft Rule",
+              "rule_id": "M\u00e3 Rule (Rule ID)"
             }
           }
         }
@@ -2370,7 +2370,7 @@
       },
       "id": 200,
       "panels": [],
-      "title": "🛡️ TAB 5: SOAR ACTIVE RESPONSE, THREAT TAXONOMY & INFRASTRUCTURE CONSOLE",
+      "title": "\ud83d\udee1\ufe0f TAB 5: SOAR ACTIVE RESPONSE, THREAT TAXONOMY & INFRASTRUCTURE CONSOLE",
       "type": "row"
     },
     {
@@ -2441,15 +2441,15 @@
               "field": "data.srcip"
             }
           ],
-          "query": "(rule.level:[12 TO *] OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995) AND _exists_:data.srcip AND NOT data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 198.51.100.*)",
+          "query": "(rule.level:[12 TO *] OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995) AND _exists_:data.srcip AND NOT data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.*)",
           "refId": "A",
           "timeField": "@timestamp"
         }
       ],
       "timeFrom": "24h",
-      "title": "TƯỜNG LỬA BIÊN CHẶN IP NƯỚC NGOÀI (24H)",
+      "title": "T\u01af\u1edcNG L\u1eecA BI\u00caN CH\u1eb6N IP N\u01af\u1edaC NGO\u00c0I (24H)",
       "type": "stat",
-      "description": "Số lượng địa chỉ IP nước ngoài duy nhất bị phát hiện tấn công nguy cấp / thực thi chặn trong 24 giờ qua (Unique Foreign Blocked IPs)."
+      "description": "S\u1ed1 l\u01b0\u1ee3ng \u0111\u1ecba ch\u1ec9 IP n\u01b0\u1edbc ngo\u00e0i duy nh\u1ea5t b\u1ecb ph\u00e1t hi\u1ec7n t\u1ea5n c\u00f4ng nguy c\u1ea5p / th\u1ef1c thi ch\u1eb7n trong 24 gi\u1edd qua (Unique Foreign Blocked IPs)."
     },
     {
       "datasource": {
@@ -2524,7 +2524,7 @@
         }
       ],
       "timeFrom": "24h",
-      "title": "HẠ TẦNG & INGEST HA (24H)",
+      "title": "H\u1ea0 T\u1ea6NG & INGEST HA (24H)",
       "type": "stat"
     },
     {
@@ -2594,20 +2594,20 @@
               "type": "count"
             }
           ],
-          "query": "rule.level:[6 TO *] AND data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 198.51.100.*)",
+          "query": "rule.level:[6 TO *] AND data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.*)",
           "refId": "A",
           "timeField": "@timestamp"
         }
       ],
       "timeFrom": "24h",
-      "title": "ALLOWLIST NỘI BỘ VNU (24H)",
+      "title": "ALLOWLIST N\u1ed8I B\u1ed8 VNU (24H)",
       "type": "stat"
     },
     {
       "datasource": {
         "uid": "bfay8umd54feoc"
       },
-      "description": "Luồng giám sát sự cố thời gian thực từ Tường lửa FortiGate và Cụm dịch vụ Web VNU. Tự động liên kết điều tra 5W1H (Kẻ tấn công, Người thao tác, Mục tiêu, Phương thức, Trạng thái phản hồi, Hành động tường lửa và Thực thi SOAR).",
+      "description": "Lu\u1ed3ng gi\u00e1m s\u00e1t s\u1ef1 c\u1ed1 th\u1eddi gian th\u1ef1c t\u1eeb T\u01b0\u1eddng l\u1eeda FortiGate v\u00e0 C\u1ee5m d\u1ecbch v\u1ee5 Web VNU. T\u1ef1 \u0111\u1ed9ng li\u00ean k\u1ebft \u0111i\u1ec1u tra 5W1H (K\u1ebb t\u1ea5n c\u00f4ng, Ng\u01b0\u1eddi thao t\u00e1c, M\u1ee5c ti\u00eau, Ph\u01b0\u01a1ng th\u1ee9c, Tr\u1ea1ng th\u00e1i ph\u1ea3n h\u1ed3i, H\u00e0nh \u0111\u1ed9ng t\u01b0\u1eddng l\u1eeda v\u00e0 Th\u1ef1c thi SOAR).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3187,77 +3187,110 @@
                 "value": [
                   {
                     "options": {
-                      "100years.example.edu": {
-                        "text": "100years.example.edu (Kỷ niệm)"
+                      "100years.vnu.edu.vn": {
+                        "text": "100years.vnu.edu.vn (K\u1ef7 ni\u1ec7m)"
                       },
                       "PORTAL_100YEARS": {
-                        "text": "100years.example.edu (Kỷ niệm)"
+                        "text": "100years.vnu.edu.vn (K\u1ef7 ni\u1ec7m)"
                       },
-                      "CEA_NEW_198.51.100.10": {
-                        "text": "cea.example.edu (KĐCLGD)"
+                      "CEA_NEW_112.137.140.13": {
+                        "text": "cea.vnu.edu.vn (K\u0110CLGD)"
                       },
-                      "Web_TuyensinhSDH_NEW_10.0.2.15": {
-                        "text": "tssdh.example.edu (Tuyển sinh SDH)"
+                      "Web_TuyensinhSDH_NEW_10.241.2.15": {
+                        "text": "tssdh.vnu.edu.vn (Tuy\u1ec3n sinh SDH)"
                       },
                       "aapanel-web-01": {
-                        "text": "hosting-portal.example.edu (Cổng Web ĐHQG)"
+                        "text": "aapanel.vnu.edu.vn (C\u1ed5ng Web \u0110HQG)"
                       },
-                      "cea.example.edu": {
-                        "text": "cea.example.edu (KĐCLGD)"
+                      "cea.vnu.edu.vn": {
+                        "text": "cea.vnu.edu.vn (K\u0110CLGD)"
                       },
-                      "cybersafe.example.edu": {
-                        "text": "it.example.edu / cybersafe.example.edu"
+                      "cybersafe.vnu.edu.vn": {
+                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
                       },
-                      "daotao.example.edu": {
-                        "text": "daotao.example.edu (Portal SV)"
+                      "daotao.vnu.edu.vn": {
+                        "text": "daotao.vnu.edu.vn (Portal SV)"
                       },
                       "STUDENT_PORTAL": {
-                        "text": "daotao.example.edu (Portal SV)"
+                        "text": "daotao.vnu.edu.vn (Portal SV)"
                       },
                       "dev-idp-dev-01": {
-                        "text": "idp-dev.example.edu (Dev)"
+                        "text": "idp-dev.vnu.edu.vn (Dev)"
                       },
-                      "eoffice.example.edu": {
-                        "text": "eoffice.example.edu (Văn bản)"
+                      "eoffice.vnu.edu.vn": {
+                        "text": "eoffice.vnu.edu.vn (V\u0103n b\u1ea3n)"
                       },
-                      "eoffice_198.51.100.10": {
-                        "text": "eoffice.example.edu (Văn bản)"
+                      "eoffice_web_112.137.142.20": {
+                        "text": "eoffice.vnu.edu.vn (V\u0103n b\u1ea3n)"
                       },
-                      "idp-dev.example.edu": {
-                        "text": "idp-dev.example.edu (Dev)"
+                      "idp-dev.vnu.edu.vn": {
+                        "text": "idp-dev.vnu.edu.vn (Dev)"
                       },
-                      "idp.example.edu": {
-                        "text": "idp.example.edu (Keycloak SSO)"
+                      "idp.vnu.edu.vn": {
+                        "text": "idp.vnu.edu.vn (Keycloak SSO)"
                       },
                       "IDP_WEB_PORTAL": {
-                        "text": "idp.example.edu (Keycloak SSO)"
+                        "text": "idp.vnu.edu.vn (Keycloak SSO)"
                       },
                       "it-cyber": {
-                        "text": "it.example.edu / cybersafe.example.edu"
+                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
                       },
-                      "it.example.edu": {
-                        "text": "it.example.edu / cybersafe.example.edu"
+                      "it.vnu.edu.vn": {
+                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
                       },
                       "prod-idp-db-01": {
-                        "text": "idp.example.edu (DB Patroni 01)"
+                        "text": "idp.vnu.edu.vn (DB Patroni 01)"
                       },
                       "prod-idp-db-02": {
-                        "text": "idp.example.edu (DB Patroni 02)"
+                        "text": "idp.vnu.edu.vn (DB Patroni 02)"
                       },
                       "prod-idp-lb-01": {
-                        "text": "idp.example.edu (HAProxy LB 01)"
+                        "text": "idp.vnu.edu.vn (HAProxy LB 01)"
                       },
                       "prod-idp-lb-02": {
-                        "text": "idp.example.edu (HAProxy LB 02)"
+                        "text": "idp.vnu.edu.vn (HAProxy LB 02)"
                       },
                       "prod-idp-web-01": {
-                        "text": "idp.example.edu (Web 01)"
+                        "text": "idp.vnu.edu.vn (Web 01)"
                       },
                       "prod-idp-web-02": {
-                        "text": "idp.example.edu (Web 02)"
+                        "text": "idp.vnu.edu.vn (Web 02)"
                       },
-                      "tssdh.example.edu": {
-                        "text": "tssdh.example.edu (Tuyển sinh SDH)"
+                      "tssdh.vnu.edu.vn": {
+                        "text": "tssdh.vnu.edu.vn (Tuy\u1ec3n sinh SDH)"
+                      },
+                      "SecurityOnion_Suricata_10.243.1.38": {
+                        "text": "Suricata NIDS \u0110HQGHN (bond0)"
+                      },
+                      "securityonion": {
+                        "text": "Suricata NIDS \u0110HQGHN (bond0)"
+                      },
+                      "10.243.1.38": {
+                        "text": "Suricata NIDS \u0110HQGHN (bond0)"
+                      },
+                      "daotao_112.137.142.44": {
+                        "text": "daotao.vnu.edu.vn (Portal SV)"
+                      },
+                      "idp_web_112.137.142.6": {
+                        "text": "idp.vnu.edu.vn (Keycloak SSO)"
+                      },
+                      "cybersafe_10.241.2.70": {
+                        "text": "it.vnu.edu.vn / cybersafe.vnu.edu.vn"
+                      },
+                      "100years_112.137.143.34": {
+                        "text": "100years.vnu.edu.vn (K\u1ef7 ni\u1ec7m)"
+                      },
+                      "eoffice_db_112.137.142.21": {
+                        "text": "eoffice-db.vnu.edu.vn"
+                      },
+                      "khaosat_ulis_10.241.2.19": {
+                        "text": "khaosat.ulis.vnu.edu.vn"
+                      },
+                      "dksdh": {
+                        "text": "dksdh.vnu.edu.vn (\u0110\u0103ng k\u00fd SDH)"
+                      },
+                      "dongbo_daotao_db": {
+                        "text": "dongbo.daotao.vnu.edu.vn"
                       }
                     },
                     "type": "value"
@@ -3557,7 +3590,7 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "LIVE INCIDENT & ENFORCEMENT STREAM (LUỒNG SỰ CỐ & THI HÀNH THỜI GIAN THỰC)",
+      "title": "LIVE INCIDENT & ENFORCEMENT STREAM (LU\u1ed2NG S\u1ef0 C\u1ed0 & THI H\u00c0NH TH\u1edcI GIAN TH\u1ef0C)",
       "transformations": [
         {
           "id": "filterFieldsByName",
@@ -3638,7 +3671,7 @@
       "datasource": {
         "uid": "bfay8umd54feoc"
       },
-      "description": "Bảng điều khiển cảnh báo sự cố hạ tầng Switch Core, Router, Ingest HA, Cụm ảo hóa vCenter/ESXi và Dò quét trinh sát mạng. Chế độ 100% ALERT-ONLY - Tuyệt đối không tự động chặn (Zero Automated Action).",
+      "description": "B\u1ea3ng \u0111i\u1ec1u khi\u1ec3n c\u1ea3nh b\u00e1o s\u1ef1 c\u1ed1 h\u1ea1 t\u1ea7ng Switch Core, Router, Ingest HA, C\u1ee5m \u1ea3o h\u00f3a vCenter/ESXi v\u00e0 D\u00f2 qu\u00e9t trinh s\u00e1t m\u1ea1ng. Ch\u1ebf \u0111\u1ed9 100% ALERT-ONLY - Tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng t\u1ef1 \u0111\u1ed9ng ch\u1eb7n (Zero Automated Action).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3933,7 +3966,7 @@
                     "options": {
                       "pattern": ".*112\\.137\\.143\\.18.*",
                       "result": {
-                        "text": "198.51.100.18 (FG_DV)"
+                        "text": "10.241.1.18 (FG_DV)"
                       }
                     },
                     "type": "regex"
@@ -3942,7 +3975,7 @@
                     "options": {
                       "pattern": ".*112\\.137\\.143\\.2.*",
                       "result": {
-                        "text": "198.51.100.2 (FG300D)"
+                        "text": "10.241.1.16 (FG300D)"
                       }
                     },
                     "type": "regex"
@@ -3951,7 +3984,7 @@
                     "options": {
                       "pattern": ".*112\\.137\\.143\\.4.*",
                       "result": {
-                        "text": "198.51.100.4 (FG200F)"
+                        "text": "10.241.1.17 (FG200F)"
                       }
                     },
                     "type": "regex"
@@ -4472,12 +4505,12 @@
               "type": "raw_data"
             }
           ],
-          "query": "(agent.id:(011 OR 012) OR data.devname:(FG300D OR FG200F OR FG_DV) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\" OR rule.id:100996 OR location:(*sec* OR *net* OR *wazuh-syslog*) OR (agent.name:(ingest* OR *vcenter* OR *esxi* OR *vmware* OR *switch* OR *router* OR *FG300D* OR *FG200F* OR *FG_DV*) AND data.asset_type:network)) AND NOT (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024) OR agent.name:(prod-idp* OR dev-idp* OR eoffice* OR CEA* OR daotao* OR aapanel* OR 100years* OR cybersafe* OR dksdh*) OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995)",
+          "query": "(agent.id:(011 OR 012) OR data.devname:(FG300D OR FG200F OR FG_DV) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\" OR rule.id:100996 OR location:(*sec* OR *net* OR *wazuh-syslog*) OR (agent.name:(ingest* OR *vcenter* OR *esxi* OR *vmware* OR *switch* OR *router* OR *FG300D* OR *FG200F* OR *FG_DV*) AND data.asset_type:network)) AND NOT (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) OR agent.name:(prod-idp* OR dev-idp* OR eoffice* OR CEA* OR daotao* OR aapanel* OR 100years* OR cybersafe* OR dksdh*) OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995)",
           "refId": "A",
           "timeField": "@timestamp"
         }
       ],
-      "title": "INFRASTRUCTURE & VCENTER OPERATIONAL ALERT CONSOLE (HẠ TẦNG MẠNG & VCENTER - ALERT-ONLY)",
+      "title": "INFRASTRUCTURE & VCENTER OPERATIONAL ALERT CONSOLE (H\u1ea0 T\u1ea6NG M\u1ea0NG & VCENTER - ALERT-ONLY)",
       "transformations": [
         {
           "id": "filterFieldsByName",

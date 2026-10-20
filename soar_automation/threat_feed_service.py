@@ -447,7 +447,7 @@ def rebuild_feed_files():
     os.replace(tmp_json, FEED_JSON_FILE)
 
 
-def add_ip_to_feed(ip, category="CAT1_WEB_EXPLOIT", country="FOREIGN", asn="", risk_score=80, reason="VNU SOAR Enforcement", ttl_seconds=0, source="SOAR", source_rule_id=None, mitre_id=None, external_dstport="443", internal_sensor_port="8088"):
+def add_ip_to_feed(ip, category="CAT1_WEB_EXPLOIT", country="FOREIGN", asn="", risk_score=80, reason="VNU SOAR Enforcement", ttl_seconds=0, source="SOAR", source_rule_id=None, mitre_id=None, external_dstport="443", internal_sensor_port="8088", target_agent=None, target_service=None):
     now = datetime.now(timezone.utc)
     now_iso = now.isoformat()
     if ttl_seconds and ttl_seconds > 0:
@@ -505,8 +505,8 @@ def add_ip_to_feed(ip, category="CAT1_WEB_EXPLOIT", country="FOREIGN", asn="", r
                 "srcip": ip,
                 "country": country,
                 "asn": asn,
-                "agent_name": "Perimeter_FortiGate",
-                "target_service": "External Perimeter / Port 8088",
+                "agent_name": target_agent or "Perimeter_Gateway",
+                "target_service": target_service or "Web_Perimeter",
                 "external_dstport": str(external_dstport or "443"),
                 "internal_sensor_port": str(internal_sensor_port or "8088"),
                 "dstport": str(external_dstport or "443"),
@@ -519,7 +519,7 @@ def add_ip_to_feed(ip, category="CAT1_WEB_EXPLOIT", country="FOREIGN", asn="", r
                 "severity": "CRITICAL" if risk_score >= 80 else "HIGH",
                 "risk_score": risk_score,
                 "soar_decision": "PERMANENT_BLOCK_APPROVED" if ttl_seconds == 0 else "TEMPORARY_BLOCK_APPROVED",
-                "enforcing_firewall": "FG300D / FG200F / FG_DV (All 3)",
+                "enforcing_firewall": "Threat_Feed_Gateway (Blocklist Feed)",
                 "fortigate_action": "BLOCKED",
                 "enforcement_verified": "true",
                 "incident_status": "CONTAINED"
@@ -601,7 +601,7 @@ def flush_feed():
     return {"status": "FLUSHED", "flushed_count": len(rows)}
 
 
-def evaluate_and_enforce_ioc(ip, threat_category="CAT1_WEB_EXPLOIT", risk_score=80, reason="SOC Event", source="SOAR", dry_run=False, source_rule_id=None, mitre_id=None, external_dstport="443", internal_sensor_port="8088"):
+def evaluate_and_enforce_ioc(ip, threat_category="CAT1_WEB_EXPLOIT", risk_score=80, reason="SOC Event", source="SOAR", dry_run=False, source_rule_id=None, mitre_id=None, external_dstport="443", internal_sensor_port="8088", target_agent=None, target_service=None):
     """
     Core Engine theo docs/exception.md:
     IOC -> Threat Intelligence -> Allowlist -> GeoLocation -> Rule Policy -> Risk Scoring -> AR Candidate -> Dry Run / Approval -> Enforcement
@@ -726,7 +726,8 @@ def evaluate_and_enforce_ioc(ip, threat_category="CAT1_WEB_EXPLOIT", risk_score=
         res = add_ip_to_feed(
             ip, threat_category, country, asn, risk_score, reason,
             ttl_seconds=ttl_seconds, source=source, source_rule_id=source_rule_id,
-            mitre_id=mitre_id, external_dstport=external_dstport, internal_sensor_port=internal_sensor_port
+            mitre_id=mitre_id, external_dstport=external_dstport, internal_sensor_port=internal_sensor_port,
+            target_agent=target_agent, target_service=target_service
         )
 
         # Telegram alert ngắn gọn cho IP Nước ngoài bị chặn biên
@@ -978,10 +979,14 @@ class FeedHTTPHandler(BaseHTTPRequestHandler):
             external_dstport = payload.get("external_dstport") or payload.get("dstport") or "443"
             internal_sensor_port = payload.get("internal_sensor_port") or "8088"
 
+            target_agent = payload.get("target_agent")
+            target_service = payload.get("target_service")
+
             result = evaluate_and_enforce_ioc(
                 ip, category, risk_score, reason, source, dry_run=dry_run,
                 source_rule_id=source_rule_id, mitre_id=mitre_id,
-                external_dstport=external_dstport, internal_sensor_port=internal_sensor_port
+                external_dstport=external_dstport, internal_sensor_port=internal_sensor_port,
+                target_agent=target_agent, target_service=target_service
             )
             self.send_json_response(200, {"success": True, "result": result})
             return
