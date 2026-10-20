@@ -3222,8 +3222,26 @@
                 }
               },
               {
+                "id": "decimals",
+                "value": 0
+              },
+              {
                 "id": "noValue",
                 "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "special",
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "text": "-"
+                      }
+                    }
+                  }
+                ]
               },
               {
                 "id": "custom.minWidth",
@@ -3403,7 +3421,6 @@
                 "data.srcip",
                 "data.dest_port",
                 "data.dstport",
-                "data.external_dstport",
                 "data.url",
                 "data.status",
                 "data.dstuser",
@@ -3411,7 +3428,6 @@
                 "GeoLocation.country_name",
                 "agent.name",
                 "data.action",
-                "data.soar_decision",
                 "rule.description"
               ]
             }
@@ -3430,6 +3446,20 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "Target Port",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "data.dest_port",
+                "data.dstport"
+              ],
+              "reducer": "max"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -3440,7 +3470,10 @@
               "agent.id": true,
               "agent.ip": true,
               "cluster.name": true,
+              "data.dest_port": true,
               "data.devname": true,
+              "data.dstport": true,
+              "data.external_dstport": true,
               "data.srcuser": true,
               "decoder.name": true,
               "full_log": true,
@@ -3468,9 +3501,6 @@
               "GeoLocation.country_name": "Geo / Country",
               "agent.name": "Target Web / Host",
               "data.action": "Firewall Action (Raw)",
-              "data.dest_port": "Target Port",
-              "data.dstport": "Target Port",
-              "data.external_dstport": "Target Port",
               "data.dstuser": "User / Actor",
               "data.srcip": "Source IP",
               "data.srcuser": "User / Actor",
@@ -3478,8 +3508,7 @@
               "data.url": "Request URL / URI",
               "rule.description": "Rule Description",
               "rule.id": "Rule ID",
-              "rule.level": "Severity",
-              "SOAR Decision": "SOAR Decision"
+              "rule.level": "Severity"
             }
           }
         }
@@ -4468,6 +4497,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 69,
+  "version": 70,
   "weekStart": ""
 }
