@@ -3248,94 +3248,6 @@
                 "value": 85
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "SOAR Decision"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "SOAR Decision"
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              },
-              {
-                "id": "custom.displayMode",
-                "value": "color-background"
-              },
-              {
-                "id": "noValue",
-                "value": "-"
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "type": "value",
-                    "options": {
-                      "PERMANENT_BLOCK_APPROVED": {
-                        "color": "#E02F44",
-                        "text": "PERM BLOCK (SOAR)"
-                      },
-                      "TEMPORARY_BLOCK_APPROVED": {
-                        "color": "#FA6400",
-                        "text": "30-DAY BLOCK (SOAR)"
-                      },
-                      "AUTOMATED_AGENT_BLOCK": {
-                        "color": "#E02F44",
-                        "text": "BLOCKED (AGENT)"
-                      },
-                      "VIETNAM_ALERT_ONLY": {
-                        "color": "#EAB839",
-                        "text": "VN CGNAT ALERT"
-                      },
-                      "ALLOWLIST_SUPPRESSED": {
-                        "color": "#73BF69",
-                        "text": "ALLOWLIST"
-                      },
-                      "ALERT_ONLY": {
-                        "color": "#5794F2",
-                        "text": "ALERT ONLY"
-                      },
-                      "BLOCK": {
-                        "color": "#E02F44",
-                        "text": "BLOCKED"
-                      },
-                      "BLOCKED": {
-                        "color": "#E02F44",
-                        "text": "BLOCKED"
-                      }
-                    }
-                  },
-                  {
-                    "type": "special",
-                    "options": {
-                      "match": "null+nan",
-                      "result": {
-                        "text": "-"
-                      }
-                    }
-                  },
-                  {
-                    "type": "special",
-                    "options": {
-                      "match": "empty",
-                      "result": {
-                        "text": "-"
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "custom.minWidth",
-                "value": 150
-              }
-            ]
           }
         ]
       },
@@ -3394,20 +3306,17 @@
             "include": {
               "names": [
                 "@timestamp",
-                "rule.id",
-                "rule.level",
+                "GeoLocation.country_name",
                 "data.srcip",
                 "data.dest_port",
                 "data.dstport",
-                "data.url",
-                "data.status",
-                "data.soar_decision",
                 "data.dstuser",
                 "data.srcuser",
-                "GeoLocation.country_name",
-                "agent.name",
-                "data.action",
-                "rule.description"
+                "data.status",
+                "data.url",
+                "rule.description",
+                "rule.id",
+                "rule.level"
               ]
             }
           }
@@ -3436,11 +3345,14 @@
               "_type": true,
               "agent.id": true,
               "agent.ip": true,
+              "agent.name": true,
               "cluster.name": true,
+              "data.action": true,
               "data.dest_port": true,
               "data.devname": true,
               "data.dstport": true,
               "data.external_dstport": true,
+              "data.soar_decision": true,
               "data.srcuser": true,
               "decoder.name": true,
               "full_log": true,
@@ -3451,41 +3363,32 @@
             "indexByName": {
               "@timestamp": 0,
               "Timestamp": 0,
-              "rule.id": 1,
-              "Rule ID": 1,
-              "rule.level": 2,
-              "Severity": 2,
-              "data.srcip": 3,
-              "Source IP": 3,
-              "Target Port": 4,
-              "GeoLocation.country_name": 5,
-              "Geo / Country": 5,
-              "agent.name": 6,
-              "Target Web / Host": 6,
-              "data.url": 7,
-              "Request URL / URI": 7,
-              "data.status": 8,
-              "HTTP Status Code": 8,
-              "data.soar_decision": 9,
-              "SOAR Decision": 9,
-              "data.dstuser": 10,
-              "User / Actor": 10,
-              "data.action": 11,
-              "Firewall Action (Raw)": 11,
-              "rule.description": 12,
-              "Rule Description": 12
+              "GeoLocation.country_name": 1,
+              "Geo / Country": 1,
+              "data.srcip": 2,
+              "Source IP": 2,
+              "Target Port": 3,
+              "data.dstuser": 4,
+              "User / Actor": 4,
+              "data.status": 5,
+              "HTTP Status Code": 5,
+              "data.url": 6,
+              "Request URL / URI": 6,
+              "rule.description": 7,
+              "Rule Description": 7,
+              "rule.id": 8,
+              "Rule ID": 8,
+              "rule.level": 9,
+              "Severity": 9
             },
             "renameByName": {
               "@timestamp": "Timestamp",
               "GeoLocation.country_name": "Geo / Country",
-              "agent.name": "Target Web / Host",
-              "data.action": "Firewall Action (Raw)",
-              "data.dstuser": "User / Actor",
               "data.srcip": "Source IP",
+              "data.dstuser": "User / Actor",
               "data.srcuser": "User / Actor",
               "data.status": "HTTP Status Code",
               "data.url": "Request URL / URI",
-              "data.soar_decision": "SOAR Decision",
               "rule.description": "Rule Description",
               "rule.id": "Rule ID",
               "rule.level": "Severity"
@@ -4477,6 +4380,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 72,
+  "version": 73,
   "weekStart": ""
 }
