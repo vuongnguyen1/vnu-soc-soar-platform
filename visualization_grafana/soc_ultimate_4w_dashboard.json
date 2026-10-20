@@ -3269,55 +3269,11 @@
               },
               {
                 "id": "noValue",
-                "value": "MONITOR ONLY"
+                "value": "-"
               },
               {
                 "id": "mappings",
                 "value": [
-                  {
-                    "type": "range",
-                    "options": {
-                      "from": 12,
-                      "to": 100,
-                      "result": {
-                        "text": "PERM BLOCK (SOAR)",
-                        "color": "#E02F44"
-                      }
-                    }
-                  },
-                  {
-                    "type": "range",
-                    "options": {
-                      "from": 8,
-                      "to": 11,
-                      "result": {
-                        "text": "30-DAY BLOCK (SOAR)",
-                        "color": "#FA6400"
-                      }
-                    }
-                  },
-                  {
-                    "type": "range",
-                    "options": {
-                      "from": 5,
-                      "to": 7,
-                      "result": {
-                        "text": "RATE-LIMIT / LOG",
-                        "color": "#EAB839"
-                      }
-                    }
-                  },
-                  {
-                    "type": "range",
-                    "options": {
-                      "from": 0,
-                      "to": 4,
-                      "result": {
-                        "text": "MONITOR ONLY",
-                        "color": "#5794F2"
-                      }
-                    }
-                  },
                   {
                     "type": "value",
                     "options": {
@@ -3341,6 +3297,10 @@
                         "color": "#73BF69",
                         "text": "ALLOWLIST"
                       },
+                      "ALERT_ONLY": {
+                        "color": "#5794F2",
+                        "text": "ALERT ONLY"
+                      },
                       "BLOCK": {
                         "color": "#E02F44",
                         "text": "BLOCKED"
@@ -3348,6 +3308,24 @@
                       "BLOCKED": {
                         "color": "#E02F44",
                         "text": "BLOCKED"
+                      }
+                    }
+                  },
+                  {
+                    "type": "special",
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "text": "-"
+                      }
+                    }
+                  },
+                  {
+                    "type": "special",
+                    "options": {
+                      "match": "empty",
+                      "result": {
+                        "text": "-"
                       }
                     }
                   }
@@ -3423,6 +3401,7 @@
                 "data.dstport",
                 "data.url",
                 "data.status",
+                "data.soar_decision",
                 "data.dstuser",
                 "data.srcuser",
                 "GeoLocation.country_name",
@@ -3431,18 +3410,6 @@
                 "rule.description"
               ]
             }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "SOAR Decision",
-            "binary": {
-              "left": "rule.level",
-              "operator": "+",
-              "right": "0"
-            },
-            "mode": "binary"
           }
         },
         {
@@ -3482,18 +3449,30 @@
               "manager.name": true
             },
             "indexByName": {
+              "@timestamp": 0,
               "Timestamp": 0,
+              "rule.id": 1,
               "Rule ID": 1,
+              "rule.level": 2,
               "Severity": 2,
+              "data.srcip": 3,
               "Source IP": 3,
               "Target Port": 4,
+              "GeoLocation.country_name": 5,
               "Geo / Country": 5,
+              "agent.name": 6,
               "Target Web / Host": 6,
+              "data.url": 7,
               "Request URL / URI": 7,
+              "data.status": 8,
               "HTTP Status Code": 8,
+              "data.soar_decision": 9,
               "SOAR Decision": 9,
+              "data.dstuser": 10,
               "User / Actor": 10,
+              "data.action": 11,
               "Firewall Action (Raw)": 11,
+              "rule.description": 12,
               "Rule Description": 12
             },
             "renameByName": {
@@ -3506,6 +3485,7 @@
               "data.srcuser": "User / Actor",
               "data.status": "HTTP Status Code",
               "data.url": "Request URL / URI",
+              "data.soar_decision": "SOAR Decision",
               "rule.description": "Rule Description",
               "rule.id": "Rule ID",
               "rule.level": "Severity"
@@ -4497,6 +4477,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 71,
+  "version": 72,
   "weekStart": ""
 }
