@@ -938,7 +938,7 @@
       },
       "gridPos": {
         "h": 10,
-        "w": 6,
+        "w": 8,
         "x": 0,
         "y": 29
       },
@@ -1014,8 +1014,8 @@
       },
       "gridPos": {
         "h": 10,
-        "w": 6,
-        "x": 6,
+        "w": 8,
+        "x": 8,
         "y": 29
       },
       "timeFrom": "24h",
@@ -1110,404 +1110,6 @@
           "color": {
             "mode": "palette-classic"
           },
-          "mappings": [
-            {
-              "type": "value",
-              "options": {
-                "idp.vnu.edu.vn": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp.vnu.edu.vn (HAProxy LB 01)": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp.vnu.edu.vn (HAProxy LB 02)": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp.vnu.edu.vn (HAProxy)": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp.vnu.edu.vn (Web 01)": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp.vnu.edu.vn (Web 02)": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp.vnu.edu.vn (DB)": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "prod-idp-lb-01": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "prod-idp-lb-02": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "prod-idp-web-01": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "prod-idp-web-02": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "prod-idp-db-01": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "prod-idp-db-02": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "dev-idp-dev-01": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp_web_112.137.142.6": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "idp-lb": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "112.137.142.6": {
-                  "text": "idp.vnu.edu.vn"
-                },
-                "cce.vnu.edu.vn": {
-                  "text": "cce.vnu.edu.vn"
-                },
-                "cce.vnu.edu.vn [KBCLQD]": {
-                  "text": "cce.vnu.edu.vn"
-                },
-                "CEA_NEW_112.137.140.13": {
-                  "text": "cce.vnu.edu.vn"
-                },
-                "112.137.140.13": {
-                  "text": "cce.vnu.edu.vn"
-                },
-                "cea.vnu.edu.vn": {
-                  "text": "cce.vnu.edu.vn"
-                },
-                "tssdh.vnu.edu.vn": {
-                  "text": "tssdh.vnu.edu.vn"
-                },
-                "Web_TuyensinhSDH_NEW_10.241.2.15": {
-                  "text": "tssdh.vnu.edu.vn"
-                },
-                "10.241.2.15": {
-                  "text": "tssdh.vnu.edu.vn"
-                },
-                "daotao.vnu.edu.vn": {
-                  "text": "daotao.vnu.edu.vn"
-                },
-                "daotao_112.137.142.44": {
-                  "text": "daotao.vnu.edu.vn"
-                },
-                "dongbo_daotao_db": {
-                  "text": "daotao.vnu.edu.vn"
-                },
-                "112.137.142.44": {
-                  "text": "daotao.vnu.edu.vn"
-                },
-                "dongbo.daotao.vnu.edu.vn": {
-                  "text": "daotao.vnu.edu.vn"
-                },
-                "eoffice.vnu.edu.vn": {
-                  "text": "eoffice.vnu.edu.vn"
-                },
-                "eoffice.vnu.edu.vn (DB)": {
-                  "text": "eoffice.vnu.edu.vn"
-                },
-                "eoffice_web_112.137.142.20": {
-                  "text": "eoffice.vnu.edu.vn"
-                },
-                "eoffice_db_112.137.142.21": {
-                  "text": "eoffice.vnu.edu.vn"
-                },
-                "112.137.142.20": {
-                  "text": "eoffice.vnu.edu.vn"
-                },
-                "112.137.142.21": {
-                  "text": "eoffice.vnu.edu.vn"
-                },
-                "eoffice-db.vnu.edu.vn": {
-                  "text": "eoffice.vnu.edu.vn"
-                },
-                "cybersafe.vnu.edu.vn": {
-                  "text": "cybersafe.vnu.edu.vn"
-                },
-                "cybersafe_10.241.2.70": {
-                  "text": "cybersafe.vnu.edu.vn"
-                },
-                "10.241.2.70": {
-                  "text": "cybersafe.vnu.edu.vn"
-                },
-                "it.vnu.edu.vn": {
-                  "text": "it.vnu.edu.vn"
-                },
-                "it-cyber": {
-                  "text": "it.vnu.edu.vn"
-                },
-                "khaosat.ulis.vnu.edu.vn": {
-                  "text": "khaosat.ulis.vnu.edu.vn"
-                },
-                "khaosat_ulis_10.241.2.19": {
-                  "text": "khaosat.ulis.vnu.edu.vn"
-                },
-                "10.241.2.19": {
-                  "text": "khaosat.ulis.vnu.edu.vn"
-                },
-                "100years.vnu.edu.vn": {
-                  "text": "100years.vnu.edu.vn"
-                },
-                "100years_112.137.143.34": {
-                  "text": "100years.vnu.edu.vn"
-                },
-                "112.137.143.34": {
-                  "text": "100years.vnu.edu.vn"
-                },
-                "aapanel.vnu.edu.vn": {
-                  "text": "aapanel.vnu.edu.vn"
-                },
-                "aapanel-web-01": {
-                  "text": "aapanel.vnu.edu.vn"
-                },
-                "112.137.133.14": {
-                  "text": "aapanel.vnu.edu.vn"
-                },
-                "qpan.vnu.edu.vn": {
-                  "text": "aapanel.vnu.edu.vn"
-                },
-                "dksdh.vnu.edu.vn": {
-                  "text": "dksdh.vnu.edu.vn"
-                },
-                "dksdh.vnu.edu.vn (DB)": {
-                  "text": "dksdh.vnu.edu.vn"
-                },
-                "dksdh": {
-                  "text": "dksdh.vnu.edu.vn"
-                },
-                "dongbo_dksdh_db": {
-                  "text": "dksdh.vnu.edu.vn"
-                },
-                "SecurityOnion_Suricata_10.243.1.38": {
-                  "text": "Suricata NIDS"
-                },
-                "Suricata NIDS": {
-                  "text": "Suricata NIDS"
-                },
-                "wazuh-grafana-ubuntu24": {
-                  "text": "SOC Perimeter Gateway"
-                },
-                "SOC Perimeter Gateway": {
-                  "text": "SOC Perimeter Gateway"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*CEA_NEW.*|.*cce\\.vnu.*|.*cea\\.vnu.*",
-                "result": {
-                  "text": "cce.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*daotao.*",
-                "result": {
-                  "text": "daotao.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*TuyensinhSDH.*|.*tssdh.*",
-                "result": {
-                  "text": "tssdh.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*idp.*",
-                "result": {
-                  "text": "idp.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*eoffice.*",
-                "result": {
-                  "text": "eoffice.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*cybersafe.*",
-                "result": {
-                  "text": "cybersafe.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*it-cyber.*",
-                "result": {
-                  "text": "it.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*khaosat.*",
-                "result": {
-                  "text": "khaosat.ulis.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*100years.*",
-                "result": {
-                  "text": "100years.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*aapanel.*",
-                "result": {
-                  "text": "aapanel.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*dksdh.*",
-                "result": {
-                  "text": "dksdh.vnu.edu.vn"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*Suricata.*|.*SecurityOnion.*",
-                "result": {
-                  "text": "Suricata NIDS"
-                }
-              }
-            },
-            {
-              "type": "regex",
-              "options": {
-                "pattern": ".*wazuh-grafana.*",
-                "result": {
-                  "text": "SOC Perimeter Gateway"
-                }
-              }
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#5794F2"
-              },
-              {
-                "color": "#FA6400",
-                "value": 20
-              },
-              {
-                "color": "#E02F44",
-                "value": 100
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 6,
-        "x": 12,
-        "y": 29
-      },
-      "id": 212,
-      "options": {
-        "displayMode": "gradient",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "/^Count$/",
-          "values": true
-        },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "alias": "",
-          "bucketAggs": [
-            {
-              "field": "agent.name",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_count",
-                "size": "10"
-              },
-              "type": "terms"
-            }
-          ],
-          "datasource": {
-            "uid": "bfay8umd54feoc"
-          },
-          "format": "table",
-          "metrics": [
-            {
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "query": "_exists_:data.srcip AND (rule.level:[4 TO *] OR rule.groups:(*attack* OR *bruteforce* OR *web* OR *sshd* OR *sql_injection* OR *recon* OR *authentication_failed*)) AND NOT (rule.id:(550 OR 554 OR 502 OR 503 OR 504) OR agent.name:(wazuh* OR node0* OR ingest* OR FG* OR *firewall*) OR data.devname:*)",
-          "refId": "A",
-          "timeField": "@timestamp"
-        }
-      ],
-      "title": "TOP DỊCH VỤ / WEBSITE BỊ TẤN CÔNG (TARGET SERVICES - 24H)",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "uid": "bfay8umd54feoc"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1530,8 +1132,8 @@
       },
       "gridPos": {
         "h": 10,
-        "w": 6,
-        "x": 18,
+        "w": 8,
+        "x": 16,
         "y": 29
       },
       "id": 211,
@@ -2518,6 +2120,27 @@
       "timeFrom": "24h",
       "title": "ALLOWLIST NỘI BỘ VNU (24H)",
       "type": "stat"
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 64
+      },
+      "id": 207,
+      "options": {
+        "code": {
+          "language": "html",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "\n<div style=\"display: flex; flex-direction: column; gap: 8px; padding: 10px 14px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);\">\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 15px;\">🎯</span>\n      <span style=\"font-size: 12px; font-weight: 700; color: #EAB839; text-transform: uppercase; letter-spacing: 0.5px;\">BỘ LỌC WEBSITE MỤC TIÊU (LIVE STREAM FILTER):</span>\n      <span style=\"font-size: 11px; color: #94a3b8;\">Chọn nhanh cổng web cần giám sát hoặc loại trừ IDP để xem các sự cố web khác</span>\n    </div>\n  </div>\n  <div style=\"display: flex; flex-wrap: wrap; gap: 6px; align-items: center;\">\n    <button onclick=\"setSocFilter('*')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #334155; color: #ffffff; border: 1px solid #64748b; transition: all 0.2s;\">🌟 Tất cả (All)</button>\n    <button onclick=\"setSocFilter('NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 700; background: #991b1b; color: #ffffff; border: 1px solid #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.4); transition: all 0.2s;\">🚫 Ngoại trừ IDP (Exclude IDP)</button>\n    <button onclick=\"setSocFilter('agent.name:(CEA_NEW* OR *cce*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 cce.vnu.edu.vn (Khảo thí)</button>\n    <button onclick=\"setSocFilter('agent.name:(*TuyensinhSDH* OR *tssdh*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 tssdh.vnu.edu.vn (Tuyển sinh)</button>\n    <button onclick=\"setSocFilter('agent.name:(*daotao*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 daotao.vnu.edu.vn (Đào tạo)</button>\n    <button onclick=\"setSocFilter('agent.name:(*cybersafe* OR *it-cyber*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; transition: all 0.2s;\">🌐 cybersafe.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(prod-idp* OR dev-idp* OR idp_web*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #facc15; border: 1px solid #ca8a04; transition: all 0.2s;\">🌐 idp.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(*eoffice*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 eoffice.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(*aapanel*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 aapanel.vnu.edu.vn</button>\n    <button onclick=\"setSocFilter('agent.name:(*khaosat*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 khaosat.ulis</button>\n    <button onclick=\"setSocFilter('agent.name:(*100years*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 100years</button>\n    <button onclick=\"setSocFilter('agent.name:(*dksdh*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #cbd5e1; border: 1px solid #475569; transition: all 0.2s;\">🌐 dksdh</button>\n    <button onclick=\"setSocFilter('agent.name:(*Suricata* OR *SecurityOnion*)')\" style=\"cursor: pointer; padding: 4px 11px; border-radius: 5px; font-size: 11px; font-weight: 600; background: #1e293b; color: #4ade80; border: 1px solid #16a34a; transition: all 0.2s;\">🛡️ Suricata NIDS</button>\n  </div>\n</div>\n<script>\nfunction setSocFilter(val) {\n  const url = new URL(window.location.href);\n  url.searchParams.set('var-target_web', val);\n  window.location.href = url.toString();\n}\n</script>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "12.3.0",
+      "transparent": true,
+      "type": "text"
     },
     {
       "datasource": {
@@ -3934,7 +3557,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 64
+        "y": 67
       },
       "id": 208,
       "options": {
@@ -4889,7 +4512,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 79
+        "y": 82
       },
       "id": 209,
       "options": {
