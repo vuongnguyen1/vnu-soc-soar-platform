@@ -3121,7 +3121,203 @@
               },
               {
                 "id": "custom.minWidth",
-                "value": 160
+                "value": 170
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "idp.vnu.edu.vn (HAProxy LB 01)": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "idp.vnu.edu.vn (HAProxy LB 02)": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "idp.vnu.edu.vn (HAProxy)": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "idp.vnu.edu.vn (Web 01)": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "idp.vnu.edu.vn (Web 02)": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "prod-idp-lb-01": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "prod-idp-lb-02": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "prod-idp-web-01": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "prod-idp-web-02": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "prod-idp-db-01": {
+                        "text": "idp.vnu.edu.vn (DB)"
+                      },
+                      "prod-idp-db-02": {
+                        "text": "idp.vnu.edu.vn (DB)"
+                      },
+                      "dev-idp-dev-01": {
+                        "text": "dev-idp.vnu.edu.vn"
+                      },
+                      "idp_web_112.137.142.6": {
+                        "text": "idp.vnu.edu.vn"
+                      },
+                      "cce.vnu.edu.vn [KBCLQD]": {
+                        "text": "cce.vnu.edu.vn"
+                      },
+                      "CEA_NEW_112.137.140.13": {
+                        "text": "cce.vnu.edu.vn"
+                      },
+                      "Web_TuyensinhSDH_NEW_10.241.2.15": {
+                        "text": "tssdh.vnu.edu.vn"
+                      },
+                      "daotao_112.137.142.44": {
+                        "text": "daotao.vnu.edu.vn"
+                      },
+                      "dongbo_daotao_db": {
+                        "text": "daotao.vnu.edu.vn (DB)"
+                      },
+                      "eoffice_web_112.137.142.20": {
+                        "text": "eoffice.vnu.edu.vn"
+                      },
+                      "eoffice_db_112.137.142.21": {
+                        "text": "eoffice.vnu.edu.vn (DB)"
+                      },
+                      "cybersafe_10.241.2.70": {
+                        "text": "cybersafe.vnu.edu.vn"
+                      },
+                      "it-cyber": {
+                        "text": "it.vnu.edu.vn"
+                      },
+                      "khaosat_ulis_10.241.2.19": {
+                        "text": "khaosat.ulis.vnu.edu.vn"
+                      },
+                      "100years_112.137.143.34": {
+                        "text": "100years.vnu.edu.vn"
+                      },
+                      "aapanel-web-01": {
+                        "text": "aapanel.vnu.edu.vn"
+                      },
+                      "dksdh": {
+                        "text": "dksdh.vnu.edu.vn"
+                      },
+                      "dongbo_dksdh_db": {
+                        "text": "dksdh.vnu.edu.vn (DB)"
+                      },
+                      "SecurityOnion_Suricata_10.243.1.38": {
+                        "text": "Suricata NIDS"
+                      },
+                      "wazuh-grafana-ubuntu24": {
+                        "text": "SOC Gateway (Perimeter)"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*idp\\.vnu\\.edu\\.vn.*|.*idp_web.*|.*prod-idp.*",
+                      "result": {
+                        "text": "idp.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*cce\\.vnu\\.edu\\.vn.*|.*CEA_NEW.*",
+                      "result": {
+                        "text": "cce.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*TuyensinhSDH.*|.*tssdh.*",
+                      "result": {
+                        "text": "tssdh.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*daotao.*",
+                      "result": {
+                        "text": "daotao.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*eoffice.*",
+                      "result": {
+                        "text": "eoffice.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*cybersafe.*|.*it-cyber.*",
+                      "result": {
+                        "text": "cybersafe.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*khaosat.*",
+                      "result": {
+                        "text": "khaosat.ulis.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*100years.*",
+                      "result": {
+                        "text": "100years.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*aapanel.*",
+                      "result": {
+                        "text": "aapanel.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*dksdh.*",
+                      "result": {
+                        "text": "dksdh.vnu.edu.vn"
+                      }
+                    }
+                  },
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": ".*Suricata.*|.*SecurityOnion.*",
+                      "result": {
+                        "text": "Suricata NIDS"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -4383,6 +4579,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 76,
+  "version": 77,
   "weekStart": ""
 }
