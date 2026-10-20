@@ -3972,7 +3972,7 @@
               "type": "raw_data"
             }
           ],
-          "query": "(data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce* OR *audit*) OR rule.level:[8 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\")",
+          "query": "((data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce* OR *audit*) OR rule.level:[8 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\")) AND (${target_web:raw})",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -5065,7 +5065,98 @@
     "Compliance"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "🌟 Tất cả Website (All Sites)",
+          "value": "*"
+        },
+        "description": "Lọc toàn bộ luồng sự cố SOC theo từng Website hoặc xem tất cả",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Mục tiêu (Website)",
+        "multi": false,
+        "name": "target_web",
+        "options": [
+          {
+            "selected": true,
+            "text": "🌟 Tất cả Website (All Sites)",
+            "value": "*"
+          },
+          {
+            "selected": false,
+            "text": "🚫 Ngoại trừ IDP (Exclude IDP)",
+            "value": "NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)",
+            "value": "agent.name:(prod-idp* OR dev-idp* OR idp_web*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)",
+            "value": "agent.name:(CEA_NEW* OR *cce*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)",
+            "value": "agent.name:(*TuyensinhSDH* OR *tssdh*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)",
+            "value": "agent.name:(*daotao*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)",
+            "value": "agent.name:(*eoffice*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 cybersafe.vnu.edu.vn (Cybersafe & IT)",
+            "value": "agent.name:(*cybersafe* OR *it-cyber*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)",
+            "value": "agent.name:(*khaosat*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)",
+            "value": "agent.name:(*100years*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)",
+            "value": "agent.name:(*aapanel*)"
+          },
+          {
+            "selected": false,
+            "text": "🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)",
+            "value": "agent.name:(*dksdh*)"
+          },
+          {
+            "selected": false,
+            "text": "🛡️ Suricata NIDS (Cảm biến mạng)",
+            "value": "agent.name:(*Suricata* OR *SecurityOnion*)"
+          },
+          {
+            "selected": false,
+            "text": "🛡️ SOC Perimeter Gateway (Cổng biên SOC)",
+            "value": "agent.name:(wazuh-grafana*)"
+          }
+        ],
+        "query": "🌟 Tất cả Website (All Sites) : * , 🚫 Ngoại trừ IDP (Exclude IDP) : NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*) , 🌐 idp.vnu.edu.vn (Cổng IDP Keycloak) : agent.name:(prod-idp* OR dev-idp* OR idp_web*) , 🌐 cce.vnu.edu.vn (Trung tâm Khảo thí) : agent.name:(CEA_NEW* OR *cce*) , 🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học) : agent.name:(*TuyensinhSDH* OR *tssdh*) , 🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN) : agent.name:(*daotao*) , 🌐 eoffice.vnu.edu.vn (Văn phòng điện tử) : agent.name:(*eoffice*) , 🌐 cybersafe.vnu.edu.vn (Cybersafe & IT) : agent.name:(*cybersafe* OR *it-cyber*) , 🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS) : agent.name:(*khaosat*) , 🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm) : agent.name:(*100years*) , 🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel) : agent.name:(*aapanel*) , 🌐 dksdh.vnu.edu.vn (Đăng ký SĐH) : agent.name:(*dksdh*) , 🛡️ Suricata NIDS (Cảm biến mạng) : agent.name:(*Suricata* OR *SecurityOnion*) , 🛡️ SOC Perimeter Gateway (Cổng biên SOC) : agent.name:(wazuh-grafana*)",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-24h",
