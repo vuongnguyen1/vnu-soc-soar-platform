@@ -1676,7 +1676,8 @@
             "footer": {
               "reducers": []
             },
-            "inspect": false
+            "inspect": false,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -2148,7 +2149,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "\n<div style=\"box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.5); overflow: hidden;\">\n  <!-- Line 1: Header Title & Live Badge -->\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 16px;\">⚡</span>\n      <span style=\"font-size: 14px; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px; text-transform: uppercase;\">LIVE INCIDENT &amp; ENFORCEMENT STREAM (LUỒNG SỰ CỐ &amp; THI HÀNH THỜI GIAN THỰC)</span>\n    </div>\n    <div style=\"display: flex; align-items: center; gap: 6px; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 10px; border-radius: 12px;\">\n      <span style=\"display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;\"></span>\n      <span style=\"font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px;\">LIVE STREAM 24/7</span>\n    </div>\n  </div>\n\n  <!-- Line 2: Filter Dropdown directly under the title -->\n  <div style=\"display: flex; align-items: center; flex-wrap: wrap; gap: 12px; background: rgba(0, 0, 0, 0.25); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.06);\">\n    <label for=\"soc_web_filter\" style=\"display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #EAB839; text-transform: uppercase; letter-spacing: 0.5px; margin: 0; white-space: nowrap;\">\n      <span>🎯</span>\n      <span>Mục tiêu (Website):</span>\n    </label>\n    \n    <select id=\"soc_web_filter\" onchange=\"setSocWebFilter(this.value)\" style=\"background: #0b0f19; color: #ffffff; border: 1.5px solid #3b82f6; border-radius: 6px; padding: 5px 14px; font-size: 12px; font-weight: 600; cursor: pointer; outline: none; min-width: 360px; box-shadow: 0 0 10px rgba(59, 130, 246, 0.25); transition: all 0.2s;\">\n      <option value=\"*\">🌟 Tất cả Website (All Sites)</option>\n      <option value=\"agent.name:(prod-idp* OR dev-idp* OR idp_web*)\">🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)</option>\n      <option value=\"agent.name:(CEA_NEW* OR *cce*)\">🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)</option>\n      <option value=\"agent.name:(*TuyensinhSDH* OR *tssdh*)\">🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)</option>\n      <option value=\"agent.name:(*daotao*)\">🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)</option>\n      <option value=\"agent.name:(*eoffice*)\">🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)</option>\n      <option value=\"agent.name:(*cybersafe* OR *it-cyber*)\">🌐 cybersafe.vnu.edu.vn (Cybersafe & IT)</option>\n      <option value=\"agent.name:(*khaosat*)\">🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)</option>\n      <option value=\"agent.name:(*100years*)\">🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)</option>\n      <option value=\"agent.name:(*aapanel*)\">🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)</option>\n      <option value=\"agent.name:(*dksdh*)\">🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)</option>\n      <option value=\"agent.name:(*Suricata* OR *SecurityOnion*)\">🛡️ Suricata NIDS (Cảm biến mạng)</option>\n      <option value=\"agent.name:(wazuh-grafana*)\">🛡️ SOC Perimeter Gateway (Cổng biên SOC)</option>\n    </select>\n\n  </div>\n</div>\n\n<script>\n(function() {\n  const sel = document.getElementById('soc_web_filter');\n  if (!sel) return;\n  const u = new URL(window.location.href);\n  const cur = u.searchParams.get('var-target_web');\n  if (cur) {\n    for (let i = 0; i < sel.options.length; i++) {\n      if (sel.options[i].value === cur) {\n        sel.selectedIndex = i;\n        break;\n      }\n    }\n  }\n})();\n\nfunction setSocWebFilter(val) {\n  const u = new URL(window.location.href);\n  u.searchParams.set('var-target_web', val);\n  window.location.href = u.toString();\n}\n</script>\n",
+        "content": "\n<div style=\"box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.5); overflow: hidden;\">\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 16px;\">⚡</span>\n      <span style=\"font-size: 14px; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px; text-transform: uppercase;\">LIVE INCIDENT &amp; ENFORCEMENT STREAM (LUỒNG SỰ CỐ &amp; THI HÀNH THỜI GIAN THỰC)</span>\n    </div>\n    <div style=\"display: flex; align-items: center; gap: 6px; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 10px; border-radius: 12px;\">\n      <span style=\"display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;\"></span>\n      <span style=\"font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px;\">LIVE STREAM 24/7</span>\n    </div>\n  </div>\n\n  <div style=\"display: flex; align-items: center; flex-wrap: wrap; gap: 12px; background: rgba(0, 0, 0, 0.3); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.08);\">\n    <label for=\"soc_web_filter\" style=\"display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #EAB839; text-transform: uppercase; letter-spacing: 0.5px; margin: 0; white-space: nowrap;\">\n      <span>🎯</span>\n      <span>Mục tiêu (Website):</span>\n    </label>\n    \n    <select id=\"soc_web_filter\" onchange=\"var u=new URL(window.location.href);u.searchParams.set('var-target_web',this.value);window.location.href=u.toString();\" style=\"background: #0f172a; color: #f8fafc; border: 1.5px solid #3b82f6; border-radius: 6px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; outline: none; min-width: 380px; box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);\">\n      <option value=\"*\" selected>🌟 Tất cả Website (All Sites)</option>\n      <option value=\"NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)\">🚫 Ngoại trừ IDP (Exclude IDP)</option>\n      <option value=\"agent.name:(prod-idp* OR dev-idp* OR idp_web*)\">🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)</option>\n      <option value=\"agent.name:(CEA_NEW* OR *cce*)\">🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)</option>\n      <option value=\"agent.name:(*TuyensinhSDH* OR *tssdh*)\">🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)</option>\n      <option value=\"agent.name:(*daotao*)\">🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)</option>\n      <option value=\"agent.name:(*eoffice*)\">🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)</option>\n      <option value=\"agent.name:(*cybersafe* OR *it-cyber*)\">🌐 cybersafe.vnu.edu.vn (Cybersafe & IT)</option>\n      <option value=\"agent.name:(*khaosat*)\">🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)</option>\n      <option value=\"agent.name:(*100years*)\">🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)</option>\n      <option value=\"agent.name:(*aapanel*)\">🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)</option>\n      <option value=\"agent.name:(*dksdh*)\">🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)</option>\n      <option value=\"agent.name:(*Suricata* OR *SecurityOnion*)\">🛡️ Suricata NIDS (Cảm biến mạng)</option>\n      <option value=\"agent.name:(wazuh-grafana*)\">🛡️ SOC Perimeter Gateway (Cổng biên SOC)</option>\n    </select>\n  </div>\n</div>\n",
         "mode": "html"
       },
       "pluginVersion": "12.3.0",
@@ -2173,7 +2174,8 @@
             "footer": {
               "reducers": []
             },
-            "inspect": true
+            "inspect": true,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -2394,7 +2396,7 @@
               },
               {
                 "id": "noValue",
-                "value": "-"
+                "value": "Internal / VNU"
               },
               {
                 "id": "mappings",
@@ -2524,7 +2526,7 @@
               },
               {
                 "id": "noValue",
-                "value": "-"
+                "value": "SSH / Non-HTTP"
               },
               {
                 "id": "custom.minWidth",
@@ -2548,7 +2550,7 @@
               },
               {
                 "id": "noValue",
-                "value": "-"
+                "value": "N/A"
               },
               {
                 "id": "mappings",
@@ -2765,25 +2767,34 @@
               },
               {
                 "id": "noValue",
-                "value": "-"
+                "value": "443 / 22"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 85
               },
               {
                 "id": "mappings",
                 "value": [
                   {
+                    "type": "special",
                     "options": {
                       "match": "null+nan",
                       "result": {
-                        "text": "-"
+                        "text": "443 / 22"
                       }
-                    },
-                    "type": "special"
+                    }
+                  },
+                  {
+                    "type": "special",
+                    "options": {
+                      "match": "empty",
+                      "result": {
+                        "text": "443 / 22"
+                      }
+                    }
                   }
                 ]
-              },
-              {
-                "id": "custom.minWidth",
-                "value": 85
               }
             ]
           },
@@ -2803,94 +2814,73 @@
               },
               {
                 "id": "noValue",
-                "value": "-"
+                "value": "MONITORING (SOC)"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 140
               },
               {
                 "id": "mappings",
                 "value": [
                   {
-                    "options": {
-                      "from": 15,
-                      "result": {
-                        "color": "#E02F44",
-                        "text": "PERM BLOCK (SOAR)"
-                      },
-                      "to": 100
-                    },
-                    "type": "range"
-                  },
-                  {
-                    "options": {
-                      "from": 14,
-                      "result": {
-                        "color": "#FA6400",
-                        "text": "30-DAY BLOCK (SOAR)"
-                      },
-                      "to": 14
-                    },
-                    "type": "range"
-                  },
-                  {
-                    "options": {
-                      "from": 0,
-                      "result": {
-                        "text": "-"
-                      },
-                      "to": 13
-                    },
-                    "type": "range"
-                  },
-                  {
+                    "type": "special",
                     "options": {
                       "match": "null+nan",
                       "result": {
-                        "text": "-"
+                        "text": "MONITORING (SOC)",
+                        "color": "#5794F2"
                       }
-                    },
-                    "type": "special"
+                    }
                   },
                   {
+                    "type": "special",
                     "options": {
-                      "ALERT_ONLY": {
-                        "color": "#5794F2",
-                        "text": "ALERT ONLY"
-                      },
-                      "ALLOWLIST_SUPPRESSED": {
-                        "color": "#73BF69",
-                        "text": "ALLOWLIST"
-                      },
-                      "AUTOMATED_AGENT_BLOCK": {
-                        "color": "#E02F44",
-                        "text": "BLOCKED (AGENT)"
-                      },
-                      "BLOCK": {
-                        "color": "#E02F44",
-                        "text": "BLOCKED"
-                      },
-                      "BLOCKED": {
-                        "color": "#E02F44",
-                        "text": "BLOCKED"
-                      },
+                      "match": "empty",
+                      "result": {
+                        "text": "MONITORING (SOC)",
+                        "color": "#5794F2"
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
                       "PERMANENT_BLOCK_APPROVED": {
-                        "color": "#E02F44",
-                        "text": "PERM BLOCK (SOAR)"
+                        "text": "PERM BLOCK (SOAR)",
+                        "color": "#E02F44"
                       },
                       "TEMPORARY_BLOCK_APPROVED": {
-                        "color": "#FA6400",
-                        "text": "30-DAY BLOCK (SOAR)"
+                        "text": "30-DAY BLOCK (SOAR)",
+                        "color": "#FA6400"
+                      },
+                      "AUTOMATED_AGENT_BLOCK": {
+                        "text": "BLOCKED (AGENT)",
+                        "color": "#E02F44"
+                      },
+                      "BLOCKED": {
+                        "text": "BLOCKED",
+                        "color": "#E02F44"
+                      },
+                      "BLOCK": {
+                        "text": "BLOCKED",
+                        "color": "#E02F44"
                       },
                       "VIETNAM_ALERT_ONLY": {
-                        "color": "#EAB839",
-                        "text": "VN CGNAT ALERT"
+                        "text": "VN CGNAT ALERT",
+                        "color": "#EAB839"
+                      },
+                      "ALERT_ONLY": {
+                        "text": "ALERT ONLY",
+                        "color": "#5794F2"
+                      },
+                      "ALLOWLIST_SUPPRESSED": {
+                        "text": "ALLOWLIST (VNU)",
+                        "color": "#73BF69"
                       }
-                    },
-                    "type": "value"
+                    }
                   }
                 ]
-              },
-              {
-                "id": "custom.minWidth",
-                "value": 140
               }
             ]
           },
@@ -3578,7 +3568,7 @@
               "type": "raw_data"
             }
           ],
-          "query": "((data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce* OR *audit*) OR rule.level:[8 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\")) AND (${target_web:raw})",
+          "query": "((data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce*) OR rule.level:[5 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\" OR rule.id:(100500 OR 100501))) AND ()",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -4631,7 +4621,7 @@
     }
   ],
   "preload": false,
-  "refresh": "1m",
+  "refresh": "10s",
   "schemaVersion": 42,
   "tags": [
     "VNU",
@@ -4646,7 +4636,7 @@
           "value": "*"
         },
         "description": "Lọc toàn bộ luồng sự cố SOC theo từng Website hoặc xem tất cả",
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "Mục tiêu (Website)",
         "name": "target_web",
@@ -4728,13 +4718,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 84,
+  "version": 86,
   "weekStart": ""
 }
