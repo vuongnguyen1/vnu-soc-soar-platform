@@ -1676,8 +1676,7 @@
             "footer": {
               "reducers": []
             },
-            "inspect": false,
-            "filterable": false
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -1698,7 +1697,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "rule.id"
+              "options": "Mã Rule (Rule ID)"
             },
             "properties": [
               {
@@ -1714,6 +1713,10 @@
                 "value": "center"
               },
               {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
                 "id": "color",
                 "value": {
                   "fixedColor": "#5794F2",
@@ -1725,7 +1728,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "rule.description"
+              "options": "Mô tả Chi tiết Rule"
             },
             "properties": [
               {
@@ -1741,7 +1744,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Count"
+              "options": "Số lượt phát hiện"
             },
             "properties": [
               {
@@ -1757,13 +1760,16 @@
                 "value": "center"
               },
               {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#5794F2",
-                      "value": 0
+                      "color": "#5794F2"
                     },
                     {
                       "color": "#EAB839",
@@ -1804,7 +1810,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Count"
+            "displayName": "Số lượt phát hiện"
           }
         ]
       },
@@ -1815,47 +1821,66 @@
           "bucketAggs": [
             {
               "field": "rule.id",
-              "id": "5",
+              "id": "3",
               "settings": {
                 "min_doc_count": "1",
                 "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
+                "orderBy": "_count",
+                "size": "100"
               },
               "type": "terms"
             },
             {
               "field": "rule.description",
-              "id": "7",
+              "id": "4",
               "settings": {
                 "min_doc_count": "1",
                 "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
+                "orderBy": "_count",
+                "size": "1"
               },
               "type": "terms"
             }
           ],
           "datasource": {
-            "type": "grafana-opensearch-datasource",
             "uid": "bfay8umd54feoc"
           },
           "format": "table",
-          "hide": false,
           "metrics": [
             {
               "id": "1",
               "type": "count"
             }
           ],
-          "query": "",
-          "queryType": "lucene",
+          "query": "*",
           "refId": "A",
           "timeField": "@timestamp"
         }
       ],
       "title": "DANH SÁCH CHI TIẾT RULE",
-      "transformations": [],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "indexByName": {
+              "Mã Rule (Rule ID)": 0,
+              "Mô tả Chi tiết Rule": 1,
+              "Số lượt phát hiện": 2
+            },
+            "renameByName": {
+              "Count": "Số lượt phát hiện",
+              "Metric: Count": "Số lượt phát hiện",
+              "doc_count": "Số lượt phát hiện",
+              "rule.description": "Mô tả Chi tiết Rule",
+              "rule.description: Descending": "Mô tả Chi tiết Rule",
+              "rule.id": "Mã Rule (Rule ID)",
+              "rule.id: Descending": "Mã Rule (Rule ID)",
+              "rule_description": "Mô tả Chi tiết Rule",
+              "rule_id": "Mã Rule (Rule ID)"
+            }
+          }
+        }
+      ],
       "type": "table"
     },
     {
@@ -4730,6 +4755,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 97,
+  "version": 98,
   "weekStart": ""
 }
