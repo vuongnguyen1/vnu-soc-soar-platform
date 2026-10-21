@@ -2396,7 +2396,7 @@
               },
               {
                 "id": "noValue",
-                "value": "Internal / VNU"
+                "value": "-"
               },
               {
                 "id": "mappings",
@@ -2526,7 +2526,7 @@
               },
               {
                 "id": "noValue",
-                "value": "SSH / Non-HTTP"
+                "value": "-"
               },
               {
                 "id": "custom.minWidth",
@@ -2550,7 +2550,7 @@
               },
               {
                 "id": "noValue",
-                "value": "N/A"
+                "value": "-"
               },
               {
                 "id": "mappings",
@@ -2767,7 +2767,7 @@
               },
               {
                 "id": "noValue",
-                "value": "443 / 22"
+                "value": "-"
               },
               {
                 "id": "custom.minWidth",
@@ -2777,22 +2777,13 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "type": "special",
                     "options": {
                       "match": "null+nan",
                       "result": {
-                        "text": "443 / 22"
+                        "text": "-"
                       }
-                    }
-                  },
-                  {
-                    "type": "special",
-                    "options": {
-                      "match": "empty",
-                      "result": {
-                        "text": "443 / 22"
-                      }
-                    }
+                    },
+                    "type": "special"
                   }
                 ]
               }
@@ -2814,7 +2805,7 @@
               },
               {
                 "id": "noValue",
-                "value": "MONITORING (SOC)"
+                "value": "-"
               },
               {
                 "id": "custom.minWidth",
@@ -2824,27 +2815,15 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "type": "special",
                     "options": {
                       "match": "null+nan",
                       "result": {
-                        "text": "MONITORING (SOC)",
-                        "color": "#5794F2"
+                        "text": "-"
                       }
-                    }
+                    },
+                    "type": "special"
                   },
                   {
-                    "type": "special",
-                    "options": {
-                      "match": "empty",
-                      "result": {
-                        "text": "MONITORING (SOC)",
-                        "color": "#5794F2"
-                      }
-                    }
-                  },
-                  {
-                    "type": "value",
                     "options": {
                       "PERMANENT_BLOCK_APPROVED": {
                         "text": "PERM BLOCK (SOAR)",
@@ -2875,10 +2854,11 @@
                         "color": "#5794F2"
                       },
                       "ALLOWLIST_SUPPRESSED": {
-                        "text": "ALLOWLIST (VNU)",
+                        "text": "ALLOWLIST",
                         "color": "#73BF69"
                       }
-                    }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -4725,6 +4705,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 89,
+  "version": 90,
   "weekStart": ""
 }
