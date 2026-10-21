@@ -1725,7 +1725,50 @@
           {
             "matcher": {
               "id": "byName",
+              "options": "rule.id"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Mã Rule (Rule ID)"
+              },
+              {
+                "id": "custom.width",
+                "value": 140
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5794F2",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
               "options": "Mô tả Chi tiết Rule"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Mô tả Chi tiết Rule"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 450
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "rule.description"
             },
             "properties": [
               {
@@ -1779,6 +1822,26 @@
                     }
                   ]
                 }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Số lượt phát hiện"
+              },
+              {
+                "id": "custom.width",
+                "value": 160
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
               }
             ]
           }
@@ -1837,6 +1900,7 @@
             }
           ],
           "datasource": {
+            "type": "grafana-opensearch-datasource",
             "uid": "bfay8umd54feoc"
           },
           "format": "table",
@@ -1847,6 +1911,7 @@
             }
           ],
           "query": "*",
+          "queryType": "lucene",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -1857,20 +1922,29 @@
           "id": "organize",
           "options": {
             "indexByName": {
+              "rule.id": 0,
+              "rule.id: Descending": 0,
+              "rule_id": 0,
               "Mã Rule (Rule ID)": 0,
+              "rule.description": 1,
+              "rule.description: Descending": 1,
+              "rule_description": 1,
               "Mô tả Chi tiết Rule": 1,
+              "Count": 2,
+              "doc_count": 2,
+              "Metric: Count": 2,
               "Số lượt phát hiện": 2
             },
             "renameByName": {
-              "Count": "Số lượt phát hiện",
-              "Metric: Count": "Số lượt phát hiện",
-              "doc_count": "Số lượt phát hiện",
-              "rule.description": "Mô tả Chi tiết Rule",
-              "rule.description: Descending": "Mô tả Chi tiết Rule",
               "rule.id": "Mã Rule (Rule ID)",
               "rule.id: Descending": "Mã Rule (Rule ID)",
+              "rule_id": "Mã Rule (Rule ID)",
+              "rule.description": "Mô tả Chi tiết Rule",
+              "rule.description: Descending": "Mô tả Chi tiết Rule",
               "rule_description": "Mô tả Chi tiết Rule",
-              "rule_id": "Mã Rule (Rule ID)"
+              "Count": "Số lượt phát hiện",
+              "doc_count": "Số lượt phát hiện",
+              "Metric: Count": "Số lượt phát hiện"
             }
           }
         }
@@ -2149,12 +2223,13 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<style>\n  div[data-testid=\"dashboard-submenu\"],\n  .submenu-controls,\n  div[class*=\"submenu-controls\"],\n  div[class*=\"DashboardSubmenu\"] {\n    display: none !important;\n    height: 0 !important;\n    margin: 0 !important;\n    padding: 0 !important;\n    overflow: hidden !important;\n  }\n</style>\n\n<div style=\"box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.5); overflow: hidden;\">\n  <!-- Line 1: Header Title & Live Badge -->\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 16px;\">⚡</span>\n      <span style=\"font-size: 14px; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px; text-transform: uppercase;\">LIVE INCIDENT &amp; ENFORCEMENT STREAM (LUỒNG SỰ CỐ &amp; THI HÀNH THỜI GIAN THỰC)</span>\n    </div>\n    <div style=\"display: flex; align-items: center; gap: 6px; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 10px; border-radius: 12px;\">\n      <span style=\"display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;\"></span>\n      <span style=\"font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px;\">LIVE STREAM 24/7</span>\n    </div>\n  </div>\n\n  <!-- Line 2: Form Dropdown Aligned to Left, with text vertically centered in body box -->\n  <div style=\"display: flex; align-items: center; justify-content: flex-start; width: 100%; margin-top: 2px;\">\n    <div style=\"display: inline-flex; align-items: center; height: 32px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden; background: #111217; box-shadow: 0 1px 4px rgba(0,0,0,0.4);\">\n      <!-- Left Label -->\n      <div style=\"display: flex; align-items: center; gap: 6px; padding: 0 12px; background: rgba(255, 255, 255, 0.08); border-right: 1px solid rgba(255, 255, 255, 0.15); font-size: 12px; font-weight: 600; color: #d8d9da; white-space: nowrap; height: 32px; line-height: 32px; box-sizing: border-box;\">\n        <span>Mục tiêu (Website)</span>\n        <span title=\"Lọc dữ liệu theo từng website mục tiêu hoặc toàn bộ hệ thống\" style=\"cursor: help; color: #8e8ea0; font-size: 12px;\">ⓘ</span>\n      </div>\n      <!-- Right Select Dropdown (Text perfectly centered vertically in body) -->\n      <div style=\"position: relative; display: flex; align-items: center; height: 32px; background: #0b0f19;\">\n        <select id=\"soc_web_filter\" onchange=\"var u=new URL(window.location.href);u.searchParams.set('var-target_web',this.value);window.location.href=u.toString();\" style=\"appearance: none; -webkit-appearance: none; background: transparent; color: #5794F2; border: none; outline: none; font-size: 12px; font-weight: 600; padding: 0 32px 0 16px; height: 32px; line-height: 32px; margin: 0; cursor: pointer; min-width: 380px; text-align: center; text-align-last: center; -moz-text-align-last: center; vertical-align: middle; box-sizing: border-box; display: inline-block;\">\n          <option value=\"*\" style=\"background: #0f172a; color: #ffffff;\">🌟 Tất cả Website (All Sites)</option>\n          <option value=\"NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🚫 Ngoại trừ IDP (Exclude IDP)</option>\n          <option value=\"agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)</option>\n          <option value=\"agent.name:(CEA_NEW* OR *cce*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)</option>\n          <option value=\"agent.name:(*TuyensinhSDH* OR *tssdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)</option>\n          <option value=\"agent.name:(*daotao*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)</option>\n          <option value=\"agent.name:(*eoffice*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)</option>\n          <option value=\"agent.name:(*cybersafe* OR *it-cyber*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cybersafe.vnu.edu.vn (Cybersafe & IT)</option>\n          <option value=\"agent.name:(*khaosat*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)</option>\n          <option value=\"agent.name:(*100years*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)</option>\n          <option value=\"agent.name:(*aapanel*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)</option>\n          <option value=\"agent.name:(*dksdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)</option>\n          <option value=\"agent.name:(*Suricata* OR *SecurityOnion*)\" style=\"background: #0f172a; color: #ffffff;\">🛡️ Suricata NIDS (Cảm biến mạng)</option>\n          <option value=\"agent.name:(wazuh-grafana*)\" style=\"background: #0f172a; color: #ffffff;\">🛡️ SOC Perimeter Gateway (Cổng biên SOC)</option>\n        </select>\n        <span style=\"position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #5794F2; font-size: 10px; line-height: 1;\">▼</span>\n      </div>\n    </div>\n    <!-- Safe Auto-select Onload Image -->\n    <img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E\" style=\"display:none\" onload=\"try{var s=document.getElementById('soc_web_filter');if(s){var v=new URL(window.location.href).searchParams.get('var-target_web');if(v){for(var i=0;i<s.options.length;i++){if(s.options[i].value===v){s.selectedIndex=i;break;}}}}}catch(e){}\" />\n  </div>\n</div>\n",
+        "content": "<style>\n  div[data-testid=\"dashboard-submenu\"],\n  .submenu-controls,\n  div[class*=\"submenu-controls\"],\n  div[class*=\"DashboardSubmenu\"] {\n    display: none !important;\n    height: 0 !important;\n    margin: 0 !important;\n    padding: 0 !important;\n    overflow: hidden !important;\n  }\n</style>\n\n<div style=\"box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.5); overflow: hidden;\">\n  <!-- Line 1: Header Title & Live Badge -->\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 16px;\">⚡</span>\n      <span style=\"font-size: 14px; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px; text-transform: uppercase;\">LIVE INCIDENT &amp; ENFORCEMENT STREAM (LUỒNG SỰ CỐ &amp; THI HÀNH THỜI GIAN THỰC)</span>\n    </div>\n    <div style=\"display: flex; align-items: center; gap: 6px; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 10px; border-radius: 12px;\">\n      <span style=\"display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;\"></span>\n      <span style=\"font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px;\">LIVE STREAM 24/7</span>\n    </div>\n  </div>\n\n  <!-- Line 2: Combined Filter Aligned to Left, Text Vertically Centered in Body -->\n  <div style=\"display: flex; align-items: center; justify-content: flex-start; width: 100%; margin-top: 2px;\">\n    <div style=\"display: inline-flex; align-items: center; height: 32px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden; background: #111217; box-shadow: 0 1px 4px rgba(0,0,0,0.4);\">\n      <!-- Left Label -->\n      <div style=\"display: flex; align-items: center; gap: 6px; padding: 0 12px; background: rgba(255, 255, 255, 0.08); border-right: 1px solid rgba(255, 255, 255, 0.15); font-size: 12px; font-weight: 600; color: #d8d9da; white-space: nowrap; height: 32px; line-height: 32px; box-sizing: border-box;\">\n        <span>Mục tiêu (Website)</span>\n        <span title=\"Lọc dữ liệu tức thì kết hợp đồng bộ máy chủ OpenSearch\" style=\"cursor: help; color: #8e8ea0; font-size: 12px;\">ⓘ</span>\n      </div>\n      <!-- Right Select Dropdown (Text centered vertically & horizontally in body) -->\n      <div style=\"position: relative; display: flex; align-items: center; height: 32px; background: #0b0f19;\">\n        <select id=\"soc_web_filter\" onchange=\"onWebsiteFilterChange(this.value)\" style=\"appearance: none; -webkit-appearance: none; background: transparent; color: #5794F2; border: none; outline: none; font-size: 12px; font-weight: 600; padding: 0 32px 0 16px; height: 32px; line-height: 32px; margin: 0; cursor: pointer; min-width: 380px; text-align: center; text-align-last: center; -moz-text-align-last: center; vertical-align: middle; box-sizing: border-box; display: inline-block;\">\n          <option value=\"*\" style=\"background: #0f172a; color: #ffffff;\">🌟 Tất cả Website (All Sites)</option>\n          <option value=\"NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🚫 Ngoại trừ IDP (Exclude IDP)</option>\n          <option value=\"agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)</option>\n          <option value=\"agent.name:(CEA_NEW* OR *cce*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)</option>\n          <option value=\"agent.name:(*TuyensinhSDH* OR *tssdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)</option>\n          <option value=\"agent.name:(*daotao*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)</option>\n          <option value=\"agent.name:(*eoffice*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)</option>\n          <option value=\"agent.name:(*cybersafe* OR *it-cyber*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cybersafe.vnu.edu.vn (Cybersafe &amp; IT)</option>\n          <option value=\"agent.name:(*khaosat*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)</option>\n          <option value=\"agent.name:(*100years*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)</option>\n          <option value=\"agent.name:(*aapanel*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)</option>\n          <option value=\"agent.name:(*dksdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)</option>\n          <option value=\"agent.name:(*Suricata* OR *SecurityOnion*)\" style=\"background: #0f172a; color: #ffffff;\">🛡️ Suricata NIDS (Cảm biến mạng)</option>\n          <option value=\"agent.name:(wazuh-grafana*)\" style=\"background: #0f172a; color: #ffffff;\">🛡️ SOC Perimeter Gateway (Cổng biên SOC)</option>\n        </select>\n        <span style=\"position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #5794F2; font-size: 10px; line-height: 1;\">▼</span>\n      </div>\n    </div>\n  </div>\n</div>\n\n<script>\n  // =========================================================================\n  // KẾT HỢP 2 PHƯƠNG ÁN: CLIENT-SIDE INSTANT FILTER + SERVER QUERY SYNC\n  // =========================================================================\n  function getWebsiteRegex(val) {\n    if (!val || val === '*' || val === 'all') return null;\n    if (val.indexOf('CEA_NEW') !== -1 || val.indexOf('cce') !== -1) return /cce|cea/i;\n    if (val.indexOf('TuyensinhSDH') !== -1 || val.indexOf('tssdh') !== -1) return /tuyensinh|tssdh/i;\n    if (val.indexOf('aapanel') !== -1) return /aapanel/i;\n    if (val.indexOf('daotao') !== -1) return /daotao/i;\n    if (val.indexOf('eoffice') !== -1) return /eoffice/i;\n    if (val.indexOf('cybersafe') !== -1) return /cybersafe|cyber/i;\n    if (val.indexOf('khaosat') !== -1) return /khaosat|ulis/i;\n    if (val.indexOf('100years') !== -1) return /100years/i;\n    if (val.indexOf('dksdh') !== -1) return /dksdh/i;\n    if (val.indexOf('Suricata') !== -1) return /suricata|securityonion/i;\n    if (val.indexOf('wazuh-grafana') !== -1) return /wazuh-grafana|gateway/i;\n    if (val.indexOf('idp') !== -1 && val.indexOf('NOT') === -1) return /idp/i;\n    return null;\n  }\n\n  // 1. Instant Client-side DOM filtering (0ms latency, zero flicker)\n  function applyInstantDomFilter(val) {\n    try {\n      var p208 = document.querySelector('[data-panelid=\"208\"]') || document.querySelector('#panel-208');\n      if (!p208) return;\n      var rows = p208.querySelectorAll('div[role=\"row\"], tr');\n      if (!rows || rows.length <= 1) return;\n\n      var isExcludeIdp = (val.indexOf('NOT') !== -1 && val.indexOf('idp') !== -1);\n      var re = getWebsiteRegex(val);\n\n      for (var i = 1; i < rows.length; i++) {\n        var row = rows[i];\n        var rowText = (row.innerText || row.textContent || '');\n        if (isExcludeIdp) {\n          row.style.display = /idp/i.test(rowText) ? 'none' : '';\n        } else if (re) {\n          row.style.display = re.test(rowText) ? '' : 'none';\n        } else {\n          row.style.display = '';\n        }\n      }\n    } catch(err) {\n      console.warn('[soc_filter] DOM filter error:', err);\n    }\n  }\n\n  // 2. Server Variable Sync (Update URL + Reload/Trigger Query)\n  function onWebsiteFilterChange(selectedVal) {\n    // A. Instant Visual Filter\n    applyInstantDomFilter(selectedVal);\n\n    // B. URL Sync without losing active session/token\n    try {\n      var u = new URL(window.location.href);\n      // Clean up residual problematic test parameters\n      u.searchParams.delete('var-min_severity');\n      u.searchParams.delete('var-Filters');\n      u.searchParams.set('var-target_web', selectedVal);\n\n      // Safe navigation: reload cleanly with the updated parameter\n      window.location.href = u.toString();\n    } catch(e) {\n      console.error('[soc_filter] Navigation error:', e);\n    }\n  }\n\n  // 3. Onload Sync: Restore selected option based on URL parameter\n  function initSocWebFilter() {\n    try {\n      var sel = document.getElementById('soc_web_filter');\n      if (!sel) return;\n      var u = new URL(window.location.href);\n      var curVal = u.searchParams.get('var-target_web');\n      if (curVal) {\n        var decoded = decodeURIComponent(curVal).replace(/\\+/g, ' ').trim();\n        for (var i = 0; i < sel.options.length; i++) {\n          var optVal = sel.options[i].value.trim();\n          if (optVal === decoded || (decoded === '*' && optVal === '*') ||\n             (decoded.indexOf('cce') !== -1 && optVal.indexOf('cce') !== -1) ||\n             (decoded.indexOf('tssdh') !== -1 && optVal.indexOf('tssdh') !== -1) ||\n             (decoded.indexOf('aapanel') !== -1 && optVal.indexOf('aapanel') !== -1)) {\n            sel.selectedIndex = i;\n            break;\n          }\n        }\n        // Also apply instant filter on page load if data is already in DOM\n        setTimeout(function() { applyInstantDomFilter(sel.value); }, 400);\n      }\n    } catch(e) {}\n  }\n\n  // Run init on load\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', initSocWebFilter);\n  } else {\n    initSocWebFilter();\n  }\n</script>",
         "mode": "html"
       },
       "pluginVersion": "12.3.0",
       "transparent": true,
-      "type": "text"
+      "type": "text",
+      "title": null
     },
     {
       "datasource": {
@@ -3698,7 +3773,8 @@
           }
         }
       ],
-      "type": "table"
+      "type": "table",
+      "title": null
     },
     {
       "datasource": {
@@ -4653,7 +4729,7 @@
     "list": [
       {
         "current": {
-          "text": "*",
+          "text": "🌟 Tất cả Website (All Sites)",
           "value": "*"
         },
         "description": "Lọc toàn bộ luồng sự cố SOC theo từng Website hoặc xem tất cả",
@@ -4734,6 +4810,7 @@
           }
         ],
         "query": "🌟 Tất cả Website (All Sites) : * , 🚫 Ngoại trừ IDP (Exclude IDP) : NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*) , 🌐 idp.vnu.edu.vn (Cổng IDP Keycloak) : agent.name:(prod-idp* OR dev-idp* OR idp_web*) , 🌐 cce.vnu.edu.vn (Trung tâm Khảo thí) : agent.name:(CEA_NEW* OR *cce*) , 🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học) : agent.name:(*TuyensinhSDH* OR *tssdh*) , 🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN) : agent.name:(*daotao*) , 🌐 eoffice.vnu.edu.vn (Văn phòng điện tử) : agent.name:(*eoffice*) , 🌐 cybersafe.vnu.edu.vn (Cybersafe & IT) : agent.name:(*cybersafe* OR *it-cyber*) , 🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS) : agent.name:(*khaosat*) , 🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm) : agent.name:(*100years*) , 🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel) : agent.name:(*aapanel*) , 🌐 dksdh.vnu.edu.vn (Đăng ký SĐH) : agent.name:(*dksdh*) , 🛡️ Suricata NIDS (Cảm biến mạng) : agent.name:(*Suricata* OR *SecurityOnion*) , 🛡️ SOC Perimeter Gateway (Cổng biên SOC) : agent.name:(wazuh-grafana*)",
+        "skipUrlSync": false,
         "type": "custom"
       }
     ]
@@ -4746,6 +4823,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 94,
+  "version": 95,
   "weekStart": ""
 }
