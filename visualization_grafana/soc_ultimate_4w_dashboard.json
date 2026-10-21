@@ -1894,7 +1894,7 @@
       "datasource": {
         "uid": "bfay8umd54feoc"
       },
-      "description": "Số lượng địa chỉ IP độc nhất (Unique IPs) và Tổng lượt thi hành chặn thực tế (Total Hits) từ nước ngoài trong 24 giờ qua.",
+      "description": "Tổng số IP nguồn nước ngoài (quốc tế) phát hiện thực hiện tấn công/dò quét (Level >= 8) trong 24 giờ qua. Các IP đạt ngưỡng nguy cấp được SOAR tự động đồng bộ sang Threat Feed để FortiGate biên chặn tức thì.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1942,7 +1942,7 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "alias": "IP Độc nhất (Unique IPs)",
+          "alias": "Unique Foreign Blocked IPs",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -1966,32 +1966,6 @@
           ],
           "query": "(rule.level:[8 TO *] OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995) AND _exists_:data.srcip AND NOT data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 112.137.*)",
           "refId": "A",
-          "timeField": "@timestamp"
-        },
-        {
-          "alias": "Tổng lượt chặn (Total Hits)",
-          "bucketAggs": [
-            {
-              "field": "@timestamp",
-              "id": "2",
-              "settings": {
-                "interval": "7d"
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "datasource": {
-            "uid": "bfay8umd54feoc"
-          },
-          "format": "time_series",
-          "metrics": [
-            {
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "query": "(rule.level:[8 TO *] OR data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995) AND _exists_:data.srcip AND NOT data.srcip:(10.* OR 127.* OR 172.16.* OR 172.17.* OR 172.18.* OR 172.19.* OR 172.20.* OR 172.21.* OR 172.22.* OR 172.23.* OR 172.24.* OR 172.25.* OR 172.26.* OR 172.27.* OR 172.28.* OR 172.29.* OR 172.30.* OR 172.31.* OR 192.168.* OR 112.137.*)",
-          "refId": "B",
           "timeField": "@timestamp"
         }
       ],
@@ -3594,7 +3568,7 @@
               "type": "raw_data"
             }
           ],
-          "query": "((data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce*) OR rule.level:[5 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\" OR rule.id:(100500 OR 100501))) AND ()",
+          "query": "((data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce*) OR rule.level:[5 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\" OR rule.id:(100500 OR 100501))) AND (${target_web:raw})",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -4751,6 +4725,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 87,
+  "version": 89,
   "weekStart": ""
 }
