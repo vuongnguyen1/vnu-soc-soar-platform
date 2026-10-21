@@ -1698,33 +1698,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mã Rule (Rule ID)"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Mã Rule (Rule ID)"
-              },
-              {
-                "id": "custom.width",
-                "value": 140
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#5794F2",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "rule.id"
             },
             "properties": [
@@ -1752,22 +1725,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Mô tả Chi tiết Rule"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Mô tả Chi tiết Rule"
-              },
-              {
-                "id": "custom.minWidth",
-                "value": 450
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "rule.description"
             },
             "properties": [
@@ -1784,7 +1741,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Số lượt phát hiện"
+              "options": "Count"
             },
             "properties": [
               {
@@ -1824,26 +1781,6 @@
                 }
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Count"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Số lượt phát hiện"
-              },
-              {
-                "id": "custom.width",
-                "value": 160
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              }
-            ]
           }
         ]
       },
@@ -1867,7 +1804,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Số lượt phát hiện"
+            "displayName": "Count"
           }
         ]
       },
@@ -1878,23 +1815,23 @@
           "bucketAggs": [
             {
               "field": "rule.id",
-              "id": "3",
+              "id": "5",
               "settings": {
                 "min_doc_count": "1",
                 "order": "desc",
-                "orderBy": "_count",
-                "size": "100"
+                "orderBy": "_term",
+                "size": "0"
               },
               "type": "terms"
             },
             {
               "field": "rule.description",
-              "id": "4",
+              "id": "7",
               "settings": {
                 "min_doc_count": "1",
                 "order": "desc",
-                "orderBy": "_count",
-                "size": "1"
+                "orderBy": "_term",
+                "size": "0"
               },
               "type": "terms"
             }
@@ -1904,51 +1841,21 @@
             "uid": "bfay8umd54feoc"
           },
           "format": "table",
+          "hide": false,
           "metrics": [
             {
               "id": "1",
               "type": "count"
             }
           ],
-          "query": "*",
+          "query": "",
           "queryType": "lucene",
           "refId": "A",
           "timeField": "@timestamp"
         }
       ],
       "title": "DANH SÁCH CHI TIẾT RULE",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "indexByName": {
-              "rule.id": 0,
-              "rule.id: Descending": 0,
-              "rule_id": 0,
-              "Mã Rule (Rule ID)": 0,
-              "rule.description": 1,
-              "rule.description: Descending": 1,
-              "rule_description": 1,
-              "Mô tả Chi tiết Rule": 1,
-              "Count": 2,
-              "doc_count": 2,
-              "Metric: Count": 2,
-              "Số lượt phát hiện": 2
-            },
-            "renameByName": {
-              "rule.id": "Mã Rule (Rule ID)",
-              "rule.id: Descending": "Mã Rule (Rule ID)",
-              "rule_id": "Mã Rule (Rule ID)",
-              "rule.description": "Mô tả Chi tiết Rule",
-              "rule.description: Descending": "Mô tả Chi tiết Rule",
-              "rule_description": "Mô tả Chi tiết Rule",
-              "Count": "Số lượt phát hiện",
-              "doc_count": "Số lượt phát hiện",
-              "Metric: Count": "Số lượt phát hiện"
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "table"
     },
     {
@@ -2223,7 +2130,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<style>\n  div[data-testid=\"dashboard-submenu\"],\n  .submenu-controls,\n  div[class*=\"submenu-controls\"],\n  div[class*=\"DashboardSubmenu\"] {\n    display: none !important;\n    height: 0 !important;\n    margin: 0 !important;\n    padding: 0 !important;\n    overflow: hidden !important;\n  }\n</style>\n\n<div style=\"box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.5); overflow: hidden;\">\n  <!-- Line 1: Header Title & Live Badge -->\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 16px;\">⚡</span>\n      <span style=\"font-size: 14px; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px; text-transform: uppercase;\">LIVE INCIDENT &amp; ENFORCEMENT STREAM (LUỒNG SỰ CỐ &amp; THI HÀNH THỜI GIAN THỰC)</span>\n    </div>\n    <div style=\"display: flex; align-items: center; gap: 6px; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 10px; border-radius: 12px;\">\n      <span style=\"display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;\"></span>\n      <span style=\"font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px;\">LIVE STREAM 24/7</span>\n    </div>\n  </div>\n\n  <!-- Line 2: Seamless Filter Form Aligned to Left, Text Vertically Centered in Body -->\n  <div style=\"display: flex; align-items: center; justify-content: flex-start; width: 100%; margin-top: 2px;\">\n    <div style=\"display: inline-flex; align-items: center; height: 32px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden; background: #111217; box-shadow: 0 1px 4px rgba(0,0,0,0.4);\">\n      <!-- Left Label -->\n      <div style=\"display: flex; align-items: center; gap: 6px; padding: 0 12px; background: rgba(255, 255, 255, 0.08); border-right: 1px solid rgba(255, 255, 255, 0.15); font-size: 12px; font-weight: 600; color: #d8d9da; white-space: nowrap; height: 32px; line-height: 32px; box-sizing: border-box;\">\n        <span>Mục tiêu (Website)</span>\n        <span title=\"Lọc dữ liệu tức thì 0ms không tải lại trang\" style=\"cursor: help; color: #8e8ea0; font-size: 12px;\">ⓘ</span>\n      </div>\n      <!-- Right Select Dropdown (ZERO RELOAD) -->\n      <div style=\"position: relative; display: flex; align-items: center; height: 32px; background: #0b0f19;\">\n        <select id=\"soc_web_filter\" onchange=\"if(window.filterSocWebsite){window.filterSocWebsite(this.value);}else{fallbackFilter(this.value);}\" style=\"appearance: none; -webkit-appearance: none; background: transparent; color: #5794F2; border: none; outline: none; font-size: 12px; font-weight: 600; padding: 0 32px 0 16px; height: 32px; line-height: 32px; margin: 0; cursor: pointer; min-width: 380px; text-align: center; text-align-last: center; -moz-text-align-last: center; vertical-align: middle; box-sizing: border-box; display: inline-block;\">\n          <option value=\"*\" style=\"background: #0f172a; color: #ffffff;\">🌟 Tất cả Website (All Sites)</option>\n          <option value=\"NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🚫 Ngoại trừ IDP (Exclude IDP)</option>\n          <option value=\"agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)</option>\n          <option value=\"agent.name:(CEA_NEW* OR *cce*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)</option>\n          <option value=\"agent.name:(*TuyensinhSDH* OR *tssdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)</option>\n          <option value=\"agent.name:(*daotao*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)</option>\n          <option value=\"agent.name:(*eoffice*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)</option>\n          <option value=\"agent.name:(*cybersafe* OR *it-cyber*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cybersafe.vnu.edu.vn (Cybersafe &amp; IT)</option>\n          <option value=\"agent.name:(*khaosat*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)</option>\n          <option value=\"agent.name:(*100years*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)</option>\n          <option value=\"agent.name:(*aapanel*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)</option>\n          <option value=\"agent.name:(*dksdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)</option>\n          <option value=\"agent.name:(*Suricata* OR *SecurityOnion*)\" style=\"background: #0f172a; color: #ffffff;\">🛡️ Suricata NIDS (Cảm biến mạng)</option>\n          <option value=\"agent.name:(wazuh-grafana*)\" style=\"background: #0f172a; color: #ffffff;\">��️ SOC Perimeter Gateway (Cổng biên SOC)</option>\n        </select>\n        <span style=\"position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #5794F2; font-size: 10px; line-height: 1;\">▼</span>\n      </div>\n    </div>\n  </div>\n</div>\n\n<script>\n  function fallbackFilter(val) {\n    if (window.applySocInstantDomFilter) window.applySocInstantDomFilter(val);\n    try {\n      var u = new URL(window.location.href);\n      u.searchParams.delete('var-min_severity');\n      u.searchParams.delete('var-Filters');\n      u.searchParams.set('var-target_web', val);\n      window.history.replaceState({}, '', u.toString());\n    } catch(e) {}\n  }\n\n  // Restore dropdown position on page load\n  (function initDropdown() {\n    try {\n      var s = document.getElementById('soc_web_filter');\n      if (!s) return;\n      var curVal = new URL(window.location.href).searchParams.get('var-target_web');\n      if (curVal) {\n        var dec = decodeURIComponent(curVal).replace(/\\+/g, ' ').trim();\n        for (var i = 0; i < s.options.length; i++) {\n          var ov = s.options[i].value.trim();\n          if (ov === dec || (dec === '*' && ov === '*') ||\n             (dec.indexOf('cce') !== -1 && ov.indexOf('cce') !== -1) ||\n             (dec.indexOf('tssdh') !== -1 && ov.indexOf('tssdh') !== -1) ||\n             (dec.indexOf('aapanel') !== -1 && ov.indexOf('aapanel') !== -1)) {\n            s.selectedIndex = i;\n            break;\n          }\n        }\n        if (window.applySocInstantDomFilter) {\n          setTimeout(function() { window.applySocInstantDomFilter(s.value); }, 400);\n        }\n      }\n    } catch(e) {}\n  })();\n</script>",
+        "content": "<style>\n  div[data-testid=\"dashboard-submenu\"],\n  .submenu-controls,\n  div[class*=\"submenu-controls\"],\n  div[class*=\"DashboardSubmenu\"] {\n    display: none !important;\n    height: 0 !important;\n    margin: 0 !important;\n    padding: 0 !important;\n    overflow: hidden !important;\n  }\n</style>\n\n<div style=\"box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98)); border: 1px solid rgba(234, 184, 57, 0.35); border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.5); overflow: hidden;\">\n  <!-- Line 1: Header Title & Live Badge -->\n  <div style=\"display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;\">\n    <div style=\"display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 16px;\">⚡</span>\n      <span style=\"font-size: 14px; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px; text-transform: uppercase;\">LIVE INCIDENT &amp; ENFORCEMENT STREAM (LUỒNG SỰ CỐ &amp; THI HÀNH THỜI GIAN THỰC)</span>\n    </div>\n    <div style=\"display: flex; align-items: center; gap: 6px; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 10px; border-radius: 12px;\">\n      <span style=\"display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;\"></span>\n      <span style=\"font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px;\">LIVE STREAM 24/7</span>\n    </div>\n  </div>\n\n  <!-- Line 2: Seamless Filter Form Aligned to Left, Text Vertically Centered in Body -->\n  <div style=\"display: flex; align-items: center; justify-content: flex-start; width: 100%; margin-top: 2px;\">\n    <div style=\"display: inline-flex; align-items: center; height: 32px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden; background: #111217; box-shadow: 0 1px 4px rgba(0,0,0,0.4);\">\n      <!-- Left Label -->\n      <div style=\"display: flex; align-items: center; gap: 6px; padding: 0 12px; background: rgba(255, 255, 255, 0.08); border-right: 1px solid rgba(255, 255, 255, 0.15); font-size: 12px; font-weight: 600; color: #d8d9da; white-space: nowrap; height: 32px; line-height: 32px; box-sizing: border-box;\">\n        <span>Mục tiêu (Website)</span>\n        <span title=\"Lọc dữ liệu tức thì 0ms không tải lại trang\" style=\"cursor: help; color: #8e8ea0; font-size: 12px;\">ⓘ</span>\n      </div>\n      <!-- Right Select Dropdown -->\n      <div style=\"position: relative; display: flex; align-items: center; height: 32px; background: #0b0f19;\">\n        <select id=\"soc_web_filter\" onchange=\"onSocWebsiteSelect(this.value)\" style=\"appearance: none; -webkit-appearance: none; background: transparent; color: #5794F2; border: none; outline: none; font-size: 12px; font-weight: 600; padding: 0 32px 0 16px; height: 32px; line-height: 32px; margin: 0; cursor: pointer; min-width: 380px; text-align: center; text-align-last: center; -moz-text-align-last: center; vertical-align: middle; box-sizing: border-box; display: inline-block;\">\n          <option value=\"*\" style=\"background: #0f172a; color: #ffffff;\">🌟 Tất cả Website (All Sites)</option>\n          <option value=\"NOT agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🚫 Ngoại trừ IDP (Exclude IDP)</option>\n          <option value=\"agent.name:(prod-idp* OR dev-idp* OR idp_web*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 idp.vnu.edu.vn (Cổng IDP Keycloak)</option>\n          <option value=\"agent.name:(CEA_NEW* OR *cce*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cce.vnu.edu.vn (Trung tâm Khảo thí)</option>\n          <option value=\"agent.name:(*TuyensinhSDH* OR *tssdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 tssdh.vnu.edu.vn (Tuyển sinh Sau Đại học)</option>\n          <option value=\"agent.name:(*daotao*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 daotao.vnu.edu.vn (Cổng Đào tạo ĐHQGHN)</option>\n          <option value=\"agent.name:(*eoffice*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 eoffice.vnu.edu.vn (Văn phòng điện tử)</option>\n          <option value=\"agent.name:(*cybersafe* OR *it-cyber*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 cybersafe.vnu.edu.vn (Cybersafe &amp; IT)</option>\n          <option value=\"agent.name:(*khaosat*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 khaosat.ulis.vnu.edu.vn (Khảo sát ULIS)</option>\n          <option value=\"agent.name:(*100years*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 100years.vnu.edu.vn (Kỷ niệm 100 Năm)</option>\n          <option value=\"agent.name:(*aapanel*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 aapanel.vnu.edu.vn (Cụm máy chủ aaPanel)</option>\n          <option value=\"agent.name:(*dksdh*)\" style=\"background: #0f172a; color: #ffffff;\">🌐 dksdh.vnu.edu.vn (Đăng ký SĐH)</option>\n          <option value=\"agent.name:(*Suricata* OR *SecurityOnion*)\" style=\"background: #0f172a; color: #ffffff;\">🛡️ Suricata NIDS (Cảm biến mạng)</option>\n          <option value=\"agent.name:(wazuh-grafana*)\" style=\"background: #0f172a; color: #ffffff;\">🛡️ SOC Perimeter Gateway (Cổng biên SOC)</option>\n        </select>\n        <span style=\"position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #5794F2; font-size: 10px; line-height: 1;\">▼</span>\n      </div>\n    </div>\n  </div>\n</div>\n\n<script>\n  window.__soc_current_target_web = '*';\n\n  function onSocWebsiteSelect(selectedVal) {\n    window.__soc_current_target_web = selectedVal;\n\n    // 1. Silent URL update (History API) - NO PAGE RELOAD\n    try {\n      var u = new URL(window.location.href);\n      u.searchParams.delete('var-min_severity');\n      u.searchParams.delete('var-Filters');\n      u.searchParams.set('var-target_web', selectedVal);\n      window.history.replaceState({}, '', u.toString());\n    } catch(e) {}\n\n    // 2. Update via Grafana SystemJS locationService if available\n    try {\n      if (window.System && typeof window.System.import === 'function') {\n        window.System.import('@grafana/runtime').then(function(runtime) {\n          if (runtime && runtime.locationService && typeof runtime.locationService.partial === 'function') {\n            runtime.locationService.partial({ 'var-target_web': selectedVal });\n          }\n        }).catch(function(){});\n      }\n    } catch(e) {}\n\n    // 3. React Fiber QueryRunner Update for Panel 208 (Direct Server Query without reload)\n    try {\n      var p208 = document.querySelector('[data-panelid=\"208\"]') || \n                 document.querySelector('#panel-208') ||\n                 document.querySelector('[data-testid*=\"panel-container-208\"]');\n      if (p208) {\n        var fiberKey = Object.keys(p208).find(function(k){ \n          return k.startsWith('__reactFiber$') || k.startsWith('__reactInternalInstance$'); \n        });\n        if (fiberKey && p208[fiberKey]) {\n          var fiber = p208[fiberKey];\n          var depth = 0;\n          while (fiber && depth < 50) {\n            var props = fiber.memoizedProps || fiber.pendingProps;\n            if (props && props.panel) {\n              var panel = props.panel;\n              var baseRule = '((data.soar_event:\"LIVE_INCIDENT_ENFORCEMENT\" OR rule.id:100995 OR (agent.id:(001 OR 002 OR 003 OR 004 OR 005 OR 009 OR 010 OR 013 OR 014 OR 015 OR 016 OR 017 OR 018 OR 019 OR 020 OR 021 OR 022 OR 023 OR 024 OR 027) AND _exists_:data.srcip AND (rule.groups:(*web* OR *sql_injection* OR *exploit* OR *webshell* OR *attack* OR *fortigate* OR *firewall* OR *sshd* OR *bruteforce*) OR rule.level:[5 TO *]))) AND NOT (agent.id:(006 OR 007 OR 008 OR 011 OR 012) OR data.soar_event:\"INFRA_OPERATIONAL_ALERT\" OR rule.id:(100500 OR 100501)))';\n              var filterClause = (selectedVal && selectedVal !== '*') ? (' AND (' + selectedVal + ')') : ' AND (*)';\n              \n              if (panel.targets && panel.targets[0]) {\n                panel.targets[0].query = baseRule + filterClause;\n              }\n              if (typeof panel.refresh === 'function') {\n                panel.refresh();\n              } else if (panel.queryRunner && typeof panel.queryRunner.run === 'function') {\n                panel.queryRunner.run({ datasource: panel.datasource });\n              }\n              break;\n            }\n            fiber = fiber.return;\n            depth++;\n          }\n        }\n      }\n    } catch(err) {\n      console.warn('[SOC Filter] Query update warning:', err);\n    }\n  }\n\n  // Restore dropdown position on page load\n  (function initDropdown() {\n    try {\n      var s = document.getElementById('soc_web_filter');\n      if (!s) return;\n      var curVal = new URL(window.location.href).searchParams.get('var-target_web');\n      if (curVal) {\n        var dec = decodeURIComponent(curVal).replace(/\\+/g, ' ').trim();\n        for (var i = 0; i < s.options.length; i++) {\n          var ov = s.options[i].value.trim();\n          if (ov === dec || (dec === '*' && ov === '*') ||\n             (dec.indexOf('cce') !== -1 && ov.indexOf('cce') !== -1) ||\n             (dec.indexOf('tssdh') !== -1 && ov.indexOf('tssdh') !== -1) ||\n             (dec.indexOf('aapanel') !== -1 && ov.indexOf('aapanel') !== -1)) {\n            s.selectedIndex = i;\n            break;\n          }\n        }\n      }\n    } catch(e) {}\n  })();\n</script>",
         "mode": "html"
       },
       "pluginVersion": "12.3.0",
@@ -4823,6 +4730,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 96,
+  "version": 97,
   "weekStart": ""
 }
