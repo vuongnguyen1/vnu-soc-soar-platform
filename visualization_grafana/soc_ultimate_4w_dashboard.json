@@ -2792,81 +2792,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "SOAR Decision"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "SOAR Decision"
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              },
-              {
-                "id": "noValue",
-                "value": "-"
-              },
-              {
-                "id": "custom.minWidth",
-                "value": 140
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "match": "null+nan",
-                      "result": {
-                        "text": "-"
-                      }
-                    },
-                    "type": "special"
-                  },
-                  {
-                    "options": {
-                      "PERMANENT_BLOCK_APPROVED": {
-                        "text": "PERM BLOCK (SOAR)",
-                        "color": "#E02F44"
-                      },
-                      "TEMPORARY_BLOCK_APPROVED": {
-                        "text": "30-DAY BLOCK (SOAR)",
-                        "color": "#FA6400"
-                      },
-                      "AUTOMATED_AGENT_BLOCK": {
-                        "text": "BLOCKED (AGENT)",
-                        "color": "#E02F44"
-                      },
-                      "BLOCKED": {
-                        "text": "BLOCKED",
-                        "color": "#E02F44"
-                      },
-                      "BLOCK": {
-                        "text": "BLOCKED",
-                        "color": "#E02F44"
-                      },
-                      "VIETNAM_ALERT_ONLY": {
-                        "text": "VN CGNAT ALERT",
-                        "color": "#EAB839"
-                      },
-                      "ALERT_ONLY": {
-                        "text": "ALERT ONLY",
-                        "color": "#5794F2"
-                      },
-                      "ALLOWLIST_SUPPRESSED": {
-                        "text": "ALLOWLIST",
-                        "color": "#73BF69"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "Target Web / Host"
             },
             "properties": [
@@ -3509,6 +3434,113 @@
                 ]
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SOAR Decision"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "SOAR Decision"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "noValue",
+                "value": "-"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "range",
+                    "options": {
+                      "from": 15,
+                      "to": 100,
+                      "result": {
+                        "text": "PERM BLOCK (SOAR)",
+                        "color": "#E02F44"
+                      }
+                    }
+                  },
+                  {
+                    "type": "range",
+                    "options": {
+                      "from": 14,
+                      "to": 14,
+                      "result": {
+                        "text": "30-DAY BLOCK (SOAR)",
+                        "color": "#FA6400"
+                      }
+                    }
+                  },
+                  {
+                    "type": "range",
+                    "options": {
+                      "from": 0,
+                      "to": 13,
+                      "result": {
+                        "text": "-"
+                      }
+                    }
+                  },
+                  {
+                    "type": "special",
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "text": "-"
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
+                      "PERMANENT_BLOCK_APPROVED": {
+                        "color": "#E02F44",
+                        "text": "PERM BLOCK (SOAR)"
+                      },
+                      "TEMPORARY_BLOCK_APPROVED": {
+                        "color": "#FA6400",
+                        "text": "30-DAY BLOCK (SOAR)"
+                      },
+                      "AUTOMATED_AGENT_BLOCK": {
+                        "color": "#E02F44",
+                        "text": "BLOCKED (AGENT)"
+                      },
+                      "VIETNAM_ALERT_ONLY": {
+                        "color": "#EAB839",
+                        "text": "VN CGNAT ALERT"
+                      },
+                      "ALLOWLIST_SUPPRESSED": {
+                        "color": "#73BF69",
+                        "text": "ALLOWLIST"
+                      },
+                      "ALERT_ONLY": {
+                        "color": "#5794F2",
+                        "text": "ALERT ONLY"
+                      },
+                      "BLOCK": {
+                        "color": "#E02F44",
+                        "text": "BLOCKED"
+                      },
+                      "BLOCKED": {
+                        "color": "#E02F44",
+                        "text": "BLOCKED"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 140
+              }
+            ]
           }
         ]
       },
@@ -3571,8 +3603,7 @@
                 "data.url",
                 "rule.description",
                 "rule.id",
-                "rule.level",
-                "data.soar_decision"
+                "rule.level"
               ]
             }
           }
@@ -3589,6 +3620,18 @@
               ],
               "reducer": "max"
             }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "SOAR Decision",
+            "binary": {
+              "left": "rule.level",
+              "operator": "+",
+              "right": "0"
+            },
+            "mode": "binary"
           }
         },
         {
@@ -3616,43 +3659,41 @@
             },
             "indexByName": {
               "@timestamp": 0,
-              "Geo / Country": 1,
+              "Timestamp": 0,
               "GeoLocation.country_name": 1,
-              "HTTP Status Code": 6,
-              "Request URL / URI": 8,
-              "Rule Description": 9,
-              "Rule ID": 10,
-              "SOAR Decision": 7,
-              "Severity": 11,
+              "Geo / Country": 1,
+              "data.srcip": 2,
               "Source IP": 2,
               "Target Port": 3,
-              "Target Web / Host": 5,
-              "Timestamp": 0,
+              "data.dstuser": 4,
               "User / Actor": 4,
               "agent.name": 5,
-              "data.dstuser": 4,
-              "data.srcip": 2,
+              "Target Web / Host": 5,
               "data.status": 6,
+              "HTTP Status Code": 6,
+              "SOAR Decision": 7,
               "data.url": 8,
+              "Request URL / URI": 8,
               "rule.description": 9,
+              "Rule Description": 9,
               "rule.id": 10,
+              "Rule ID": 10,
               "rule.level": 11,
-              "data.soar_decision": 7
+              "Severity": 11
             },
             "renameByName": {
               "@timestamp": "Timestamp",
               "GeoLocation.country_name": "Geo / Country",
-              "SOAR Decision": "SOAR Decision",
-              "agent.name": "Target Web / Host",
-              "data.dstuser": "User / Actor",
               "data.srcip": "Source IP",
+              "data.dstuser": "User / Actor",
               "data.srcuser": "User / Actor",
+              "agent.name": "Target Web / Host",
               "data.status": "HTTP Status Code",
+              "SOAR Decision": "SOAR Decision",
               "data.url": "Request URL / URI",
               "rule.description": "Rule Description",
               "rule.id": "Rule ID",
-              "rule.level": "Severity",
-              "data.soar_decision": "SOAR Decision"
+              "rule.level": "Severity"
             }
           }
         }
@@ -4705,6 +4746,6 @@
   "timezone": "browser",
   "title": "VNU - SOC Ultimate",
   "uid": "vnu-soc-ultimate",
-  "version": 90,
+  "version": 91,
   "weekStart": ""
 }
