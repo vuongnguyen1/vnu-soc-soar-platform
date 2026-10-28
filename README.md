@@ -140,7 +140,7 @@ enterprise-wazuh-soc-soar/
 │   └── local_rules.xml                      # Ruleset tùy biến chống RCE, WebShell, SEO Cloaking
 ├── visualization_grafana/                   # Dashboard trực quan hóa
 │   ├── soc_ultimate_4w_dashboard.json       # Dashboard điều hành 4W
-│   └── silent_background_update.css         # CSS chống chớp màn hình SOC Wall
+│   └── silent_background_update.css         
 └── deploy_automation/                       # Tự động hóa triển khai & khắc phục sự cố
     ├── deploy_wazuh_agent.sh                # Triển khai Agent tự động
     └── playbooks/                           # Ansible playbooks
