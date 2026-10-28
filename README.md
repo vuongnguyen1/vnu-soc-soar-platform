@@ -16,10 +16,9 @@
 1. [Kiến Trúc Tổng Thể & Luồng Dữ Liệu](#-kiến-trúc-tổng-thể--luồng-dữ-liệu)
 2. [Điểm Sáng Công Nghệ Đột Phá (Core Engineering Highlights)](#-điểm-sáng-công-nghệ-đột-phá)
 3. [Mô Hình Hybrid: "Deterministic Action, Generative Reasoning"](#-mô-hình-hybrid-deterministic-action-generative-reasoning)
-4. [Kiến Trúc Toàn Diện & Đặc Tả Kỹ Thuật (Architecture Blueprint)](#-kiến-trúc-toàn-diện--đặc-tả-kỹ-thuật-v26)
-5. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
-6. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
-7. [Bản Quyền](#-bản-quyền)
+4. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
+5. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
+6. [Bản Quyền](#-bản-quyền)
 
 ---
 
@@ -75,6 +74,8 @@ flowchart TB
     AI_COPILOT -->|Token Metrics Stream| GRAF
 ```
 
+> 📘 **Tài liệu đặc tả chi tiết**: Xem phân rã kiến trúc, cơ chế Token Hub & Quota trượt cùng lộ trình kỹ thuật tại [**docs/agentic_ai_architecture_and_roadmap.md**](docs/agentic_ai_architecture_and_roadmap.md).
+
 ---
 
 ## 💎 ĐIỂM SÁNG CÔNG NGHỆ ĐỘT PHÁ
@@ -118,14 +119,6 @@ flowchart TB
 | :--- | :--- | :--- |
 | **Hành Động (Action)** | **Cảnh sát thi hành công vụ** | **100% Code Python (Tất định / Deterministic):** Tự động lọc Whitelist, kiểm tra ngưỡng cảnh báo (Level $\ge 12$, số lượt quét $\ge 500$), thực thi lệnh Host Drop (`agent_control -b`) và nạp vào FortiGate Threat Feed trong 0.2s. |
 | **Suy Luận (Reasoning)** | **Chuyên gia phân tích / Tham mưu** | **Google Gemini 3.8 Flash:** Đọc ngữ cảnh đã được tinh gọn, suy luận xâu chuỗi chuỗi tấn công (Cyber Kill Chain), phân tích xem là Botnet quét hàng loạt hay APT có chủ đích, và sinh bản báo cáo CoT cho kỹ sư trực ca. |
-
----
-
-## 🏛️ KIẾN TRÚC TOÀN DIỆN & ĐẶC TẢ KỸ THUẬT V2.6
-
-Tài liệu đặc tả chi tiết kiến trúc, thiết kế 5 tầng phòng thủ, cơ chế Token Hub & Quota trượt, cùng lộ trình kỹ thuật:
-👉 [**docs/agentic_ai_architecture_and_roadmap.md**](docs/agentic_ai_architecture_and_roadmap.md)  
-👉 [**docs/architecture_design.md**](docs/architecture_design.md)
 
 ---
 
