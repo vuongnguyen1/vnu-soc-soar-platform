@@ -30,40 +30,43 @@ Hệ thống hoạt động theo mô hình phòng thủ khép kín 5 tầng:
 ```mermaid
 flowchart TB
     subgraph SENSORS ["1. Log Collection & Distributed Sensors"]
-        L1[Linux Hosts: Nginx / SSH / Syslog / Auditd]
-        W1[Windows Hosts: IIS / Sysmon / Security Event 4688, 4104]
-        S1[Passive NIDS: Suricata @ Security Onion via SPAN Port]
-        F1[Perimeter: FortiGate Gateway Syslog]
+        L1["Linux Hosts: Nginx / SSH / Syslog / Auditd"]
+        W1["Windows Hosts: IIS / Sysmon / Security Event 4688, 4104"]
+        S1["Passive NIDS: Suricata @ Security Onion via SPAN Port"]
+        F1["Perimeter: FortiGate Gateway Syslog"]
     end
 
     subgraph CORE ["2. Wazuh SIEM & Telemetry Core"]
-        DEC[Decoders & Custom MITRE ATT&CK Ruleset\n70,000+ Lines]
-        OS[(OpenSearch Telemetry Cluster\nwazuh-alerts-*)]
+        DEC["Decoders & Custom MITRE ATT&CK Ruleset<br/>70,000+ Lines"]
+        OS[("OpenSearch Telemetry Cluster<br/>wazuh-alerts-*")]
     end
 
     subgraph HUNTER ["3. Autonomous Correlation & Threat Hunter"]
-        CORR[30-min Cyber Kill Chain Correlator\nsoc_agentic_scheduler.py]
-        CAMP[24h Attacker Campaign & Entity Chaining\nagentic_threat_hunter.py]
+        CORR["30-min Cyber Kill Chain Correlator<br/>soc_agentic_scheduler.py"]
+        CAMP["24h Attacker Campaign & Entity Chaining<br/>agentic_threat_hunter.py"]
     end
 
     subgraph ENGINE ["4. Hybrid Action & Reasoning Engine"]
-        DISP[soc_action_dispatcher.py\nDeterministic AR Execution]
-        FG_FEED[FortiGate Dynamic Threat Feed\nPort 8088 / IP Aging 30d]
-        HOST_AR[Host AR Drop / Process Kill / Host Isolation]
-        AI_COPILOT[soc_ai_reasoning_engine.py\nGoogle Antigravity CLI (Gemini 3.8 Flash)]
-        PROP[soc_proposal_manager.py\nHITL Remediation Proposals PROP-xxx]
+        DISP["soc_action_dispatcher.py<br/>Deterministic AR Execution"]
+        FG_FEED["FortiGate Dynamic Threat Feed<br/>Port 8088 / IP Aging 30d"]
+        HOST_AR["Host AR Drop / Process Kill / Host Isolation"]
+        AI_COPILOT["soc_ai_reasoning_engine.py<br/>Google Antigravity CLI (Gemini 3.8 Flash)"]
+        PROP["soc_proposal_manager.py<br/>HITL Remediation Proposals PROP-xxx"]
     end
 
     subgraph OPS ["5. Mission Control & Human-in-the-Loop"]
-        GRAF[Grafana Mission Control & AI Token Hub]
-        TELE[Telegram SOC Bot Dispatcher & Contextual Reply]
+        GRAF["Grafana Mission Control & AI Token Hub"]
+        TELE["Telegram SOC Bot Dispatcher & Contextual Reply"]
     end
 
     SENSORS -->|rsyslog / Agent Event Channel| DEC
     DEC --> OS
-    OS --> CORR & CAMP
-    CORR & CAMP -->|100% Deterministic Trigger| DISP
-    DISP --> FG_FEED & HOST_AR
+    OS --> CORR
+    OS --> CAMP
+    CORR -->|100% Deterministic Trigger| DISP
+    CAMP -->|100% Deterministic Trigger| DISP
+    DISP --> FG_FEED
+    DISP --> HOST_AR
     CORR -->|In-Context Telemetry Prompt| AI_COPILOT
     AI_COPILOT -->|Reasoning CoT & Assessment| TELE
     CORR -->|Source Code Vulnerability| PROP

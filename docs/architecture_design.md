@@ -9,30 +9,30 @@ Tài liệu mô tả kiến trúc kỹ thuật 4 lớp (Multi-Tier Defense Archi
 ```mermaid
 flowchart TD
     subgraph SENSORS ["1. SENSORS & LOG COLLECTION LAYER"]
-        A1[Linux Servers\nNginx, SSH, Syslog] -->|rsyslog / Agent| WAZUH_SRV
-        A2[Windows Servers\nIIS, EventLog, Sysmon] -->|Wazuh Agent WinRM| WAZUH_SRV
-        A3[Boundary Firewalls\nFortiGate Syslog] -->|Port 514 UDP| WAZUH_SRV
+        A1["Linux Servers<br/>Nginx, SSH, Syslog"] -->|rsyslog / Agent| WAZUH_SRV
+        A2["Windows Servers<br/>IIS, EventLog, Sysmon"] -->|Wazuh Agent WinRM| WAZUH_SRV
+        A3["Boundary Firewalls<br/>FortiGate Syslog"] -->|Port 514 UDP| WAZUH_SRV
     end
 
     subgraph ENGINE ["2. SIEM CORE & DETECTION ENGINE"]
-        WAZUH_SRV[Wazuh Manager\nDecoders & Rule Engine]
-        WAZUH_SRV -->|Alert Events| INDEXER[(OpenSearch / Wazuh Indexer\nDistributed Cluster)]
-        WAZUH_SRV -->|Level >= 8 Alerts| INTEGRATION[Active Response Integration\nshuffle.py]
+        WAZUH_SRV["Wazuh Manager<br/>Decoders & Rule Engine"]
+        WAZUH_SRV -->|Alert Events| INDEXER[("OpenSearch / Wazuh Indexer<br/>Distributed Cluster")]
+        WAZUH_SRV -->|Level >= 8 Alerts| INTEGRATION["Active Response Integration<br/>shuffle.py"]
     end
 
     subgraph SOAR ["3. SOAR AUTOMATION & BOUNDARY ENFORCEMENT"]
-        INTEGRATION --> DEDUP{Sliding Window\nDeduplication 300s}
-        DEDUP -->|Duplicate in 5m| DROP_ALERT[Count +1 / Ignore]
-        DEDUP -->|New Threat IP| GEO_CHECK{MaxMind GeoIP\nCGNAT Safeguard}
-        GEO_CHECK -->|Vietnam IP| HITL[Human-in-the-Loop\nTelegram Approval]
-        GEO_CHECK -->|Foreign Attacker| FORTI_API[FortiGate REST API\nAdd to AUTO_SOC_BLACKLIST]
-        FORTI_API --> TELEGRAM[Telegram SOC Alert\nInstant Notification]
+        INTEGRATION --> DEDUP{"Sliding Window<br/>Deduplication 300s"}
+        DEDUP -->|Duplicate in 5m| DROP_ALERT["Count +1 / Ignore"]
+        DEDUP -->|New Threat IP| GEO_CHECK{"MaxMind GeoIP<br/>CGNAT Safeguard"}
+        GEO_CHECK -->|Vietnam IP| HITL["Human-in-the-Loop<br/>Telegram Approval"]
+        GEO_CHECK -->|Foreign Attacker| FORTI_API["FortiGate REST API<br/>Add to AUTO_SOC_BLACKLIST"]
+        FORTI_API --> TELEGRAM["Telegram SOC Alert<br/>Instant Notification"]
     end
 
     subgraph VISUAL ["4. MISSION CONTROL & AI COPILOT"]
-        INDEXER --> GRAFANA[Grafana 12 Mission Control\n4W Multi-Dimensional Dashboard]
-        GRAFANA --> STALE[Stale-While-Revalidate\nSilent Background Update Engine]
-        AI_BOT[socduac AI Copilot\nGoogle Gemini Flash] <-->|Contextual Advisory| GRAFANA
+        INDEXER --> GRAFANA["Grafana 12 Mission Control<br/>4W Multi-Dimensional Dashboard"]
+        GRAFANA --> STALE["Stale-While-Revalidate<br/>Silent Background Update Engine"]
+        AI_BOT["socduac AI Copilot<br/>Google Gemini Flash"] <-->|Contextual Advisory| GRAFANA
     end
 ```
 
