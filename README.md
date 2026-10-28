@@ -16,7 +16,7 @@
 1. [Kiến Trúc Tổng Thể & Luồng Dữ Liệu](#-kiến-trúc-tổng-thể--luồng-dữ-liệu)
 2. [Điểm Sáng Công Nghệ Đột Phá (Core Engineering Highlights)](#-điểm-sáng-công-nghệ-đột-phá)
 3. [Mô Hình Hybrid: "Deterministic Action, Generative Reasoning"](#-mô-hình-hybrid-deterministic-action-generative-reasoning)
-4. [Tài Liệu Ôn Luyện Phỏng Vấn Kỹ Thuật (Interview Cheatsheet)](#-tài-liệu-ôn-luyện-phỏng-vấn-kỹ-thuật)
+4. [Kiến Trúc Toàn Diện & Đặc Tả Kỹ Thuật (Architecture Blueprint)](#-kiến-trúc-toàn-diện--đặc-tả-kỹ-thuật-v26)
 5. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
 6. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
 7. [Bản Quyền](#-bản-quyền)
@@ -118,11 +118,11 @@ flowchart TB
 
 ---
 
-## 🎯 TÀI LIỆU ÔN LUYỆN PHỎNG VẤN KỸ THUẬT
+## 🏛️ KIẾN TRÚC TOÀN DIỆN & ĐẶC TẢ KỸ THUẬT V2.6
 
-Xem tài liệu chi tiết chuyên sâu phục vụ phỏng vấn các vị trí **Senior SOC Engineer / DevSecOps / AI Security Architect**:
-👉 [**docs/INTERVIEW_CHEATSHEET.md**](docs/INTERVIEW_CHEATSHEET.md)
-* *Bao gồm: Kịch bản trả lời phỏng vấn mẫu, so sánh đánh đổi kiến trúc (Trade-offs), giải thích cơ chế phòng vệ DoS nội bộ, chiến lược quản trị Token AI và kinh nghiệm thực chiến xử lý lỗ hổng IDOR / Rootkit IIS.*
+Tài liệu đặc tả chi tiết kiến trúc, thiết kế 5 tầng phòng thủ, cơ chế Token Hub & Quota trượt, cùng lộ trình kỹ thuật:
+👉 [**docs/agentic_ai_architecture_and_roadmap.md**](docs/agentic_ai_architecture_and_roadmap.md)  
+👉 [**docs/architecture_design.md**](docs/architecture_design.md)
 
 ---
 
@@ -134,7 +134,7 @@ enterprise-wazuh-soc-soar/
 ├── .gitignore                              # Đã cấu hình chặn 100% secrets, raw logs & DBs
 ├── .env.example                             # Mẫu biến môi trường an toàn (Zero-Secret)
 ├── docs/                                    
-│   ├── INTERVIEW_CHEATSHEET.md              # 🎯 Bộ câu hỏi & lời giải phỏng vấn chuyên sâu
+│   ├── agentic_ai_architecture_and_roadmap.md # 🏛️ Kiến trúc toàn diện & đặc tả kỹ thuật v2.6
 │   ├── architecture_design.md               # Thiết kế chi tiết kiến trúc
 │   ├── threat_taxonomy_matrix.md            # Ma trận phân loại đe dọa CAT1 - CAT6
 │   └── learn.md                             # Kinh nghiệm vận hành thực tế
