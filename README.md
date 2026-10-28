@@ -1,109 +1,128 @@
-# 🛡️ Enterprise Wazuh SIEM, SOAR Automation & AI Copilot Platform
+# 🛡️ Enterprise True Agentic AI SOC, SOAR & Autonomous Threat Response Platform (v2.6)
 
 [![Wazuh SIEM](https://img.shields.io/badge/Wazuh-v4.9+-005571?style=for-the-badge&logo=wazuh&logoColor=white)](https://wazuh.com/)
 [![Grafana](https://img.shields.io/badge/Grafana-v12.0+-F46800?style=for-the-badge&logo=grafana&logoColor=white)](https://grafana.com/)
 [![FortiGate](https://img.shields.io/badge/FortiGate-REST_API-EE3124?style=for-the-badge&logo=fortinet&logoColor=white)](https://fortinet.com/)
-[![Google Gemini](https://img.shields.io/badge/Google_Gemini-3.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Google Antigravity](https://img.shields.io/badge/Google_Antigravity-Gemini_3.8_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK_Mapped-A6192E?style=for-the-badge)](https://attack.mitre.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-> **Hệ sinh thái Giám sát An toàn Thông tin (SIEM), Tự động hóa Phản ứng Biên (SOAR), Trực quan hóa Mission Control và Trợ lý ảo AI Copilot cấp Doanh nghiệp.**  
-> Dự án được thiết kế cho quy mô hạ tầng lớn (hàng triệu tệp tin, đa nền tảng Linux & Windows Server, cụm tường lửa FortiGate), giải quyết triệt để các bài toán thực chiến: **chống nghẽn cảnh báo (Alert Fatigue), bảo vệ dải IP 4G/CGNAT nội địa, tối ưu FIM Rule 233 và tích hợp LLM hỗ trợ tác chiến an ninh mạng.**
+> **Hệ sinh thái Giám sát An toàn Thông tin (SIEM), Tự động hóa Phản ứng Biên (SOAR), Xâu chuỗi Chiến thuật Tấn công (Cyber Kill Chain) và Trợ lý Điều hành Agentic AI Copilot cấp Doanh nghiệp.**  
+> Thiết kế đặc thù cho cụm hạ tầng đại học & doanh nghiệp quy mô lớn (29+ Nodes, hàng triệu tệp tin, máy chủ Linux, Windows Server, Mail Cluster, Keycloak IDP, cụm tường lửa FortiGate), giải quyết triệt để 5 bài toán thực chiến: **Triệt tiêu bão cảnh báo (Alert Fatigue), Bảo vệ dải IP 4G/CGNAT nội địa, Chống sập dịch vụ do khóa nhầm Ingress (Cloudflare Tunnel / Load Balancer), Quản trị hạn mức Token AI thời gian thực và Quy trình vá mã nguồn an toàn HITL (Human-in-the-Loop).**
 
 ---
 
 ## 📑 MỤC LỤC
-1. [Kiến Trúc Tổng Thể](#-kiến-trúc-tổng-thể)
-2. [Điểm Sáng Công Nghệ & Khác Biệt Thực Chiến](#-điểm-sáng-công-nghệ--khác-biệt-thực-chiến)
-3. [Ma Trận Phân Loại Đe Dọa (CAT1 - CAT6)](#-ma-trận-phân-loại-đe-dọa-cat1---cat6)
-4. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
-5. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
-6. [Bản Quyền](#-bản-quyền)
+1. [Kiến Trúc Tổng Thể & Luồng Dữ Liệu](#-kiến-trúc-tổng-thể--luồng-dữ-liệu)
+2. [Điểm Sáng Công Nghệ Đột Phá (Core Engineering Highlights)](#-điểm-sáng-công-nghệ-đột-phá)
+3. [Mô Hình Hybrid: "Deterministic Action, Generative Reasoning"](#-mô-hình-hybrid-deterministic-action-generative-reasoning)
+4. [Tài Liệu Ôn Luyện Phỏng Vấn Kỹ Thuật (Interview Cheatsheet)](#-tài-liệu-ôn-luyện-phỏng-vấn-kỹ-thuật)
+5. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
+6. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
+7. [Bản Quyền](#-bản-quyền)
 
 ---
 
-## 🏛️ KIẾN TRÚC TỔNG THỂ
+## 🏛️ KIẾN TRÚC TỔNG THỂ & LUỒNG DỮ LIỆU
 
-Hệ thống hoạt động theo mô hình phòng thủ 4 lớp khép kín:
+Hệ thống hoạt động theo mô hình phòng thủ khép kín 5 tầng:
 
 ```mermaid
-flowchart LR
-    subgraph SENSORS ["1. Log Collection & Sensors"]
-        L1[Linux: Nginx / SSH / Syslog]
-        W1[Windows: IIS / Sysmon / EventLog]
-        F1[Boundary: FortiGate Syslog]
+flowchart TB
+    subgraph SENSORS ["1. Log Collection & Distributed Sensors"]
+        L1[Linux Hosts: Nginx / SSH / Syslog / Auditd]
+        W1[Windows Hosts: IIS / Sysmon / Security Event 4688, 4104]
+        S1[Passive NIDS: Suricata @ Security Onion via SPAN Port]
+        F1[Perimeter: FortiGate Gateway Syslog]
     end
 
-    subgraph ENGINE ["2. Wazuh SIEM Core"]
-        DEC[Decoders & Custom Ruleset\n70,000+ Lines]
-        IDX[(OpenSearch Cluster\nwazuh-alerts-*)]
+    subgraph CORE ["2. Wazuh SIEM & Telemetry Core"]
+        DEC[Decoders & Custom MITRE ATT&CK Ruleset\n70,000+ Lines]
+        OS[(OpenSearch Telemetry Cluster\nwazuh-alerts-*)]
     end
 
-    subgraph SOAR ["3. SOAR & Active Response"]
-        DEDUP[Sliding Window Dedup 300s\nSQLite WAL Cache]
-        GEO[MaxMind GeoIP & ASN\nCGNAT Safeguard]
-        FG[FortiGate REST API\nAUTO_SOC_BLACKLIST]
-        TG[Telegram SOC Bot]
+    subgraph HUNTER ["3. Autonomous Correlation & Threat Hunter"]
+        CORR[30-min Cyber Kill Chain Correlator\nsoc_agentic_scheduler.py]
+        CAMP[24h Attacker Campaign & Entity Chaining\nagentic_threat_hunter.py]
     end
 
-    subgraph VISUAL ["4. SOC Wall & AI Copilot"]
-        GRAF[Grafana 12 4W Dashboard\nSilent Background Update]
-        AI[socduac AI Copilot\nGoogle Gemini Flash]
+    subgraph ENGINE ["4. Hybrid Action & Reasoning Engine"]
+        DISP[soc_action_dispatcher.py\nDeterministic AR Execution]
+        FG_FEED[FortiGate Dynamic Threat Feed\nPort 8088 / IP Aging 30d]
+        HOST_AR[Host AR Drop / Process Kill / Host Isolation]
+        AI_COPILOT[soc_ai_reasoning_engine.py\nGoogle Antigravity CLI (Gemini 3.8 Flash)]
+        PROP[soc_proposal_manager.py\nHITL Remediation Proposals PROP-xxx]
     end
 
-    SENSORS -->|rsyslog / Agent| DEC
-    DEC --> IDX
-    DEC -->|Alerts Level >= 8| DEDUP
-    DEDUP --> GEO
-    GEO -->|Foreign Attacker| FG --> TG
-    GEO -->|Vietnam IP| TG
-    IDX --> GRAF
-    GRAF <--> AI
+    subgraph OPS ["5. Mission Control & Human-in-the-Loop"]
+        GRAF[Grafana Mission Control & AI Token Hub]
+        TELE[Telegram SOC Bot Dispatcher & Contextual Reply]
+    end
+
+    SENSORS -->|rsyslog / Agent Event Channel| DEC
+    DEC --> OS
+    OS --> CORR & CAMP
+    CORR & CAMP -->|100% Deterministic Trigger| DISP
+    DISP --> FG_FEED & HOST_AR
+    CORR -->|In-Context Telemetry Prompt| AI_COPILOT
+    AI_COPILOT -->|Reasoning CoT & Assessment| TELE
+    CORR -->|Source Code Vulnerability| PROP
+    PROP -->|Approve via Telegram| TELE
+    OS --> GRAF
+    AI_COPILOT -->|Token Metrics Stream| GRAF
 ```
 
 ---
 
-## 💎 ĐIỂM SÁNG CÔNG NGHỆ & KHÁC BIỆT THỰC CHIẾN
+## 💎 ĐIỂM SÁNG CÔNG NGHỆ ĐỘT PHÁ
 
 ### 1. Thuật toán Khử Trùng Lặp Cửa Sổ Trượt (Sliding Window Deduplication 300s)
 * **Vấn đề:** Khi kẻ tấn công brute-force SSH hoặc flood HTTP hàng nghìn request/phút, SIEM sinh bão cảnh báo (Alert Fatigue), làm nghẽn hàng đợi webhook và quá tải API thiết bị mạng.
 * **Giải pháp:** Sử dụng SQLite chế độ WAL (Write-Ahead Logging) theo dõi cặp khóa `(src_ip, rule_id)` trong cửa sổ 5 phút. Alert đầu tiên được chuyển đi ngay để cấm biên; các alert tiếp theo chỉ tăng bộ đếm tần suất (`count += 1`), triệt tiêu hơn 95% tải thừa.
 
-### 2. Bộ Lọc Bảo Vệ IP Nội Địa (CGNAT Safeguard)
-* **Vấn đề:** Các nhà mạng di động 4G tại Việt Nam dùng chung dải CGNAT (hàng ngàn người chung 1 IP public). Nếu tự động cấm IP này tại tường lửa biên, hàng ngàn người dùng vô tội sẽ bị mất mạng oan (DoS diện rộng).
-* **Giải pháp:** Tích hợp MaxMind GeoLite2 ASN & Country. **100% IP nước ngoài** bị chặn biên tự động; **IP Việt Nam** chuyển sang luồng Human-in-the-Loop (HITL) qua Telegram để kỹ sư xác minh.
+### 2. Bộ Lọc Bảo Vệ IP Nội Địa & Phân Đoạn Luồng Ingress
+* **Vấn đề:** Các nhà mạng di động 4G tại Việt Nam dùng chung dải CGNAT (hàng ngàn người chung 1 IP public). Ngoài ra, các dịch vụ đứng sau Cloudflare Tunnel hoặc Load Balancer nếu bị chặn nhầm IP nguồn sẽ làm sập toàn bộ người dùng hợp lệ.
+* **Giải pháp:** 
+  - **Tách bạch Cảm biến vs Mục tiêu:** Nhận diện traffic từ Suricata SPAN port để không bao giờ chạy lệnh chặn vô tác dụng lên node Security Onion.
+  - **Cloudflare Tunnel Aware:** Tuyệt đối không dùng `iptables DROP` trên máy chủ Master (tránh đứt tunnel `127.0.0.1`), thay vào đó khóa qua Cloudflare WAF + FortiGate Threat Feed.
+  - **Load Balancer Aware:** Dịch vụ sau Load Balancer được chặn qua CrowdSec tại tầng Gateway, không chặn tại Web Backend Node.
 
-### 3. FIM Phân Tầng Chọn Lọc (Tiered Integrity - Vượt ngưỡng Rule 233)
-* **Vấn đề:** Wazuh mặc định giới hạn 100.000 file trong Syscheck database. Quét toàn bộ Web Root WordPress/Drupal sẽ làm Agent chạm ngưỡng Rule 233 và treo máy.
-* **Giải pháp:** Dùng thuộc tính `restrict` chỉ theo dõi các định dạng thực thi nguy hiểm (`.php`, `.aspx`, `.jsp`, `.dll`, `.sh`) và đưa thư mục dữ liệu tĩnh (`uploads/`, `cache/`) vào `<ignore>`, giảm từ 1.000.000 file xuống dưới 5.000 file trọng yếu.
+### 3. FIM Phân Tầng Chọn Lọc (Tiered Integrity - Vượt Ngưỡng Rule 233)
+* **Vấn đề:** Wazuh mặc định giới hạn 100.000 file trong Syscheck database. Quét toàn bộ Web Root WordPress/Drupal sẽ làm Agent chạm ngưỡng Rule 233 và tự ngắt bảo vệ.
+* **Giải pháp:** Dùng thuộc tính `restrict` chỉ theo dõi các định dạng thực thi nguy hiểm (`.php`, `.aspx`, `.jsp`, `.dll`, `.sh`) và đưa thư mục dữ liệu tĩnh (`uploads/`, `cache/`) vào `<ignore>`, giảm từ 1.000.000 file xuống dưới 5.000 file trọng yếu, duy trì CPU Agent dưới 3%.
 
-### 4. Động cơ Cập Nhật Ngầm Không Chớp Màn Hình (Silent Background Update)
-* **Vấn đề:** Trên màn hình lớn SOC Wall, Dashboard auto-refresh mỗi phút làm các panel chớp nháy, hiện loading bar giật cục.
-* **Giải pháp:** Ứng dụng mô hình **Stale-While-Revalidate**: Khóa cứng bố cục layout, ẩn toàn bộ progress bar xoay tròn, áp dụng CSS fade 0.3s khi số liệu mới cập nhật, tạo trải nghiệm tĩnh lặng, chuyên nghiệp.
-
-### 5. Trợ Lý Ảo AI Tác Chiến (socduac AI Copilot)
-* **Tích hợp:** Google Gemini 3.5 Flash / Flash Lite đàm thoại tự nhiên đa lượt ngay trong giao diện giám sát.
-* **Nguyên tắc an toàn (Guardrails):** **Strict Read-Only & Zero-Mutation** (AI chỉ cố vấn tham mưu, tuyệt đối không tự ý sửa/xóa log hay can thiệp hệ thống) kết hợp **On-Demand Token Saver**.
-
-### 6. Mô Hình Thực Thi Kép Hybrid & Vòng Đời IP Aging 30 Ngày (CMDB Anti-Bloat)
-* **Vấn đề:** Khi số lượng IP tấn công tích lũy theo thời gian lên tới hàng nghìn hoặc hàng chục nghìn IP, việc tạo lẻ Object Address vào CMDB tường lửa sẽ gây tràn bộ nhớ thiết bị mạng (CMDB Bloat / Memory Leak).
+### 4. Quản Trị Quota AI, Chống Rate Spike & Token Metrics Hub
+* **Vấn đề:** Chi phí token LLM và nguy cơ cạn kiệt Quota trượt khi hệ thống tự động chạy 24/7.
 * **Giải pháp:**
-  - **Mô hình Hybrid (Thực thi kép):** REST API phản ứng tức thì (0.5s) đưa IP vào `WZ_AR_BLOCKLIST` để ngắt ngay cuộc tấn công nguy hiểm, đồng thời đẩy vào External Threat Feed (`/feeds/vnu_soc_blocklist.txt`) để tường lửa nạp vào RAM độc lập không phình file cấu hình.
-  - **Vòng đời Aging 30 ngày:** Tự động giải phóng các IP sau 30 ngày im lặng; tự động gia hạn thêm 30 ngày nếu phát hiện tiếp tục có hành vi xâm nhập; toàn bộ lịch sử được lưu trữ vĩnh viễn trong bảng `feed_history` phục vụ pháp y số.
-  - **Chống vòng lặp phản hồi (Anti-Echo Loop):** Cô lập triệt để các mã luật SOAR Feedback (Rule 100995) khỏi Alert Engine để ngăn chặn bão đệ quy tự kích hoạt chặn chéo.
+  - Tích hợp **Google Antigravity CLI** (`agy`) chạy model **Gemini 3.8 Flash** với chế độ **Adaptive Effort**: Mặc định `low` (Turbo 3–4s, tiết kiệm token tối đa); tự động nâng `medium` khi Audit Source Code / Forensics.
+  - Theo dõi cửa sổ trượt 5 giờ (1.5M tokens / 300 calls) và tuần (15M tokens / 3.000 calls).
+  - Tự động phát hiện bất thường Rate Spike (>12 calls/phút) và trực quan hóa toàn bộ số liệu tiêu thụ token trên Grafana Dashboard.
+
+### 5. Quy Trình Vá Mã Nguồn An Toàn HITL (Safe Code Remediation)
+* **Vấn đề:** Tự động sửa code khi phát hiện lỗ hổng IDOR/WebShell có rủi ro gây sập ứng dụng (Application Downtime).
+* **Giải pháp:** 
+  - Quy trình 4 bước chuẩn: **Assess $\rightarrow$ Propose $\rightarrow$ Patch with Backup $\rightarrow$ Verify & Rollback**.
+  - Tự động tạo bản sao lưu có timestamp (`Backup_Security_YYYYMMDD_HHMMSS`) trước khi ghi đè file.
+  - Chạy script kiểm thử POC tự động và cho phép Admin rollback 1 lệnh qua Telegram.
 
 ---
 
-## 📊 MA TRẬN PHÂN LOẠI ĐE DỌA (CAT1 - CAT6)
+## 🧠 MÔ HÌNH HYBRID: "DETERMINISTIC ACTION, GENERATIVE REASONING"
 
-| Mã | Nhóm Đe Dọa | Kỹ thuật Điển hình | Mức Độ | Phản Ứng SOAR / Tường Lửa |
-|:---:|:---|:---|:---:|:---|
-| **CAT1** | **Web Application Exploit** | SQL Injection, XSS, RCE, Webshell Injection | **10 - 14** | Chặn vĩnh viễn (`Permanent Drop`) tại FortiGate |
-| **CAT2** | **Credential Access & Brute-Force** | Dò quét mật khẩu SSH port 22, RDP 3389, FTP, wp-login | **6 - 10** | Chặn tạm thời (`Temporary Ban 1h - 24h`) |
-| **CAT3** | **Denial of Service (DoS / DDoS)** | HTTP Request Flooding, Slowloris, SYN Flood | **8 - 12** | Kích hoạt rate-limiting WAF, cách ly IP tại Policy |
-| **CAT4** | **Host Compromise & Persistence** | Thay đổi file hệ thống, SEO Cloaking cờ bạc lậu, DLL injection | **12 - 15** | Báo động đỏ Telegram, cách ly máy chủ (`Host Isolation`) |
-| **CAT5** | **Reconnaissance & Scanning** | Masscan, Nmap, Nikto, Nuclei, Acunetix, sqlmap | **6 - 8** | Ghi nhận Watchlist, bẫy Honeypot |
-| **CAT6** | **Network & Perimeter Threat** | Quét cổng VPN/IPSec, vi phạm Access Policy FortiGate | **7 - 10** | Cấm biên tức thì tại Firewall Policy |
+Để triển khai AI vào SOC production mà **không bao giờ lo sợ rủi ro AI ảo giác (Hallucination) gây gián đoạn hạ tầng**, hệ thống phân định rạch ròi 2 tầng:
+
+| Thành phần | Vai trò | Cơ chế thực thi |
+| :--- | :--- | :--- |
+| **Hành Động (Action)** | **Cảnh sát thi hành công vụ** | **100% Code Python (Tất định / Deterministic):** Tự động lọc Whitelist, kiểm tra ngưỡng cảnh báo (Level $\ge 12$, số lượt quét $\ge 500$), thực thi lệnh Host Drop (`agent_control -b`) và nạp vào FortiGate Threat Feed trong 0.2s. |
+| **Suy Luận (Reasoning)** | **Chuyên gia phân tích / Tham mưu** | **Google Gemini 3.8 Flash:** Đọc ngữ cảnh đã được tinh gọn, suy luận xâu chuỗi chuỗi tấn công (Cyber Kill Chain), phân tích xem là Botnet quét hàng loạt hay APT có chủ đích, và sinh bản báo cáo CoT cho kỹ sư trực ca. |
+
+---
+
+## 🎯 TÀI LIỆU ÔN LUYỆN PHỎNG VẤN KỸ THUẬT
+
+Xem tài liệu chi tiết chuyên sâu phục vụ phỏng vấn các vị trí **Senior SOC Engineer / DevSecOps / AI Security Architect**:
+👉 [**docs/INTERVIEW_CHEATSHEET.md**](docs/INTERVIEW_CHEATSHEET.md)
+* *Bao gồm: Kịch bản trả lời phỏng vấn mẫu, so sánh đánh đổi kiến trúc (Trade-offs), giải thích cơ chế phòng vệ DoS nội bộ, chiến lược quản trị Token AI và kinh nghiệm thực chiến xử lý lỗ hổng IDOR / Rootkit IIS.*
 
 ---
 
@@ -111,32 +130,40 @@ flowchart LR
 
 ```text
 enterprise-wazuh-soc-soar/
-├── README.md                          
-├── .gitignore                       
-├── .env.example                      
-├── docs/                              
-│   ├── architecture_design.md         
-│   ├── threat_taxonomy_matrix.md      
-│   └── learn.md                       
-├── detection_rules/                   
-│   └── local_rules.xml                
-├── soar_automation/                   
-│   ├── shuffle_active_response.py     
-│   └── threat_feed_service.py        
-├── visualization_grafana/             
-│   ├── soc_ultimate_4w_dashboard.json 
-│   └── silent_background_update.css   
-├── ai_soc_copilot/                   
-│   ├── copilot_server.py              
-│   ├── widget_frontend.js             
-│   └── guardrails.md                  
-└── deploy_automation/                 
-    ├── deploy_wazuh_agent.sh          
-    └── playbooks/                     
+├── README.md                                 # Tài liệu kiến trúc tổng thể v2.6
+├── .gitignore                              # Đã cấu hình chặn 100% secrets, raw logs & DBs
+├── .env.example                             # Mẫu biến môi trường an toàn (Zero-Secret)
+├── docs/                                    
+│   ├── INTERVIEW_CHEATSHEET.md              # 🎯 Bộ câu hỏi & lời giải phỏng vấn chuyên sâu
+│   ├── architecture_design.md               # Thiết kế chi tiết kiến trúc
+│   ├── threat_taxonomy_matrix.md            # Ma trận phân loại đe dọa CAT1 - CAT6
+│   └── learn.md                             # Kinh nghiệm vận hành thực tế
+├── ai_soc_copilot/                          # Bộ não Agentic AI & Reasoning Engine
+│   ├── soc_ai_reasoning_engine.py           # Cầu nối Antigravity CLI, Quota & Token Metrics Hub
+│   ├── soc_agentic_scheduler.py             # Bộ điều phối tự động tương quan sự kiện 20 phút
+│   ├── soc_action_dispatcher.py             # Bộ điều phối hành động phản kháng đa tầng (AR)
+│   ├── soc_proposal_manager.py              # Bộ quản lý đề xuất vá HITL (PROP-xxx)
+│   ├── agentic_threat_hunter.py             # Săn tìm RCE, WebShell, Exfiltration & Campaign 24h
+│   ├── copilot_server.py                    # Server API Copilot
+│   ├── widget_frontend.js                   # Web widget đàm thoại an ninh
+│   └── guardrails.md                        # Quy tắc an toàn nghiêm ngặt
+├── soar_automation/                         # Tự động hóa phản ứng chu vi & Báo cáo
+│   ├── generate_daily_soc_report.py         # Pipeline trích xuất telemetry & báo cáo an ninh 24h
+│   ├── soc_rule_tuner_24h.py                # Tự động tinh chỉnh core rules & kiểm thử wazuh-logtest
+│   ├── threat_feed_service.py               # External Dynamic Threat Feed Gateway (Port 8088)
+│   └── shuffle_active_response.py           # Webhook tích hợp Shuffle SOAR
+├── detection_rules/                         # Tập luật phát hiện chuẩn MITRE ATT&CK
+│   └── local_rules.xml                      # Ruleset tùy biến chống RCE, WebShell, SEO Cloaking
+├── visualization_grafana/                   # Dashboard trực quan hóa
+│   ├── soc_ultimate_4w_dashboard.json       # Dashboard điều hành 4W
+│   └── silent_background_update.css         # CSS chống chớp màn hình SOC Wall
+└── deploy_automation/                       # Tự động hóa triển khai & khắc phục sự cố
+    ├── deploy_wazuh_agent.sh                # Triển khai Agent tự động
+    └── playbooks/                           # Ansible playbooks
         ├── install_agent.yml
         ├── check_status.yml
         ├── scan_webshell.yml
-        ├── remediate_seo_malware.yml  # Kịch bản dọn sạch mã độc & khôi phục binary w3wp.exe
+        ├── remediate_seo_malware.yml        # Kịch bản dọn sạch malware & khôi phục w3wp.exe
         └── patch_cve_packages.yml
 ```
 
@@ -146,37 +173,30 @@ enterprise-wazuh-soc-soar/
 
 ### 1. Yêu cầu hệ thống
 * Hệ điều hành: Ubuntu 22.04 / 24.04 LTS hoặc RHEL 8 / 9.
-* Wazuh Manager v4.9+ & OpenSearch / Wazuh Indexer.
-* Grafana v11+ hoặc v12+.
-* Python 3.10+ (thư viện: `requests`, `fastapi`, `uvicorn`, `maxminddb`).
+* Wazuh Manager v4.9+ & OpenSearch Telemetry Cluster.
+* Python 3.10+ (cài đặt: `pip install requests fastapi uvicorn maxminddb`).
+* Google Antigravity CLI (`agy`) đã cấu hình OAuth.
 
 ### 2. Các bước cấu hình nhanh
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-username/enterprise-wazuh-soc-soar.git
-cd enterprise-wazuh-soc-soar
+git clone https://github.com/vuongnguyen1/vnu-soc-soar-platform.git
+cd vnu-soc-soar-platform
 
 # 2. Cấu hình biến môi trường
 cp .env.example .env
 nano .env
 
-# 3. Nạp luật phát hiện vào Wazuh Manager
-cp detection_rules/local_rules.xml /var/ossec/etc/rules/
-/var/ossec/bin/wazuh-control restart
+# 3. Kích hoạt Scheduler điều phối tương quan an ninh AI (chạy ngầm mỗi 20 phút)
+crontab -e
+# Thêm dòng:
+# */20 * * * * /usr/bin/python3 ai_soc_copilot/soc_agentic_scheduler.py >> /var/log/soc_scheduler.log 2>&1
 
-# 4. Cài đặt kịch bản tự động phản ứng SOAR
-cp soar_automation/shuffle_active_response.py /var/ossec/integrations/shuffle.py
-chmod 750 /var/ossec/integrations/shuffle.py
-chown root:wazuh /var/ossec/integrations/shuffle.py
-
-# 5. Khởi chạy AI SOC Copilot
-cd ai_soc_copilot
-pip install -r requirements.txt
-python3 copilot_server.py
+# 4. Khởi chạy External Dynamic Threat Feed Server cho FortiGate (Cổng 8088)
+python3 soar_automation/threat_feed_service.py --daemon
 ```
 
 ---
 
 ## 📄 BẢN QUYỀN
 Phát hành theo giấy phép [MIT License](LICENSE).
-

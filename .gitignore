@@ -8,6 +8,7 @@
 *.key
 *.crt
 *.id_rsa
+*oauth*
 
 # Database & Cache
 *.db
@@ -17,6 +18,17 @@
 *.log
 __pycache__/
 *.pyc
+
+# Raw Telemetry & Sensitive Reports
+*.xlsx
+*.csv
+*.jsonl
+investigations.json
+ai_token_metrics.json
+proposals.json
+.sent_*.json
+.last_scheduler_run.json
+sca_report_*.json
 
 # Local runtime & OS
 .DS_Store
