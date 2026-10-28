@@ -15,10 +15,9 @@
 ## 📑 MỤC LỤC
 1. [Kiến Trúc Tổng Thể & Luồng Dữ Liệu](#-kiến-trúc-tổng-thể--luồng-dữ-liệu)
 2. [Điểm Sáng Công Nghệ Đột Phá (Core Engineering Highlights)](#-điểm-sáng-công-nghệ-đột-phá)
-3. [Mô Hình Hybrid: "Deterministic Action, Generative Reasoning"](#-mô-hình-hybrid-deterministic-action-generative-reasoning)
-4. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
-5. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
-6. [Bản Quyền](#-bản-quyền)
+3. [Cấu Trúc Thư Mục Repository](#-cấu-trúc-thư-mục-repository)
+4. [Hướng Dẫn Triển Khai & Khởi Chạy](#-hướng-dẫn-triển-khai--khởi-chạy)
+5. [Bản Quyền](#-bản-quyền)
 
 ---
 
@@ -108,17 +107,6 @@ flowchart TB
   - Quy trình 4 bước chuẩn: **Assess $\rightarrow$ Propose $\rightarrow$ Patch with Backup $\rightarrow$ Verify & Rollback**.
   - Tự động tạo bản sao lưu có timestamp (`Backup_Security_YYYYMMDD_HHMMSS`) trước khi ghi đè file.
   - Chạy script kiểm thử POC tự động và cho phép Admin rollback 1 lệnh qua Telegram.
-
----
-
-## 🧠 MÔ HÌNH HYBRID: "DETERMINISTIC ACTION, GENERATIVE REASONING"
-
-Để triển khai AI vào SOC production mà **không bao giờ lo sợ rủi ro AI ảo giác (Hallucination) gây gián đoạn hạ tầng**, hệ thống phân định rạch ròi 2 tầng:
-
-| Thành phần | Vai trò | Cơ chế thực thi |
-| :--- | :--- | :--- |
-| **Hành Động (Action)** | **Cảnh sát thi hành công vụ** | **100% Code Python (Tất định / Deterministic):** Tự động lọc Whitelist, kiểm tra ngưỡng cảnh báo (Level $\ge 12$, số lượt quét $\ge 500$), thực thi lệnh Host Drop (`agent_control -b`) và nạp vào FortiGate Threat Feed trong 0.2s. |
-| **Suy Luận (Reasoning)** | **Chuyên gia phân tích / Tham mưu** | **Google Gemini 3.8 Flash:** Đọc ngữ cảnh đã được tinh gọn, suy luận xâu chuỗi chuỗi tấn công (Cyber Kill Chain), phân tích xem là Botnet quét hàng loạt hay APT có chủ đích, và sinh bản báo cáo CoT cho kỹ sư trực ca. |
 
 ---
 
